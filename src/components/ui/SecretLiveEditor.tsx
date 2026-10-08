@@ -162,8 +162,9 @@ export default function SecretLiveEditor() {
     }
 
     const handleKeyDown = (e: KeyboardEvent) => {
-      // Ctrl + Shift + E or Cmd + Shift + E
-      if ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === 'E' || e.key === 'e')) {
+      // Shortcut: Ctrl + Shift + E (Windows/Linux) or Cmd + Shift + E (Mac)
+      const isEKey = e.key === 'E' || e.key === 'e' || e.code === 'KeyE';
+      if ((e.ctrlKey || e.metaKey) && e.shiftKey && isEKey) {
         e.preventDefault();
         const isAuth = sessionStorage.getItem('sobhavi_editor_auth') === 'true';
         if (isAuth) {
@@ -173,10 +174,16 @@ export default function SecretLiveEditor() {
         }
       }
 
-      // Ctrl + S or Cmd + S
-      if (isEditing && (e.ctrlKey || e.metaKey) && (e.key === 's' || e.key === 'S')) {
+      // Save shortcut inside edit mode: Ctrl + S or Cmd + S
+      const isSKey = e.key === 's' || e.key === 'S' || e.code === 'KeyS';
+      if (isEditing && (e.ctrlKey || e.metaKey) && isSKey) {
         e.preventDefault();
         handleSave();
+      }
+
+      // Escape key to close modal
+      if (e.key === 'Escape') {
+        if (showPinModal) setShowPinModal(false);
       }
     };
 
@@ -425,25 +432,7 @@ export default function SecretLiveEditor() {
         </div>
       )}
 
-      {/* Floating Toggle Trigger Button (When not editing) */}
-      {!isEditing && (
-        <button
-          type="button"
-          className={styles.triggerBtn}
-          onClick={() => {
-            const isAuth = sessionStorage.getItem('sobhavi_editor_auth') === 'true';
-            if (isAuth) {
-              setIsEditing(true);
-            } else {
-              setShowPinModal(true);
-            }
-          }}
-          title="Turn on Live Edit Mode (Admin)"
-        >
-          <span className={styles.triggerIcon}>✏️</span>
-          <span>Edit Website</span>
-        </button>
-      )}
+
 
       {/* Floating Toolbar (Only visible when Edit Mode is active) */}
       {isEditing && (
