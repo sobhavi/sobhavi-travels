@@ -446,3 +446,23 @@
     justify-content: center;
   }
 }
+
+@media (max-width: 480px) {
+  .heroSection {
+    padding: 5.5rem 0.85rem 3rem;
+  }
+
+  .flightCard {
+    padding: 1.25rem 0.95rem;
+    border-radius: 12px;
+  }
+
+  .airlineNames {
+    gap: 0.5rem;
+  }
+
+  .airlineBadge {
+    font-size: 0.78rem;
+    padding: 0.2rem 0.55rem;
+  }
+}

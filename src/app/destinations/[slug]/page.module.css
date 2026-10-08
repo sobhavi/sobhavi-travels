@@ -1045,3 +1045,28 @@
   }
 }
 
+@media (max-width: 480px) {
+  .hero {
+    height: 80vh;
+    padding-bottom: 3rem;
+  }
+
+  .title {
+    font-size: 2.2rem;
+  }
+
+  .essentialBox {
+    padding: 1.25rem 1rem;
+  }
+
+  .faqQuestionBtn {
+    padding: 1rem;
+    font-size: 0.95rem;
+  }
+
+  .faqAnswerInner {
+    padding: 0 1rem 1rem;
+    font-size: 0.88rem;
+  }
+}
+

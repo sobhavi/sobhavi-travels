@@ -1012,27 +1012,218 @@
 }
 
 @media (max-width: 768px) {
+  .heroSection {
+    min-height: 85vh;
+  }
+
+  .heroTitleLarge {
+    font-size: clamp(1.85rem, 8vw, 2.75rem);
+    letter-spacing: 0.08em;
+  }
+
+  .heroSubtitle {
+    letter-spacing: 0.12em;
+    font-size: 0.78rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .heroScrollIndicator {
+    bottom: 1.25rem;
+  }
+
   .introSection {
-    padding: 3.8rem 1.25rem 3.5rem;
+    padding: 3.5rem 1rem 3rem;
   }
 
   .introHeadline {
     font-size: clamp(1.3rem, 5.2vw, 1.75rem);
+    margin-bottom: 1.25rem;
+  }
+
+  .introParagraph {
+    font-size: 0.95rem;
+    line-height: 1.75;
+  }
+
+  .introCalloutBox {
+    padding: 1.25rem 1rem;
+    border-radius: 12px;
+  }
+
+  .introCalloutQuote {
+    font-size: 1rem;
+    line-height: 1.55;
+  }
+
+  .introServicesText {
+    font-size: 0.92rem;
+    line-height: 1.7;
+  }
+
+  .introCtaBtn {
+    padding: 0.85rem 1.8rem;
+    font-size: 0.78rem;
+    width: 100%;
+    max-width: 320px;
+  }
+
+  .destinationsSection {
+    padding: 3.5rem 0 4.5rem;
+  }
+
+  .tabsContainer {
+    width: 100%;
+    max-width: 340px;
+    margin: 1.5rem auto 0;
+    display: flex;
+    padding: 0.3rem;
+  }
+
+  .tabBtn {
+    flex: 1;
+    padding: 0.65rem 0.75rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+    text-align: center;
   }
 
   .gridInner {
     grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .destCard {
+    height: 380px;
+    border-radius: 14px;
+  }
+
+  .destCardContent {
+    padding: 1.35rem 1.15rem;
+  }
+
+  .destCardName {
+    font-size: 1.3rem;
+  }
+
+  .destCardTagline {
+    font-size: 0.82rem;
+    margin-bottom: 0.85rem;
+  }
+
+  .categoriesSection {
+    padding: 3.5rem 0 4.5rem;
   }
 
   .categoriesGrid {
     grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .categoryCardImage {
+    height: 190px;
+  }
+
+  .categoryCardContent {
+    padding: 1.25rem;
+  }
+
+  .categoryCardTitle {
+    font-size: 1.25rem;
+  }
+
+  .blogsSection {
+    padding: 3.5rem 0 4.5rem;
   }
 
   .blogsGrid {
     grid-template-columns: 1fr;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .exploreAllWrapper {
+    margin-top: 2rem;
+  }
+
+  .exploreAllBtn {
+    padding: 0.85rem 1.8rem;
+    font-size: 0.78rem;
+    width: 100%;
+    max-width: 320px;
   }
 
   .finalCtaBox {
-    padding: 3rem 1.5rem;
+    padding: 2.75rem 1.25rem;
+    border-radius: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .heroSection {
+    min-height: 80vh;
+  }
+
+  .heroTitleLarge {
+    font-size: clamp(1.6rem, 8.5vw, 2.1rem);
+    letter-spacing: 0.05em;
+  }
+
+  .heroSubtitle {
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+  }
+
+  .destCard {
+    height: 350px;
+  }
+
+  .destCardPriceBanner {
+    top: 0.85rem;
+    right: 0.85rem;
+    padding: 0.25rem 0.55rem;
+    border-radius: 6px;
+  }
+
+  .priceTinyLabel {
+    font-size: 0.52rem;
+  }
+
+  .priceAmount {
+    font-size: 0.82rem;
+  }
+
+  .categoryCardImage {
+    height: 170px;
+  }
+
+  .cornerPriceBadge {
+    top: 0.75rem;
+    right: 0.75rem;
+    padding: 0.25rem 0.55rem;
+    border-radius: 6px;
+  }
+
+  .cornerPriceLabel {
+    font-size: 0.52rem;
+  }
+
+  .cornerPriceAmount {
+    font-size: 0.82rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .tabsContainer {
+    max-width: 100%;
+  }
+
+  .tabBtn {
+    padding: 0.55rem 0.45rem;
+    font-size: 0.68rem;
+    letter-spacing: 0.04em;
+  }
+
+  .destCard {
+    height: 330px;
   }
 }

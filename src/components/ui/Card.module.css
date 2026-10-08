@@ -110,3 +110,40 @@
 .magazineCard:hover .arrow {
   transform: translateX(5px);
 }
+
+@media (max-width: 480px) {
+  .imageReveal {
+    margin-bottom: 1.25rem;
+  }
+
+  .magazineTag {
+    top: 0.75rem;
+    left: 0.75rem;
+    padding: 0.25rem 0.6rem;
+    font-size: 0.65rem;
+  }
+
+  .magazinePriceBadge {
+    top: 0.75rem;
+    right: 0.75rem;
+    padding: 0.25rem 0.55rem;
+  }
+
+  .priceTinyLabel {
+    font-size: 0.5rem;
+  }
+
+  .priceAmount {
+    font-size: 0.78rem;
+  }
+
+  .magazineTitle {
+    font-size: 1.35rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .magazineDesc {
+    font-size: 0.82rem;
+    margin-bottom: 1.25rem;
+  }
+}

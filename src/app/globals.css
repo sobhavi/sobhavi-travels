@@ -232,6 +232,12 @@ a, button {
   }
 }
 
+@media (max-width: 360px) {
+  .container {
+    padding: 0 0.75rem;
+  }
+}
+
 /* Buttons matching luxury aesthetic */
 .btn-primary, .btn-outline, .btn-pink, .btn-black, .btn-outline-dark {
   display: inline-flex;

@@ -337,7 +337,7 @@
   .infoHeading {
     font-size: clamp(0.95rem, 4.2vw, 1.35rem);
     margin-bottom: 1.25rem;
-    white-space: nowrap !important;
+    white-space: normal !important;
   }
 
   .input,
@@ -364,6 +364,29 @@
 
   .cardText {
     font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .formCard {
+    padding: 1.25rem 0.85rem;
+    border-radius: 12px;
+  }
+
+  .formTitle {
+    font-size: 1.45rem;
+    margin-bottom: 1rem;
+  }
+
+  .infoHeading {
+    font-size: 1.15rem;
+    white-space: normal !important;
+  }
+
+  .submitBtn {
+    padding: 0.9rem 1.2rem;
+    font-size: 0.86rem;
+    letter-spacing: 0.08em;
   }
 }
 

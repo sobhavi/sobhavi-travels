@@ -388,16 +388,127 @@
     padding: 3.5rem 0 5rem;
   }
 
-  .cardContent {
-    padding: 1.35rem 1.25rem;
+  .grid {
+    gap: 1.75rem;
   }
 
-  .cardTitle {
+  .imageWrapper {
+    height: 240px;
+  }
+
+  .cardContent {
+    padding: 1.35rem 1.15rem;
+  }
+
+  .destName {
     font-size: 1.45rem;
   }
 
-  .cardOverview {
-    font-size: 0.88rem;
+  .destTagline {
+    font-size: 0.86rem;
+    margin-bottom: 0.85rem;
+  }
+
+  .destOverview {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
+
+  .inclusionsBox {
+    padding: 0.85rem 1rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .inclusionsList {
+    grid-template-columns: 1fr;
+    gap: 0.45rem;
+    font-size: 0.82rem;
+  }
+
+  .cardActions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+    padding-top: 1rem;
+  }
+
+  .bookBtn,
+  .whatsappBtn {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    font-size: 0.82rem;
+  }
+
+  .faqGrid {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .faqCard {
+    padding: 1.35rem 1.15rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .heroSection {
+    padding: 5.5rem 0.85rem 3rem;
+  }
+
+  .imageWrapper {
+    height: 220px;
+  }
+
+  .destBadge {
+    top: 0.75rem;
+    left: 0.75rem;
+    font-size: 0.68rem;
+    padding: 0.25rem 0.55rem;
+  }
+
+  .topRightPriceBanner {
+    top: 0.75rem;
+    right: 0.75rem;
+    padding: 0.3rem 0.55rem;
+    border-radius: 6px;
+  }
+
+  .priceBannerLabel {
+    font-size: 0.52rem;
+  }
+
+  .priceBannerAmount {
+    font-size: 0.82rem;
+  }
+
+  .cardContent {
+    padding: 1.2rem 0.95rem;
+  }
+
+  .destName {
+    font-size: 1.3rem;
+  }
+
+  .destTagline {
+    font-size: 0.82rem;
+  }
+
+  .destOverview {
+    font-size: 0.86rem;
+    line-height: 1.55;
+  }
+
+  .dayPlanList {
+    padding: 0.75rem 0.85rem;
+    font-size: 0.8rem;
+  }
+
+  .faqSection {
+    padding: 3rem 0 3.5rem;
+  }
+
+  .faqHeader {
+    margin-bottom: 2rem;
   }
 }
 

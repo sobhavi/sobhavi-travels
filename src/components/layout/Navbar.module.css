@@ -290,6 +290,18 @@
   }
 }
 
+@media (max-width: 360px) {
+  .logoImage {
+    height: 38px;
+    max-width: 145px;
+  }
+
+  .mobileEnquire {
+    padding: 0.38rem 0.6rem !important;
+    font-size: 0.62rem !important;
+  }
+}
+
 @media (min-width: 1024px) {
   .centerLinks { display: flex; }
   .rightActions { display: flex; }
