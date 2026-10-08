@@ -124,12 +124,14 @@ export default function RannCityPackages({ routes }: RannCityPackagesProps) {
                 >
                   ✦ Enquire for {route.cityName.split(' ')[0]} &rarr;
                 </Link>
-                <Link
-                  href={`/rann-utsav/${route.slug}`}
+                <a
+                  href={`https://wa.me/917406994752?text=Hello%20Sobhavi%20Travels,%20I%20am%20interested%20in%20the%20Rann%20Utsav%20package%20from%20${encodeURIComponent(route.cityName)}.`}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className={styles.cardActionBtn}
                 >
-                  View Route Details &amp; Plan
-                </Link>
+                  💬 WhatsApp Specialist
+                </a>
               </div>
             </div>
           </article>

@@ -295,75 +295,56 @@
   font-weight: bold;
 }
 
-/* Actions Stack (Image 1 Style) */
-.cardActionsStack {
-  display: flex;
-  flex-direction: column;
+/* Card Actions (Matching International Style) */
+.cardActions {
+  display: grid;
+  grid-template-columns: 1fr auto;
   gap: 0.75rem;
-  padding-top: 1.25rem;
+  margin-top: auto;
+  padding-top: 1.5rem;
   border-top: 1px solid rgba(28, 25, 23, 0.08);
 }
 
-.primaryEnquireBtn {
-  width: 100%;
-  text-align: center;
-  padding: 0.9rem 1.25rem;
+.bookBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.85rem 1.5rem;
   background: linear-gradient(135deg, #b8972e 0%, #96751c 100%);
   color: #ffffff;
-  border-radius: 8px;
-  font-family: var(--font-sans);
-  font-size: 0.85rem;
+  border-radius: 999px;
+  font-size: 0.82rem;
   font-weight: 700;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   text-decoration: none;
   transition: all 0.25s ease;
-  box-shadow: 0 4px 15px rgba(184, 151, 46, 0.25);
+  box-shadow: 0 4px 14px rgba(184, 151, 46, 0.25);
 }
 
-.primaryEnquireBtn:hover {
+.bookBtn:hover {
   background: linear-gradient(135deg, #c7a73a 0%, #a88523 100%);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(184, 151, 46, 0.35);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(184, 151, 46, 0.35);
 }
 
-.secondaryPlanBtn {
-  width: 100%;
-  text-align: center;
-  padding: 0.85rem 1.25rem;
-  background: #f4efe6;
-  color: #1c1917;
-  border: 1px solid rgba(28, 25, 23, 0.15);
-  border-radius: 8px;
-  font-family: var(--font-sans);
-  font-size: 0.84rem;
-  font-weight: 600;
-  letter-spacing: 0.04em;
+.whatsappBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.85rem 1.2rem;
+  background: #25d366;
+  color: #ffffff;
+  border-radius: 999px;
+  font-size: 0.82rem;
+  font-weight: 700;
   text-decoration: none;
+  gap: 0.4rem;
   transition: all 0.25s ease;
 }
 
-.secondaryPlanBtn:hover {
-  background: #ede6d8;
-  border-color: #b8972e;
-  color: #96751c;
-  transform: translateY(-2px);
-}
-
-.cardWaRow {
-  display: block;
-  text-align: center;
-  font-size: 0.8rem;
-  font-weight: 600;
-  color: #25D366;
-  text-decoration: none;
-  padding-top: 0.2rem;
-  transition: color 0.2s ease;
-}
-
-.cardWaRow:hover {
-  color: #1ebe5a;
-  text-decoration: underline;
+.whatsappBtn:hover {
+  background: #1ebc59;
 }
 
 @media (max-width: 1024px) {

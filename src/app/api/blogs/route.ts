@@ -18,9 +18,12 @@ export async function POST(request: Request) {
     const body = await request.json();
     const { title, excerpt, coverImage, inArticleImage, inArticleCaption, category, author, authorRole, readTime, intro, bodyParagraphs, quote, quoteAuthor } = body;
 
-    if (!title || !excerpt || !coverImage) {
-      return NextResponse.json({ success: false, error: 'Title, excerpt, and cover image are required.' }, { status: 400 });
+    if (!title || !title.trim() || !excerpt || !excerpt.trim()) {
+      return NextResponse.json({ success: false, error: 'Title and excerpt are required.' }, { status: 400 });
     }
+
+    const defaultCover = 'https://images.unsplash.com/photo-1599661046289-e31897846e41?q=72&w=720&auto=format&fit=crop';
+    const finalCover = (coverImage && typeof coverImage === 'string' && coverImage.trim()) ? coverImage.trim() : defaultCover;
 
     const rawBody = bodyParagraphs || body.content || body.body || '';
     const paragraphs = Array.isArray(rawBody) 
@@ -28,10 +31,10 @@ export async function POST(request: Request) {
       : (typeof rawBody === 'string' ? rawBody.split('\n\n').map((p: string) => p.trim()).filter(Boolean) : []);
 
     const created = await saveBlog({
-      title,
+      title: title.trim(),
       slug: body.slug || title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, ''),
-      excerpt,
-      coverImage,
+      excerpt: excerpt.trim(),
+      coverImage: finalCover,
       inArticleImage: inArticleImage || undefined,
       inArticleCaption: inArticleCaption || undefined,
       category: category || 'Bespoke Travel',

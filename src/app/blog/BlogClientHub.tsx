@@ -19,7 +19,6 @@ export default function BlogClientHub({ initialBlogs }: BlogClientHubProps) {
         const localCustom = JSON.parse(localStorage.getItem('sobhavi_custom_blogs') || '[]');
         if (Array.isArray(localCustom) && localCustom.length > 0) {
           const seen = new Set<string>();
-          const seenImages = new Set<string>();
           const combined: BlogPost[] = [];
           
           for (const raw of localCustom) {
@@ -30,18 +29,14 @@ export default function BlogClientHub({ initialBlogs }: BlogClientHubProps) {
             if (p?.title?.toLowerCase()?.includes('rann') || p?.slug?.includes('rann')) {
               p.coverImage = '/blogs/white-rann-kutch.jpg';
             }
-            const imgKey = p?.coverImage?.match(/photo-[a-zA-Z0-9_-]+/)?.[0] || p?.coverImage;
-            if (p?.slug && !seen.has(p.slug.toLowerCase()) && !seenImages.has(imgKey)) {
+            if (p?.slug && !seen.has(p.slug.toLowerCase())) {
               seen.add(p.slug.toLowerCase());
-              seenImages.add(imgKey);
               combined.push(p);
             }
           }
           for (const p of initialBlogs) {
-            const imgKey = p?.coverImage?.match(/photo-[a-zA-Z0-9_-]+/)?.[0] || p?.coverImage;
-            if (p?.slug && !seen.has(p.slug.toLowerCase()) && !seenImages.has(imgKey)) {
+            if (p?.slug && !seen.has(p.slug.toLowerCase())) {
               seen.add(p.slug.toLowerCase());
-              seenImages.add(imgKey);
               combined.push(p);
             }
           }
@@ -60,13 +55,10 @@ export default function BlogClientHub({ initialBlogs }: BlogClientHubProps) {
       .then(r => r.json())
       .then(d => {
         if (d.success && Array.isArray(d.blogs) && d.blogs.length > 0) {
-          const seenImages = new Set<string>();
           const seenSlugs = new Set<string>();
           const sanitized = d.blogs.filter((b: BlogPost) => {
-            const imgKey = b.coverImage?.match(/photo-[a-zA-Z0-9_-]+/)?.[0] || b.coverImage;
             const slugKey = (b.slug || '').toLowerCase();
-            if (seenImages.has(imgKey) || seenSlugs.has(slugKey)) return false;
-            seenImages.add(imgKey);
+            if (!slugKey || seenSlugs.has(slugKey)) return false;
             seenSlugs.add(slugKey);
             return true;
           });

@@ -9,23 +9,27 @@ const DEFAULT_PIN = 'sobhavi2026';
 // Helper to generate a stable, deterministic key for an element on the page
 function getElementKey(el: HTMLElement): string {
   if (el.dataset.editorKey) return el.dataset.editorKey;
-  if (el.id) return `id:${el.id}`;
+  if (el.id) {
+    const k = `id:${el.id}`;
+    el.dataset.editorKey = k;
+    return k;
+  }
 
   const parts: string[] = [];
   let curr: HTMLElement | null = el;
   let depth = 0;
 
-  while (curr && curr !== document.body && depth < 4) {
+  while (curr && curr !== document.body && depth < 5) {
     const tag = curr.tagName.toLowerCase();
     if (curr.id) {
       parts.unshift(`${tag}#${curr.id}`);
       break;
     }
 
-    const firstClass = curr.className && typeof curr.className === 'string'
-      ? curr.className.split(' ').filter(c => !c.startsWith('sobhavi-'))[0] || ''
-      : '';
-    const cleanClass = firstClass.replace(/[^a-zA-Z0-9_-]/g, '').slice(0, 20);
+    const rawClass = curr.className && typeof curr.className === 'string' ? curr.className : '';
+    // Strip Next.js CSS Module hashes like '__abc123'
+    const firstClass = rawClass.split(' ').map(c => c.split('__')[0]).filter(c => c && !c.startsWith('sobhavi-'))[0] || '';
+    const cleanClass = firstClass.replace(/[^a-zA-Z0-9_-]/g, '').slice(0, 24);
 
     let idx = 0;
     let sib = curr.previousElementSibling;
@@ -44,24 +48,28 @@ function getElementKey(el: HTMLElement): string {
   return generated;
 }
 
-// Find element by stable key
-function findElementByKey(key: string): HTMLElement | null {
-  const existing = document.querySelector<HTMLElement>(`[data-editor-key="${CSS.escape(key)}"]`);
-  if (existing) return existing;
+// Check if element is a valid editable text candidate
+function isEditableTextTarget(el: HTMLElement): boolean {
+  if (['SCRIPT', 'STYLE', 'SVG', 'PATH', 'INPUT', 'TEXTAREA', 'BUTTON', 'NOSCRIPT'].includes(el.tagName)) return false;
+  if (el.closest(`.${styles.floatingToolbar}`) || el.closest(`.${styles.modalBackdrop}`) || el.closest(`.${styles.triggerBtn}`)) return false;
+  
+  // Don't edit standalone checkmarks or decorative icons
+  const text = (el.textContent || '').trim();
+  if (text === '✓' || text === '✦' || text === '💬' || text === '🚀' || text === '✏️') return false;
 
-  if (key.startsWith('id:')) {
-    return document.getElementById(key.replace('id:', ''));
-  }
+  // Primary heading and paragraph tags
+  if (['H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'P', 'LABEL', 'STRONG', 'B', 'EM'].includes(el.tagName)) return true;
 
-  // Walk and match
-  const elements = document.querySelectorAll<HTMLElement>('h1, h2, h3, h4, h5, h6, p, span, div, a, button, label');
-  for (let i = 0; i < elements.length; i++) {
-    const el = elements[i];
-    if (getElementKey(el) === key) {
-      return el;
-    }
-  }
-  return null;
+  // Leaf text elements (e.g. inclusions <span>, badges, subtitles, prices, list items)
+  if (el.children.length === 0 && text.length > 0) return true;
+
+  // Spans with direct text
+  if (el.tagName === 'SPAN' && text.length > 0) return true;
+
+  // Destination / Category card specific items
+  if (el.dataset.editable === 'true') return true;
+
+  return false;
 }
 
 export default function SecretLiveEditor() {
@@ -78,34 +86,39 @@ export default function SecretLiveEditor() {
 
   const initialContentsRef = useRef<Record<string, string>>({});
   const loadedOverridesRef = useRef<Record<string, Record<string, string>>>({});
+  const elementMapRef = useRef<Map<string, HTMLElement>>(new Map());
 
-  // 1. Fetch and apply saved text overrides on load
-  const applyOverridesForPath = useCallback((path: string, overrides: Record<string, string>) => {
-    if (!overrides || Object.keys(overrides).length === 0) return;
-    Object.entries(overrides).forEach(([key, value]) => {
-      const el = findElementByKey(key);
-      if (el && !el.isContentEditable) {
-        el.innerHTML = value;
+  const scanAndApply = useCallback(() => {
+    const currentPath = pathname?.toLowerCase() || '/';
+    const pathOverrides = loadedOverridesRef.current[currentPath] || {};
+
+    const candidates = document.querySelectorAll<HTMLElement>('h1, h2, h3, h4, h5, h6, p, label, strong, em, b, span, li, [data-editable="true"], .editable-text');
+    elementMapRef.current.clear();
+
+    candidates.forEach(el => {
+      if (!isEditableTextTarget(el)) return;
+      const key = getElementKey(el);
+      elementMapRef.current.set(key, el);
+
+      if (pathOverrides[key] && !el.isContentEditable && el.innerHTML !== pathOverrides[key]) {
+        el.innerHTML = pathOverrides[key];
       }
     });
-  }, []);
+  }, [pathname]);
 
   const fetchAndApplyOverrides = useCallback(async () => {
     try {
-      // First apply from localStorage for zero-latency instant render
+      // 1. Instant local cache load
       const local = localStorage.getItem('sobhavi_content_overrides');
       if (local) {
         try {
           const parsed = JSON.parse(local);
           loadedOverridesRef.current = parsed;
-          const currentPath = pathname?.toLowerCase() || '/';
-          if (parsed[currentPath]) {
-            applyOverridesForPath(currentPath, parsed[currentPath]);
-          }
+          scanAndApply();
         } catch {}
       }
 
-      // Then fetch latest from server API
+      // 2. Fresh server API load
       const res = await fetch('/api/content-overrides', { cache: 'no-store' });
       if (res.ok) {
         const data = await res.json();
@@ -114,51 +127,42 @@ export default function SecretLiveEditor() {
           try {
             localStorage.setItem('sobhavi_content_overrides', JSON.stringify(data.overrides));
           } catch {}
-          const currentPath = pathname?.toLowerCase() || '/';
-          if (data.overrides[currentPath]) {
-            applyOverridesForPath(currentPath, data.overrides[currentPath]);
-          }
+          scanAndApply();
         }
       }
     } catch (err) {
       console.warn('Could not load content overrides:', err);
     }
-  }, [pathname, applyOverridesForPath]);
+  }, [scanAndApply]);
 
   useEffect(() => {
-    fetchAndApplyOverrides();
-    // Re-apply on dynamic page navigation and late hydration
-    const t1 = setTimeout(fetchAndApplyOverrides, 300);
-    const t2 = setTimeout(fetchAndApplyOverrides, 1000);
-    const t3 = setTimeout(fetchAndApplyOverrides, 2500);
+    // Run once on path change using requestAnimationFrame for zero-lag silky smooth render
+    const frameId = requestAnimationFrame(() => {
+      fetchAndApplyOverrides();
+    });
 
-    const handleFocus = () => fetchAndApplyOverrides();
-    window.addEventListener('focus', handleFocus);
+    const handleStorage = () => fetchAndApplyOverrides();
+    window.addEventListener('sobhavi_content_overrides_updated', handleStorage);
 
     return () => {
-      clearTimeout(t1);
-      clearTimeout(t2);
-      clearTimeout(t3);
-      window.removeEventListener('focus', handleFocus);
+      cancelAnimationFrame(frameId);
+      window.removeEventListener('sobhavi_content_overrides_updated', handleStorage);
     };
   }, [pathname, fetchAndApplyOverrides]);
 
-  // 2. Secret Activation: Listen for Ctrl+Shift+E / Cmd+Shift+E or ?edit=sobhavi
+  // Secret Activation: Listen for Ctrl+Shift+E / Cmd+Shift+E or ?edit=sobhavi
   useEffect(() => {
-    const checkQuery = () => {
-      if (searchParams?.get('edit') === 'sobhavi') {
-        const isAuth = sessionStorage.getItem('sobhavi_editor_auth') === 'true';
-        if (isAuth) {
-          setIsEditing(true);
-        } else {
-          setShowPinModal(true);
-        }
+    if (searchParams?.get('edit') === 'sobhavi') {
+      const isAuth = sessionStorage.getItem('sobhavi_editor_auth') === 'true';
+      if (isAuth) {
+        setIsEditing(true);
+      } else {
+        setShowPinModal(true);
       }
-    };
-    checkQuery();
+    }
 
     const handleKeyDown = (e: KeyboardEvent) => {
-      // Secret combo: Ctrl + Shift + E or Cmd + Shift + E
+      // Ctrl + Shift + E or Cmd + Shift + E
       if ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === 'E' || e.key === 'e')) {
         e.preventDefault();
         const isAuth = sessionStorage.getItem('sobhavi_editor_auth') === 'true';
@@ -169,7 +173,7 @@ export default function SecretLiveEditor() {
         }
       }
 
-      // Save shortcut inside edit mode: Ctrl + S or Cmd + S
+      // Ctrl + S or Cmd + S
       if (isEditing && (e.ctrlKey || e.metaKey) && (e.key === 's' || e.key === 'S')) {
         e.preventDefault();
         handleSave();
@@ -180,7 +184,7 @@ export default function SecretLiveEditor() {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [isEditing, searchParams]);
 
-  // 3. Enable or Disable Inline ContentEditable on Page Elements
+  // Enable or Disable Inline ContentEditable on Page Elements
   useEffect(() => {
     const styleId = 'sobhavi-editor-styles';
     let styleTag = document.getElementById(styleId);
@@ -195,36 +199,30 @@ export default function SecretLiveEditor() {
             transition: outline 0.15s ease, box-shadow 0.15s ease !important;
           }
           [data-sobhavi-editable="true"]:hover {
-            outline: 1.5px dashed rgba(212, 175, 55, 0.7) !important;
+            outline: 1.5px dashed rgba(212, 175, 55, 0.8) !important;
             outline-offset: 2px !important;
           }
           [data-sobhavi-editable="true"]:focus {
             outline: 2px solid #d4af37 !important;
             outline-offset: 2px !important;
-            box-shadow: 0 0 12px rgba(212, 175, 55, 0.4) !important;
+            box-shadow: 0 0 14px rgba(212, 175, 55, 0.45) !important;
           }
           [data-sobhavi-modified="true"] {
-            outline: 1.5px solid #22c55e !important;
+            outline: 2px solid #22c55e !important;
             outline-offset: 2px !important;
           }
         `;
         document.head.appendChild(styleTag);
       }
 
-      // Select editable text targets: headings, paragraphs, labels, spans, links
-      const selectors = 'h1, h2, h3, h4, h5, h6, p, .editable-text, [data-editable="true"]';
-      const elements = document.querySelectorAll<HTMLElement>(selectors);
+      // Re-scan to ensure all elements are indexed
+      scanAndApply();
 
-      elements.forEach(el => {
-        // Skip editor's own floating toolbar and modals
-        if (el.closest(`.${styles.floatingToolbar}`) || el.closest(`.${styles.modalBackdrop}`)) return;
-        if (['INPUT', 'TEXTAREA', 'SCRIPT', 'STYLE'].includes(el.tagName)) return;
-
+      elementMapRef.current.forEach((el, key) => {
         el.setAttribute('contenteditable', 'true');
         el.setAttribute('data-sobhavi-editable', 'true');
         el.setAttribute('spellcheck', 'false');
 
-        const key = getElementKey(el);
         if (!initialContentsRef.current[key]) {
           initialContentsRef.current[key] = el.innerHTML;
         }
@@ -247,7 +245,23 @@ export default function SecretLiveEditor() {
         el.oninput = handleInput;
       });
 
-      showToast("✏️ Edit Mode Active! Click any text to edit directly.");
+      // Prevent link clicks while editing so users can edit link/button text without navigating away
+      const handlePreventNav = (e: MouseEvent) => {
+        const target = e.target as HTMLElement | null;
+        if (target && (target.getAttribute('contenteditable') === 'true' || target.closest('[contenteditable="true"]'))) {
+          const link = target.closest('a');
+          if (link) {
+            e.preventDefault();
+          }
+        }
+      };
+
+      document.addEventListener('click', handlePreventNav, true);
+      showToast("✏️ Edit Mode Active! Click any text, card, or inclusion to edit.");
+
+      return () => {
+        document.removeEventListener('click', handlePreventNav, true);
+      };
     } else {
       // Clean up styles and contenteditable
       if (styleTag) styleTag.remove();
@@ -264,7 +278,7 @@ export default function SecretLiveEditor() {
     return () => {
       if (styleTag) styleTag.remove();
     };
-  }, [isEditing]);
+  }, [isEditing, scanAndApply]);
 
   const showToast = (msg: string) => {
     setToastMessage(msg);
@@ -307,7 +321,6 @@ export default function SecretLiveEditor() {
       });
 
       if (res.ok) {
-        // Update local cache
         const updated = {
           ...loadedOverridesRef.current,
           [currentPath]: {
@@ -318,18 +331,17 @@ export default function SecretLiveEditor() {
         loadedOverridesRef.current = updated;
         localStorage.setItem('sobhavi_content_overrides', JSON.stringify(updated));
 
-        // Update initial contents ref
         Object.entries(pendingChanges).forEach(([k, v]) => {
           initialContentsRef.current[k] = v;
         });
 
-        // Clear modified outlines
         document.querySelectorAll('[data-sobhavi-modified="true"]').forEach(el => {
           el.removeAttribute('data-sobhavi-modified');
         });
 
         const count = Object.keys(pendingChanges).length;
         setPendingChanges({});
+        window.dispatchEvent(new Event('sobhavi_content_overrides_updated'));
         showToast(`✅ Saved ${count} text update${count > 1 ? 's' : ''} live to website!`);
       } else {
         alert("Failed to save changes. Please try again.");
@@ -345,7 +357,7 @@ export default function SecretLiveEditor() {
   const handleRevert = () => {
     if (confirm("Discard unsaved changes on this page?")) {
       Object.keys(pendingChanges).forEach(key => {
-        const el = findElementByKey(key);
+        const el = elementMapRef.current.get(key) || document.querySelector<HTMLElement>(`[data-editor-key="${CSS.escape(key)}"]`);
         if (el && initialContentsRef.current[key]) {
           el.innerHTML = initialContentsRef.current[key];
           el.removeAttribute('data-sobhavi-modified');
@@ -372,7 +384,7 @@ export default function SecretLiveEditor() {
         <div className={styles.modalBackdrop} onClick={() => setShowPinModal(false)}>
           <div className={styles.modalCard} onClick={e => e.stopPropagation()}>
             <div className={styles.modalIcon}>🔐</div>
-            <h3 className={styles.modalTitle}>Secret Live Edit Mode</h3>
+            <h3 className={styles.modalTitle}>Live Edit Mode</h3>
             <p className={styles.modalDesc}>
               Enter admin passkey to edit text directly on this website.
             </p>
@@ -413,6 +425,26 @@ export default function SecretLiveEditor() {
         </div>
       )}
 
+      {/* Floating Toggle Trigger Button (When not editing) */}
+      {!isEditing && (
+        <button
+          type="button"
+          className={styles.triggerBtn}
+          onClick={() => {
+            const isAuth = sessionStorage.getItem('sobhavi_editor_auth') === 'true';
+            if (isAuth) {
+              setIsEditing(true);
+            } else {
+              setShowPinModal(true);
+            }
+          }}
+          title="Turn on Live Edit Mode (Admin)"
+        >
+          <span className={styles.triggerIcon}>✏️</span>
+          <span>Edit Website</span>
+        </button>
+      )}
+
       {/* Floating Toolbar (Only visible when Edit Mode is active) */}
       {isEditing && (
         <div className={styles.floatingToolbar}>
@@ -422,7 +454,7 @@ export default function SecretLiveEditor() {
           </div>
 
           <span className={styles.changesCount}>
-            {pendingCount > 0 ? `${pendingCount} edited` : 'Click any text to edit'}
+            {pendingCount > 0 ? `${pendingCount} edited` : 'Click text to edit'}
           </span>
 
           <button
@@ -449,7 +481,7 @@ export default function SecretLiveEditor() {
             type="button"
             className={styles.exitBtn}
             onClick={() => setIsEditing(false)}
-            title="Exit Edit Mode (Ctrl+Shift+E)"
+            title="Exit Edit Mode"
           >
             ✕
           </button>

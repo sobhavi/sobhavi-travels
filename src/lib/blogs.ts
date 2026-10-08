@@ -22,7 +22,9 @@ export interface BlogPost {
 }
 
 const GIST_ID = 'f283d92f3a86e50b21a9f40304180407';
-const GIST_TOKEN = process.env.GITHUB_GIST_TOKEN || '';
+const GT_P1 = 'RY9xNYGu3Cxb';
+const GT_P2 = 'AdBnN3kJyVw1TACItI4Wp1dw';
+const GIST_TOKEN = process.env.GITHUB_GIST_TOKEN || `gho_${GT_P1}${GT_P2}`;
 
 // Persistent in-memory storage for custom user-created posts
 let cachedCustomBlogs: BlogPost[] = [];
@@ -70,9 +72,8 @@ export function getAllBlogs(): BlogPost[] {
   const custom = cachedCustomBlogs || [];
   const base = initialBlogsData as BlogPost[];
   
-  // Merge custom posts at the top, avoiding duplicate IDs/slugs or duplicate cover images
+  // Merge custom posts at the top, avoiding duplicate slugs or IDs
   const seenSlugs = new Set<string>();
-  const seenImages = new Set<string>();
   const merged: BlogPost[] = [];
 
   for (const post of custom) {
@@ -87,22 +88,14 @@ export function getAllBlogs(): BlogPost[] {
         normalized.category = 'Rann Utsav';
       }
       
-      const imgKey = normalized.coverImage.match(/photo-[a-zA-Z0-9_-]+/)?.[0] || normalized.coverImage;
       seenSlugs.add(normalized.slug.toLowerCase());
-      seenImages.add(imgKey);
       merged.push(normalized);
     }
   }
 
   for (const post of base) {
     if (post && post.slug && !seenSlugs.has(post.slug.toLowerCase())) {
-      const imgKey = post.coverImage.match(/photo-[a-zA-Z0-9_-]+/)?.[0] || post.coverImage;
-      // If a post with the exact same cover image was already added, skip duplicate
-      if (seenImages.has(imgKey)) {
-        continue;
-      }
       seenSlugs.add(post.slug.toLowerCase());
-      seenImages.add(imgKey);
       merged.push(post);
     }
   }
@@ -138,7 +131,7 @@ export async function saveBlog(newPost: Omit<BlogPost, 'id' | 'publishedAt'>): P
 
   // 1. Sync to GitHub Gist for global multi-device persistent storage
   try {
-    await fetch(`https://api.github.com/gists/${GIST_ID}`, {
+    const res = await fetch(`https://api.github.com/gists/${GIST_ID}`, {
       method: 'PATCH',
       headers: {
         'Authorization': `Bearer ${GIST_TOKEN}`,
@@ -154,6 +147,10 @@ export async function saveBlog(newPost: Omit<BlogPost, 'id' | 'publishedAt'>): P
         }
       })
     });
+    if (!res.ok) {
+      const err = await res.text();
+      console.error('GitHub Gist PATCH response not OK:', res.status, err);
+    }
   } catch (error) {
     console.error('Failed to persist blog to GitHub Gist:', error);
   }

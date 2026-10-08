@@ -573,7 +573,7 @@ export default function AdminClientDashboard({ initialEnquiries, initialBlogs, i
           readTime: '5 min read'
         });
       } else {
-        alert("Could not publish blog. Please check your inputs.");
+        alert(data.error || "Could not publish blog. Please check your inputs.");
       }
     } catch (err) {
       console.error(err);
