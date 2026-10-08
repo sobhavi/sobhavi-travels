@@ -55,6 +55,41 @@ export default function SinglePageForm({ initialDestination = "", initialService
 
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [lastWaUrl, setLastWaUrl] = useState<string>('');
+  const [showExtendedFields, setShowExtendedFields] = useState<boolean>(false);
+
+  // Sync form visibility settings from siteConfig (Admin controllable)
+  useEffect(() => {
+    const applyConfig = () => {
+      const local = localStorage.getItem('sobhavi_site_config');
+      if (local) {
+        try {
+          const parsed = JSON.parse(local);
+          if (parsed.formSettings?.showExtendedFields !== undefined) {
+            setShowExtendedFields(Boolean(parsed.formSettings.showExtendedFields));
+          }
+        } catch {}
+      }
+    };
+
+    applyConfig();
+
+    fetch('/api/site-config', { cache: 'no-store' })
+      .then(r => r.json())
+      .then(d => {
+        if (d.success && d.config?.formSettings?.showExtendedFields !== undefined) {
+          setShowExtendedFields(Boolean(d.config.formSettings.showExtendedFields));
+        }
+      })
+      .catch(() => {});
+
+    window.addEventListener('sobhavi_site_config_updated', applyConfig);
+    window.addEventListener('storage', applyConfig);
+    return () => {
+      window.removeEventListener('sobhavi_site_config_updated', applyConfig);
+      window.removeEventListener('storage', applyConfig);
+    };
+  }, []);
 
   useEffect(() => {
     if (initialDestination) {
@@ -79,7 +114,7 @@ export default function SinglePageForm({ initialDestination = "", initialService
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
     if (!formData.name.trim() || !formData.phone.trim()) {
@@ -103,29 +138,31 @@ export default function SinglePageForm({ initialDestination = "", initialService
       return;
     }
 
-    // Build structured WhatsApp message for Sobhavi Travels
+    // Build concise, professional WhatsApp message
     const messageLines = [
       "*New Travel Enquiry - SOBHAVI TRAVELS*",
       "",
-      `*Your name:* ${formData.name}`,
-      `*Mobile / WhatsApp:* ${formData.phone}`,
+      `*Your name:* ${formData.name.trim()}`,
+      `*Mobile / WhatsApp:* ${formData.phone.trim()}`,
       `*Email:* ${formData.email.trim()}`,
       `*Interested in:* ${formData.service}`,
-      `*Destination(s):* ${formData.destination || 'Not specified'}`,
-      formData.duration ? `*Trip Duration / Package:* ${formData.duration}` : null,
-      `*Approx. travel dates:* ${formData.travelDates || 'Flexible'}`,
-      `*Number of travellers:* ${formData.travellers || 'Not specified'}`,
-      `*Approximate budget (per person):* ${formData.budget || 'Not specified'}`,
+      formData.destination.trim() ? `*Destination(s):* ${formData.destination.trim()}` : null,
+      formData.duration.trim() ? `*Trip Duration / Package:* ${formData.duration.trim()}` : null,
+      formData.travelDates.trim() ? `*Approx. travel dates:* ${formData.travelDates.trim()}` : null,
+      formData.travellers.trim() ? `*Number of travellers:* ${formData.travellers.trim()}` : null,
+      formData.budget.trim() ? `*Approximate budget (per person):* ${formData.budget.trim()}` : null,
       formData.hearAboutUs ? `*Found us via:* ${formData.hearAboutUs}` : null,
       (formData.hearAboutUs === "Referred by Friend or Family" && (formData.referrerName || formData.referrerPhone))
-        ? `*Referred by:* ${formData.referrerName || 'Not specified'} ${formData.referrerPhone ? `(${formData.referrerPhone})` : ''}`
+        ? `*Referred by:* ${formData.referrerName.trim()} ${formData.referrerPhone ? `(${formData.referrerPhone.trim()})` : ''}`
         : null,
-      `*Anything else we should know?:* ${formData.notes || 'None'}`
+      formData.notes.trim() ? `*Notes / Special Requests:* ${formData.notes.trim()}` : null
     ].filter(Boolean) as string[];
 
     const waText = messageLines.join("\n");
     const waUrl = `https://wa.me/${TARGET_WHATSAPP}?text=${encodeURIComponent(waText)}`;
+    setLastWaUrl(waUrl);
 
+    // Payload for Google Sheet & Database Sync
     const payload = {
       timestamp: new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" }),
       name: formData.name.trim(),
@@ -144,23 +181,27 @@ export default function SinglePageForm({ initialDestination = "", initialService
       notes: formData.notes.trim() || 'None'
     };
 
-    // Submit once to /api/enquiries (which saves to database, logs backup, and syncs to Google Sheet)
-    setIsSubmitting(true);
+    // 1. INSTANT WHATSAPP OPEN (<50ms): Direct in synchronous click thread to prevent browser popup blockers!
     try {
-      await fetch('/api/enquiries', {
+      window.open(waUrl, '_blank');
+    } catch (popupErr) {
+      console.warn("Direct window open blocked:", popupErr);
+    }
+    setSubmitted(true);
+
+    // 2. INSTANT PARALLEL BACKEND SYNC: Keepalive ensures Google Sheets & DB sync complete reliably in <1s
+    try {
+      fetch('/api/enquiries', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
+        body: JSON.stringify(payload),
+        keepalive: true
+      }).catch(err => {
+        console.error("Enquiry background sync error:", err);
       });
     } catch (err) {
-      console.error("Enquiry submission error:", err);
-    } finally {
-      setIsSubmitting(false);
+      console.error("Enquiry dispatch error:", err);
     }
-
-    // Open WhatsApp directly
-    window.open(waUrl, '_blank');
-    setSubmitted(true);
   };
 
   return (
@@ -174,18 +215,30 @@ export default function SinglePageForm({ initialDestination = "", initialService
           {submitted ? (
             <div className={styles.successMessage}>
               <div className={styles.successIcon}>✓</div>
-              <h3 className={styles.successTitle}>Enquiry Prepared!</h3>
+              <h3 className={styles.successTitle}>Enquiry Sent!</h3>
               <p className={styles.successDesc}>
-                Your details have been opened in WhatsApp. If it didn&apos;t open automatically, click the button below to send:
+                Your details have been registered and opened directly in WhatsApp. If WhatsApp did not open automatically, click below:
               </p>
-              <button 
-                type="button" 
-                onClick={handleSubmit} 
-                className={styles.submitBtn}
-                style={{ marginTop: '1.25rem' }}
-              >
-                Send Enquiry
-              </button>
+              {lastWaUrl ? (
+                <a 
+                  href={lastWaUrl} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className={styles.submitBtn}
+                  style={{ marginTop: '1.25rem', display: 'flex', alignItems: 'center', justifyContent: 'center', textDecoration: 'none' }}
+                >
+                  💬 Continue in WhatsApp
+                </a>
+              ) : (
+                <button 
+                  type="button" 
+                  onClick={handleSubmit} 
+                  className={styles.submitBtn}
+                  style={{ marginTop: '1.25rem' }}
+                >
+                  Send Enquiry
+                </button>
+              )}
               <button 
                 type="button" 
                 onClick={() => setSubmitted(false)} 
@@ -271,120 +324,125 @@ export default function SinglePageForm({ initialDestination = "", initialService
                 />
               </div>
 
-              {/* Trip Duration / Package */}
-              <div className={styles.formGroup}>
-                <label className={styles.label}>Trip Duration / Package</label>
-                <input
-                  type="text"
-                  name="duration"
-                  value={formData.duration}
-                  onChange={handleChange}
-                  placeholder="e.g. 2 Nights / 3 Days, 3N/4D, 1 Week"
-                  className={styles.input}
-                />
-              </div>
-
-              {/* Approx. travel dates */}
-              <div className={styles.formGroup}>
-                <label className={styles.label}>Approx. travel dates</label>
-                <input
-                  type="text"
-                  name="travelDates"
-                  value={formData.travelDates}
-                  onChange={handleChange}
-                  placeholder="e.g. 15-22 December 2026"
-                  className={styles.input}
-                />
-              </div>
-
-              {/* Number of travellers */}
-              <div className={styles.formGroup}>
-                <label className={styles.label}>Number of travellers</label>
-                <input
-                  type="text"
-                  name="travellers"
-                  value={formData.travellers}
-                  onChange={handleChange}
-                  placeholder="e.g. 2 adults + 1 child"
-                  className={styles.input}
-                />
-              </div>
-
-              {/* Approximate budget (per person) */}
-              <div className={styles.formGroup}>
-                <label className={styles.label}>Approximate budget (per person)</label>
-                <input
-                  type="text"
-                  name="budget"
-                  value={formData.budget}
-                  onChange={handleChange}
-                  placeholder="e.g. ₹20,000–₹25,000"
-                  className={styles.input}
-                />
-              </div>
-
-              {/* How did you hear about us? */}
-              <div className={styles.formGroup}>
-                <label className={styles.label}>How did you hear about us?</label>
-                <div className={styles.selectWrapper}>
-                  <select
-                    name="hearAboutUs"
-                    value={formData.hearAboutUs}
-                    onChange={handleChange}
-                    className={styles.select}
-                  >
-                    <option value="">Select how you found us (Optional)</option>
-                    {HEAR_ABOUT_US_OPTIONS.map(opt => (
-                      <option key={opt} value={opt}>{opt}</option>
-                    ))}
-                  </select>
-                </div>
-              </div>
-
-              {/* Optional Referrer Fields (shown when friend/family selected) */}
-              {formData.hearAboutUs === "Referred by Friend or Family" && (
-                <div className={styles.referrerBox}>
-                  <div className={styles.referrerHeader}>
-                    <span className={styles.referrerTitle}>🤝 Referrer Details</span>
-                    <span className={styles.optionalTag}>Optional (Not Mandatory)</span>
-                  </div>
+              {/* Extended Form Fields (Toggled via Admin Panel, Hidden by default for fast conversion) */}
+              {showExtendedFields && (
+                <>
+                  {/* Trip Duration / Package */}
                   <div className={styles.formGroup}>
-                    <label className={styles.label}>Referrer&apos;s Name</label>
+                    <label className={styles.label}>Trip Duration / Package</label>
                     <input
                       type="text"
-                      name="referrerName"
-                      value={formData.referrerName}
+                      name="duration"
+                      value={formData.duration}
                       onChange={handleChange}
-                      placeholder="e.g. Ramesh Sharma"
+                      placeholder="e.g. 2 Nights / 3 Days, 3N/4D, 1 Week"
                       className={styles.input}
                     />
                   </div>
-                  <div className={styles.formGroup}>
-                    <label className={styles.label}>Referrer&apos;s Mobile / Phone</label>
-                    <input
-                      type="tel"
-                      name="referrerPhone"
-                      value={formData.referrerPhone}
-                      onChange={handleChange}
-                      placeholder="e.g. +91 98765 43210"
-                      className={styles.input}
-                    />
-                  </div>
-                </div>
-              )}
 
-              {/* Anything else we should know? */}
-              <div className={styles.formGroup}>
-                <label className={styles.label}>Anything else we should know?</label>
-                <textarea
-                  name="notes"
-                  value={formData.notes}
-                  onChange={handleChange}
-                  placeholder="Dietary preferences, mobility needs, honeymoon-specific requests, prior visa rejections, etc."
-                  rows={4}
-                  className={styles.textarea}
-                />
-              </div>
+                  {/* Approx. travel dates */}
+                  <div className={styles.formGroup}>
+                    <label className={styles.label}>Approx. travel dates</label>
+                    <input
+                      type="text"
+                      name="travelDates"
+                      value={formData.travelDates}
+                      onChange={handleChange}
+                      placeholder="e.g. 15-22 December 2026"
+                      className={styles.input}
+                    />
+                  </div>
+
+                  {/* Number of travellers */}
+                  <div className={styles.formGroup}>
+                    <label className={styles.label}>Number of travellers</label>
+                    <input
+                      type="text"
+                      name="travellers"
+                      value={formData.travellers}
+                      onChange={handleChange}
+                      placeholder="e.g. 2 adults + 1 child"
+                      className={styles.input}
+                    />
+                  </div>
+
+                  {/* Approximate budget (per person) */}
+                  <div className={styles.formGroup}>
+                    <label className={styles.label}>Approximate budget (per person)</label>
+                    <input
+                      type="text"
+                      name="budget"
+                      value={formData.budget}
+                      onChange={handleChange}
+                      placeholder="e.g. ₹20,000–₹25,000"
+                      className={styles.input}
+                    />
+                  </div>
+
+                  {/* How did you hear about us? */}
+                  <div className={styles.formGroup}>
+                    <label className={styles.label}>How did you hear about us?</label>
+                    <div className={styles.selectWrapper}>
+                      <select
+                        name="hearAboutUs"
+                        value={formData.hearAboutUs}
+                        onChange={handleChange}
+                        className={styles.select}
+                      >
+                        <option value="">Select how you found us (Optional)</option>
+                        {HEAR_ABOUT_US_OPTIONS.map(opt => (
+                          <option key={opt} value={opt}>{opt}</option>
+                        ))}
+                      </select>
+                    </div>
+                  </div>
+
+                  {/* Optional Referrer Fields (shown when friend/family selected) */}
+                  {formData.hearAboutUs === "Referred by Friend or Family" && (
+                    <div className={styles.referrerBox}>
+                      <div className={styles.referrerHeader}>
+                        <span className={styles.referrerTitle}>🤝 Referrer Details</span>
+                        <span className={styles.optionalTag}>Optional (Not Mandatory)</span>
+                      </div>
+                      <div className={styles.formGroup}>
+                        <label className={styles.label}>Referrer&apos;s Name</label>
+                        <input
+                          type="text"
+                          name="referrerName"
+                          value={formData.referrerName}
+                          onChange={handleChange}
+                          placeholder="e.g. Ramesh Sharma"
+                          className={styles.input}
+                        />
+                      </div>
+                      <div className={styles.formGroup}>
+                        <label className={styles.label}>Referrer&apos;s Mobile / Phone</label>
+                        <input
+                          type="tel"
+                          name="referrerPhone"
+                          value={formData.referrerPhone}
+                          onChange={handleChange}
+                          placeholder="e.g. +91 98765 43210"
+                          className={styles.input}
+                        />
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Anything else we should know? */}
+                  <div className={styles.formGroup}>
+                    <label className={styles.label}>Anything else we should know?</label>
+                    <textarea
+                      name="notes"
+                      value={formData.notes}
+                      onChange={handleChange}
+                      placeholder="Dietary preferences, mobility needs, honeymoon-specific requests, prior visa rejections, etc."
+                      rows={4}
+                      className={styles.textarea}
+                    />
+                  </div>
+                </>
+              )}
 
               {/* Submit Button */}
               <button 

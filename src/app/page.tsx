@@ -539,12 +539,12 @@ export default function Home() {
                       {/* Top Right Corner Price Banner */}
                       <div className={styles.destCardPriceBanner}>
                         <span className={styles.priceTinyLabel}>STARTING FROM</span>
-                        <span className={styles.priceAmount}>₹25,000</span>
+                        <span className={styles.priceAmount} data-editable="true">₹25,000</span>
                       </div>
 
                       <div className={styles.destCardContent}>
-                        <h3 className={styles.destCardName}>{dest.name}</h3>
-                        <p className={styles.destCardTagline}>{dest.tagline}</p>
+                        <h3 className={styles.destCardName} data-editable="true">{dest.name}</h3>
+                        <p className={styles.destCardTagline} data-editable="true">{dest.tagline}</p>
                         <span className={styles.destCardLinkText}>View Destination &rarr;</span>
                       </div>
                     </Link>

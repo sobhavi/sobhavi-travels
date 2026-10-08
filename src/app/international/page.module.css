@@ -250,6 +250,12 @@
   gap: 0.4rem;
 }
 
+.inclusionItem span[data-editable="true"] {
+  flex: 1;
+  display: inline-block;
+  min-height: 1.2em;
+}
+
 .checkIcon {
   color: #10b981;
   font-weight: bold;

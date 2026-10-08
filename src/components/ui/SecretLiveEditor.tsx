@@ -48,11 +48,17 @@ function getElementKey(el: HTMLElement): string {
   return generated;
 }
 
+const CANDIDATE_SELECTOR = 'h1, h2, h3, h4, h5, h6, p, label, strong, em, b, span, li, [data-editable="true"], .editable-text, [class*="destTagline"], [class*="inclusionsTitle"], [class*="destName"], [class*="destOverview"], [class*="priceBannerAmount"], [class*="destBadge"], [class*="dayNumber"]';
+
 // Check if element is a valid editable text candidate
 function isEditableTextTarget(el: HTMLElement): boolean {
-  if (['SCRIPT', 'STYLE', 'SVG', 'PATH', 'INPUT', 'TEXTAREA', 'BUTTON', 'NOSCRIPT'].includes(el.tagName)) return false;
-  if (el.closest(`.${styles.floatingToolbar}`) || el.closest(`.${styles.modalBackdrop}`) || el.closest(`.${styles.triggerBtn}`)) return false;
+  if (!el || !el.tagName) return false;
+  if (['SCRIPT', 'STYLE', 'SVG', 'PATH', 'INPUT', 'SELECT', 'TEXTAREA', 'BUTTON', 'NOSCRIPT'].includes(el.tagName)) return false;
+  if (el.closest(`.${styles.floatingToolbar}`) || el.closest(`.${styles.modalBackdrop}`)) return false;
   
+  // Explicitly marked editable elements are always editable!
+  if (el.dataset.editable === 'true' || el.getAttribute('data-editable') === 'true') return true;
+
   // Don't edit standalone checkmarks or decorative icons
   const text = (el.textContent || '').trim();
   if (text === '✓' || text === '✦' || text === '💬' || text === '🚀' || text === '✏️') return false;
@@ -60,14 +66,24 @@ function isEditableTextTarget(el: HTMLElement): boolean {
   // Primary heading and paragraph tags
   if (['H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'P', 'LABEL', 'STRONG', 'B', 'EM'].includes(el.tagName)) return true;
 
+  // Card specific classes (Package Inclusions, Taglines, Overviews, Prices, Badges)
+  const className = typeof el.className === 'string' ? el.className : '';
+  if (
+    className.includes('inclusionsTitle') || 
+    className.includes('destTagline') || 
+    className.includes('priceBannerAmount') || 
+    className.includes('destBadge') ||
+    className.includes('destName') ||
+    className.includes('destOverview')
+  ) {
+    return true;
+  }
+
   // Leaf text elements (e.g. inclusions <span>, badges, subtitles, prices, list items)
   if (el.children.length === 0 && text.length > 0) return true;
 
   // Spans with direct text
   if (el.tagName === 'SPAN' && text.length > 0) return true;
-
-  // Destination / Category card specific items
-  if (el.dataset.editable === 'true') return true;
 
   return false;
 }
@@ -88,11 +104,36 @@ export default function SecretLiveEditor() {
   const loadedOverridesRef = useRef<Record<string, Record<string, string>>>({});
   const elementMapRef = useRef<Map<string, HTMLElement>>(new Map());
 
+  const attachEditable = useCallback((el: HTMLElement, key: string) => {
+    el.setAttribute('contenteditable', 'true');
+    el.setAttribute('data-sobhavi-editable', 'true');
+    el.setAttribute('spellcheck', 'false');
+
+    if (!initialContentsRef.current[key]) {
+      initialContentsRef.current[key] = el.innerHTML;
+    }
+
+    el.oninput = () => {
+      const currentHtml = el.innerHTML;
+      if (currentHtml !== initialContentsRef.current[key]) {
+        el.setAttribute('data-sobhavi-modified', 'true');
+        setPendingChanges(prev => ({ ...prev, [key]: currentHtml }));
+      } else {
+        el.removeAttribute('data-sobhavi-modified');
+        setPendingChanges(prev => {
+          const updated = { ...prev };
+          delete updated[key];
+          return updated;
+        });
+      }
+    };
+  }, []);
+
   const scanAndApply = useCallback(() => {
     const currentPath = pathname?.toLowerCase() || '/';
     const pathOverrides = loadedOverridesRef.current[currentPath] || {};
 
-    const candidates = document.querySelectorAll<HTMLElement>('h1, h2, h3, h4, h5, h6, p, label, strong, em, b, span, li, [data-editable="true"], .editable-text');
+    const candidates = document.querySelectorAll<HTMLElement>(CANDIDATE_SELECTOR);
     elementMapRef.current.clear();
 
     candidates.forEach(el => {
@@ -103,8 +144,12 @@ export default function SecretLiveEditor() {
       if (pathOverrides[key] && !el.isContentEditable && el.innerHTML !== pathOverrides[key]) {
         el.innerHTML = pathOverrides[key];
       }
+
+      if (isEditing) {
+        attachEditable(el, key);
+      }
     });
-  }, [pathname]);
+  }, [pathname, isEditing, attachEditable]);
 
   const fetchAndApplyOverrides = useCallback(async () => {
     try {
@@ -191,7 +236,7 @@ export default function SecretLiveEditor() {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [isEditing, searchParams]);
 
-  // Enable or Disable Inline ContentEditable on Page Elements
+  // Enable or Disable Inline ContentEditable on Page Elements with MutationObserver
   useEffect(() => {
     const styleId = 'sobhavi-editor-styles';
     let styleTag = document.getElementById(styleId);
@@ -206,13 +251,13 @@ export default function SecretLiveEditor() {
             transition: outline 0.15s ease, box-shadow 0.15s ease !important;
           }
           [data-sobhavi-editable="true"]:hover {
-            outline: 1.5px dashed rgba(212, 175, 55, 0.8) !important;
+            outline: 2px dashed rgba(212, 175, 55, 0.85) !important;
             outline-offset: 2px !important;
           }
           [data-sobhavi-editable="true"]:focus {
             outline: 2px solid #d4af37 !important;
             outline-offset: 2px !important;
-            box-shadow: 0 0 14px rgba(212, 175, 55, 0.45) !important;
+            box-shadow: 0 0 16px rgba(212, 175, 55, 0.5) !important;
           }
           [data-sobhavi-modified="true"] {
             outline: 2px solid #22c55e !important;
@@ -222,52 +267,58 @@ export default function SecretLiveEditor() {
         document.head.appendChild(styleTag);
       }
 
-      // Re-scan to ensure all elements are indexed
+      // Initial scan
       scanAndApply();
 
-      elementMapRef.current.forEach((el, key) => {
-        el.setAttribute('contenteditable', 'true');
-        el.setAttribute('data-sobhavi-editable', 'true');
-        el.setAttribute('spellcheck', 'false');
+      // MutationObserver: dynamically mounted elements (e.g. Domestic/International tab switch) become editable automatically!
+      const observer = new MutationObserver(() => {
+        scanAndApply();
+      });
+      observer.observe(document.body, { childList: true, subtree: true });
 
-        if (!initialContentsRef.current[key]) {
-          initialContentsRef.current[key] = el.innerHTML;
+      // Click & Pointerdown capture: prevents navigation while editing & focuses editable targets
+      const handleClickCapture = (e: MouseEvent) => {
+        const target = e.target as HTMLElement | null;
+        if (!target) return;
+
+        // Skip toolbar and modal interactions
+        if (target.closest(`.${styles.floatingToolbar}`) || target.closest(`.${styles.modalBackdrop}`)) {
+          return;
         }
 
-        const handleInput = () => {
-          const currentHtml = el.innerHTML;
-          if (currentHtml !== initialContentsRef.current[key]) {
-            el.setAttribute('data-sobhavi-modified', 'true');
-            setPendingChanges(prev => ({ ...prev, [key]: currentHtml }));
-          } else {
-            el.removeAttribute('data-sobhavi-modified');
-            setPendingChanges(prev => {
-              const updated = { ...prev };
-              delete updated[key];
-              return updated;
-            });
-          }
-        };
+        // Prevent link navigation during edit mode
+        const link = target.closest('a');
+        if (link) {
+          e.preventDefault();
+        }
 
-        el.oninput = handleInput;
-      });
+        // If target or parent is an editable target, ensure it has focus
+        if (target.getAttribute('contenteditable') === 'true') {
+          return;
+        }
 
-      // Prevent link clicks while editing so users can edit link/button text without navigating away
-      const handlePreventNav = (e: MouseEvent) => {
-        const target = e.target as HTMLElement | null;
-        if (target && (target.getAttribute('contenteditable') === 'true' || target.closest('[contenteditable="true"]'))) {
-          const link = target.closest('a');
-          if (link) {
-            e.preventDefault();
-          }
+        if (isEditableTextTarget(target)) {
+          const key = getElementKey(target);
+          attachEditable(target, key);
+          target.focus();
+          return;
+        }
+
+        // Check child element (e.g. clicked row containing editable span)
+        const editableChild = target.querySelector<HTMLElement>('[data-sobhavi-editable="true"], [data-editable="true"], span');
+        if (editableChild && isEditableTextTarget(editableChild)) {
+          const key = getElementKey(editableChild);
+          attachEditable(editableChild, key);
+          editableChild.focus();
         }
       };
 
-      document.addEventListener('click', handlePreventNav, true);
-      showToast("✏️ Edit Mode Active! Click any text, card, or inclusion to edit.");
+      document.addEventListener('click', handleClickCapture, true);
+      showToast("✏️ Edit Mode Active! Click any text, title, or package inclusion to edit.");
 
       return () => {
-        document.removeEventListener('click', handlePreventNav, true);
+        observer.disconnect();
+        document.removeEventListener('click', handleClickCapture, true);
       };
     } else {
       // Clean up styles and contenteditable
@@ -285,7 +336,7 @@ export default function SecretLiveEditor() {
     return () => {
       if (styleTag) styleTag.remove();
     };
-  }, [isEditing, scanAndApply]);
+  }, [isEditing, scanAndApply, attachEditable]);
 
   const showToast = (msg: string) => {
     setToastMessage(msg);

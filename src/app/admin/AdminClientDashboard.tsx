@@ -2377,6 +2377,70 @@ export default function AdminClientDashboard({ initialEnquiries, initialBlogs, i
             </div>
           </div>
 
+          {/* Enquiry Form Field Visibility Settings */}
+          <div style={{
+            background: 'rgba(212, 175, 55, 0.06)',
+            border: '1px solid rgba(212, 175, 55, 0.25)',
+            borderRadius: '12px',
+            padding: '1.25rem 1.5rem',
+            marginBottom: '1.75rem',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '0.75rem'
+          }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
+              <div>
+                <h3 style={{ margin: 0, fontSize: '1.05rem', color: '#fceda2', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                  <span>⚙️</span> Website Enquiry Form Settings
+                </h3>
+                <p style={{ margin: '0.25rem 0 0 0', fontSize: '0.85rem', color: '#94a3b8' }}>
+                  Control whether extra travel planning fields (duration, dates, travellers, budget, notes) are visible to website visitors.
+                </p>
+              </div>
+
+              <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                <label style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', cursor: 'pointer', background: 'rgba(0,0,0,0.3)', padding: '0.5rem 0.85rem', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.1)' }}>
+                  <input
+                    type="checkbox"
+                    checked={Boolean(config.formSettings?.showExtendedFields)}
+                    onChange={(e) => {
+                      const updated = {
+                        ...config,
+                        formSettings: {
+                          ...config.formSettings,
+                          showExtendedFields: e.target.checked
+                        }
+                      };
+                      setConfig(updated);
+                    }}
+                    style={{ width: '18px', height: '18px', accentColor: '#d4af37', cursor: 'pointer' }}
+                  />
+                  <span style={{ fontSize: '0.88rem', fontWeight: 600, color: config.formSettings?.showExtendedFields ? '#22c55e' : '#e2e8f0' }}>
+                    {config.formSettings?.showExtendedFields ? 'Extended Fields: VISIBLE' : 'Extended Fields: HIDDEN (Default)'}
+                  </span>
+                </label>
+
+                <button
+                  type="button"
+                  onClick={() => handleSaveConfig('Enquiry Form Settings')}
+                  disabled={savingSection === 'Enquiry Form Settings'}
+                  className={styles.saveSectionBtn}
+                  style={{ padding: '0.5rem 1rem', fontSize: '0.85rem' }}
+                >
+                  {savingSection === 'Enquiry Form Settings' ? 'Saving...' : 'Save Setting'}
+                </button>
+              </div>
+            </div>
+
+            <div style={{ fontSize: '0.8rem', color: '#94a3b8', borderTop: '1px solid rgba(255,255,255,0.06)', paddingTop: '0.6rem' }}>
+              {config.formSettings?.showExtendedFields ? (
+                <span>⚠️ Extended mode active: Visitors will see full form fields including <em>Trip Duration, Approx. travel dates, Number of travellers, Approximate budget, Referral source, and Notes</em>.</span>
+              ) : (
+                <span>✨ Compact mode active (Recommended): Form shows essential fields only (<em>Name, WhatsApp, Email, Service, Destination</em>) for maximum lead conversions. WhatsApp &amp; Google Sheets sync in &lt;1 second.</span>
+              )}
+            </div>
+          </div>
+
           {enquiries.length === 0 ? (
             <div style={{ textAlign: 'center', padding: '3rem 1rem', color: '#94a3b8' }}>
               <span style={{ fontSize: '2.5rem', display: 'block', marginBottom: '0.5rem' }}>📭</span>

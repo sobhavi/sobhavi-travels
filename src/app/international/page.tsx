@@ -252,20 +252,22 @@ export default function InternationalPage() {
                     style={{ backgroundImage: `url(${dest.image})` }}
                   >
                     <div className={styles.imageOverlay} />
-                    <span className={styles.destBadge}>{dest.duration} • {dest.bestTime}</span>
+                    <span className={styles.destBadge} data-editable="true">{dest.duration} • {dest.bestTime}</span>
 
                     {/* Top Right Floating Price Banner */}
                     <div className={styles.topRightPriceBanner}>
                       <span className={styles.priceBannerLabel}>Starting From</span>
-                      <span className={styles.priceBannerAmount}>₹25,000</span>
+                      <span className={styles.priceBannerAmount} data-editable="true">
+                        {dest.startingPrice ? dest.startingPrice.replace(/Starting\s*(at)?\s*/i, '') : '₹25,000'}
+                      </span>
                     </div>
                   </div>
 
                   <div className={styles.cardContent}>
-                    <h3 className={styles.destName}>{dest.name}</h3>
-                    <div className={styles.destTagline}>{dest.tagline}</div>
+                    <h3 className={styles.destName} data-editable="true">{dest.name}</h3>
+                    <div className={styles.destTagline} data-editable="true">{dest.tagline}</div>
 
-                    <p className={styles.destOverview}>{dest.overview}</p>
+                    <p className={styles.destOverview} data-editable="true">{dest.overview}</p>
 
                     {dest.dayPlan && dest.dayPlan.length > 0 && (
                       <div className={styles.dayPlanList}>
@@ -275,19 +277,19 @@ export default function InternationalPage() {
                         {dest.dayPlan.slice(0, 4).map((d: DayPlan, i: number) => (
                           <div key={i} className={styles.dayPlanItem}>
                             <span className={styles.dayNumber}>{d.day}:</span>
-                            <span>{d.title}</span>
+                            <span data-editable="true">{d.title}</span>
                           </div>
                         ))}
                       </div>
                     )}
 
                     <div className={styles.inclusionsBox}>
-                      <div className={styles.inclusionsTitle}>Package Inclusions:</div>
+                      <div className={styles.inclusionsTitle} data-editable="true">Package Inclusions:</div>
                       <div className={styles.inclusionsList}>
                         {dest.inclusions.map((inc, i) => (
                           <div key={i} className={styles.inclusionItem}>
                             <span className={styles.checkIcon}>✓</span>
-                            <span>{inc}</span>
+                            <span data-editable="true">{inc}</span>
                           </div>
                         ))}
                       </div>

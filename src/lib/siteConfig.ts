@@ -94,6 +94,10 @@ export interface NavigationConfig {
   menuItems: MenuItemConfig[];
 }
 
+export interface FormSettingsConfig {
+  showExtendedFields?: boolean; // Default false: hides duration, dates, travellers, budget, notes
+}
+
 export interface SiteConfig {
   company: CompanyConfig;
   header?: HeaderConfig;
@@ -105,6 +109,7 @@ export interface SiteConfig {
   domesticDestinations: DestinationPackage[];
   internationalDestinations: DestinationPackage[];
   navigation?: NavigationConfig;
+  formSettings?: FormSettingsConfig;
 }
 
 // In-memory cache for serverless environments where filesystem may be read-only
@@ -167,7 +172,8 @@ export async function syncCloudSiteConfig(): Promise<SiteConfig> {
           inMemoryConfig = {
             ...base,
             ...parsed,
-            navigation: parsed.navigation || base.navigation || defaultNavigation
+            navigation: parsed.navigation || base.navigation || defaultNavigation,
+            formSettings: parsed.formSettings || base.formSettings || { showExtendedFields: false }
           };
           lastSiteConfigFetchTime = now;
         }
@@ -187,6 +193,9 @@ export function getSiteConfig(): SiteConfig {
   const loaded = (defaultConfig as unknown as SiteConfig);
   if (!loaded.navigation || !Array.isArray(loaded.navigation.menuItems) || loaded.navigation.menuItems.length === 0) {
     loaded.navigation = defaultNavigation;
+  }
+  if (!loaded.formSettings) {
+    loaded.formSettings = { showExtendedFields: false };
   }
   return loaded;
 }
@@ -230,7 +239,12 @@ export async function saveSiteConfig(newConfig: Partial<SiteConfig>): Promise<Si
     categories: newConfig.categories || current.categories,
     domesticDestinations: newConfig.domesticDestinations || current.domesticDestinations,
     internationalDestinations: newConfig.internationalDestinations || current.internationalDestinations,
-    navigation: newConfig.navigation || current.navigation || defaultNavigation
+    navigation: newConfig.navigation || current.navigation || defaultNavigation,
+    formSettings: {
+      showExtendedFields: false,
+      ...(current.formSettings || {}),
+      ...(newConfig.formSettings || {})
+    }
   };
 
   inMemoryConfig = merged;

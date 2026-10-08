@@ -352,5 +352,8 @@
       { "id": "group-tours", "label": "Group Tours", "href": "/group-tours", "enabled": true, "showInHeader": false, "showInMobile": true, "showInFooter": true },
       { "id": "contact", "label": "Contact Us", "href": "/contact", "enabled": true, "showInHeader": false, "showInMobile": true, "showInFooter": true }
     ]
+  },
+  "formSettings": {
+    "showExtendedFields": false
   }
 }
