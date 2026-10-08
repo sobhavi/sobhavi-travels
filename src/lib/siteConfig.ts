@@ -203,7 +203,7 @@ export function getSiteConfig(): SiteConfig {
 const defaultHeader: HeaderConfig = {
   brandName: "SOBHAVI TRAVELS",
   logoSubtitle: "LUXURY BESPOKE JOURNEYS",
-  phone: "+917406994752",
+  phone: "+9180462154",
   whatsapp: "7406994752",
   enquireButtonText: "Enquire Now",
   enquireButtonLink: "/enquire",
@@ -214,7 +214,7 @@ const defaultHeader: HeaderConfig = {
 const defaultFooter: FooterConfig = {
   aboutTitle: "SOBHAVI TRAVELS",
   aboutText: "Escape The Routine. From quick getaways to international holidays, family vacations to special occasions — travel made memorable.",
-  phone: "+917406994752",
+  phone: "+9180462154",
   whatsapp: "7406994752",
   email: "hello@sobhavitravel.com",
   address: "Ground Floor, No. 19, 2nd Cross, NR Layout, Kalyanagar, Babusapalya, Bengaluru 560043",

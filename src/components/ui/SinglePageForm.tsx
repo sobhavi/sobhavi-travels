@@ -32,8 +32,9 @@ const HEAR_ABOUT_US_OPTIONS = [
   "Other"
 ];
 
-const TARGET_WHATSAPP = "917406994752";
-const DISPLAY_PHONE = "+917406994752";
+const TARGET_WHATSAPP = "9180462154";
+const ALT_WHATSAPP = "917406994752";
+const DISPLAY_PHONE = "+9180462154";
 const DISPLAY_EMAIL = "hello@sobhavitravel.com";
 
 export default function SinglePageForm({ initialDestination = "", initialService = "", initialDuration = "" }: SinglePageFormProps) {
@@ -272,7 +273,7 @@ export default function SinglePageForm({ initialDestination = "", initialService
                   name="phone"
                   value={formData.phone}
                   onChange={handleChange}
-                  placeholder="+917406994752"
+                  placeholder="e.g. +91 98765 43210"
                   required
                   className={styles.input}
                 />
@@ -461,7 +462,25 @@ export default function SinglePageForm({ initialDestination = "", initialService
         <div className={styles.infoColumn}>
           <h2 className={styles.infoHeading} style={{ whiteSpace: 'nowrap' }}>Other ways to reach us</h2>
 
-          {/* Card 1: WhatsApp (fastest) */}
+          {/* Card 1: Direct Call / Phone */}
+          <div className={styles.contactCard}>
+            <div className={styles.cardIconBox} style={{ background: '#fbf8f1', borderColor: 'rgba(184, 151, 46, 0.4)' }}>
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="#8c7322">
+                <path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+              </svg>
+            </div>
+            <div className={styles.cardDetails}>
+              <div className={styles.cardTitle}>Direct Call / Phone Desk</div>
+              <div className={styles.cardText}>
+                <a href={`tel:${DISPLAY_PHONE}`} className={styles.amberLink}>
+                  {DISPLAY_PHONE}
+                </a>
+                <span className={styles.mutedText}> · Call our travel desk directly</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Card 2: WhatsApp (fastest) */}
           <div className={styles.contactCard}>
             <div className={styles.cardIconBox} style={{ background: 'transparent', border: 'none' }}>
               <svg width="36" height="36" viewBox="0 0 32 32" fill="none" style={{ display: 'block' }}>
@@ -481,6 +500,18 @@ export default function SinglePageForm({ initialDestination = "", initialService
                   {DISPLAY_PHONE}
                 </a>
                 <span className={styles.mutedText}> · WhatsApp us for a travel quote</span>
+                <div style={{ marginTop: '0.22rem', fontSize: '0.82rem', color: '#78716c' }}>
+                  Also available:{' '}
+                  <a 
+                    href={`https://wa.me/${ALT_WHATSAPP}?text=Hello%20Sobhavi%20Travels,%20I%20would%20like%20a%20travel%20quote.`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={styles.amberLink}
+                    style={{ fontSize: '0.82rem' }}
+                  >
+                    +917406994752
+                  </a>
+                </div>
               </div>
             </div>
           </div>
