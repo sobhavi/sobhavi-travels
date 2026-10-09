@@ -33,9 +33,9 @@ const HEAR_ABOUT_US_OPTIONS = [
 ];
 
 const TARGET_WHATSAPP = "917406994752";
-const ALT_WHATSAPP = "9180462154";
+const ALT_WHATSAPP = "919180462154";
 const DISPLAY_PHONE = "+91 74069 94752";
-const DISPLAY_ALT_PHONE = "+91 80462154";
+const DISPLAY_ALT_PHONE = "+91 9180462154";
 const DISPLAY_EMAIL = "hello@sobhavitravel.com";
 
 export default function SinglePageForm({ initialDestination = "", initialService = "", initialDuration = "" }: SinglePageFormProps) {
