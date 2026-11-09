@@ -1227,3 +1227,183 @@
     height: 330px;
   }
 }
+
+/* ==========================================================================
+   FEATURED 2027 GROUP TRIPS & ON-DEMAND SHOWCASE SECTION
+   ========================================================================== */
+.featuredTripsSection {
+  padding: 100px 0;
+  position: relative;
+  background: radial-gradient(circle at 50% 0%, rgba(212, 175, 55, 0.08) 0%, rgba(8, 11, 15, 0.95) 75%);
+  border-top: 1px solid rgba(212, 175, 55, 0.15);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.tripsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  margin-top: 48px;
+}
+
+.tripFeaturedCard {
+  background: #0E131A;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 16px 45px rgba(0, 0, 0, 0.4);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), border-color 0.3s ease, box-shadow 0.35s ease;
+  position: relative;
+  text-decoration: none;
+  color: inherit;
+}
+
+.tripFeaturedCard:hover {
+  transform: translateY(-8px);
+  border-color: rgba(212, 175, 55, 0.5);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6);
+}
+
+.tripMediaWrap {
+  position: relative;
+  height: 240px;
+  width: 100%;
+  overflow: hidden;
+}
+
+.tripCoverImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.tripFeaturedCard:hover .tripCoverImage {
+  transform: scale(1.08);
+}
+
+.tripMediaOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.1) 0%, rgba(14, 19, 26, 0.95) 100%);
+}
+
+.tripBadgeTag {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  z-index: 2;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.badgeAndaman {
+  background: #FCE8EE;
+  color: #B83C5A;
+  border: 1px solid #F5B5C5;
+}
+
+.badgeSriLanka {
+  background: #0E2338;
+  color: #FFA585;
+  border: 1px solid #F06543;
+}
+
+.badgeOnDemand {
+  background: rgba(212, 175, 55, 0.15);
+  color: #F1D479;
+  border: 1px solid #D4AF37;
+}
+
+.tripCardBody {
+  padding: 28px 26px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.tripDateRow {
+  font-size: 0.85rem;
+  color: #D4AF37;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.tripCardHeading {
+  font-family: var(--font-heading), "Oswald", sans-serif;
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #FFFFFF;
+  margin: 0 0 10px 0;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.tripQuoteText {
+  font-size: 0.98rem;
+  color: #9FB2C4;
+  line-height: 1.55;
+  margin: 0 0 20px 0;
+  flex: 1;
+}
+
+.tripFooterRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 18px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.tripPriceBox {
+  display: flex;
+  flex-direction: column;
+}
+
+.tripPriceLabel {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  color: #7E90A2;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+
+.tripPriceValue {
+  font-size: 1.18rem;
+  font-weight: 900;
+  color: #FFFFFF;
+}
+
+.tripCtaPill {
+  font-size: 0.88rem;
+  font-weight: 800;
+  color: #D4AF37;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: transform 0.2s ease;
+}
+
+.tripFeaturedCard:hover .tripCtaPill {
+  transform: translateX(4px);
+}
+
+@media (max-width: 1024px) {
+  .tripsGrid {
+    grid-template-columns: 1fr;
+    max-width: 600px;
+    margin: 40px auto 0;
+  }
+}

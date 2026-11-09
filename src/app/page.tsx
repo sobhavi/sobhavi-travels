@@ -483,6 +483,125 @@ export default function Home() {
         </section>
 
         {/* =================================================================
+            SPECIAL FEATURE: 2027 CURATED GROUP EXPEDITIONS & ON-DEMAND TRAVEL
+            ================================================================= */}
+        <section className={styles.featuredTripsSection}>
+          <div className="container">
+            <div className={styles.sectionHeader}>
+              <span className={styles.eyebrow}>CURATED & ON-DEMAND</span>
+              <h2 className={styles.sectionTitle}>SIGNATURE EXPEDITIONS 2027</h2>
+              <p className={styles.sectionSubtitle}>
+                Handpicked fixed-date group departures & unlimited on-demand bespoke journeys.
+              </p>
+            </div>
+
+            <div className={styles.tripsGrid}>
+              {/* Trip 1: Andaman Women-Only */}
+              <Link href="/trips/andaman-january-2027" className={styles.tripFeaturedCard}>
+                <div className={styles.tripMediaWrap}>
+                  <div className={`${styles.tripBadgeTag} ${styles.badgeAndaman}`}>
+                    🌸 WOMEN ONLY · STRANGERS TRIP
+                  </div>
+                  <Image
+                    src="/images/trips/andaman/hero-radhanagar.jpg"
+                    alt="Andaman Women-Only Trip 2027"
+                    fill
+                    className={styles.tripCoverImage}
+                  />
+                  <div className={styles.tripMediaOverlay} />
+                </div>
+                <div className={styles.tripCardBody}>
+                  <div className={styles.tripDateRow}>
+                    23 – 28 JANUARY 2027 · 5N / 6D
+                  </div>
+                  <h3 className={styles.tripCardHeading}>THE ANDAMANS</h3>
+                  <p className={styles.tripQuoteText}>
+                    "Come solo. Leave with island sisters." Port Blair, Radhanagar Beach, Elephanta semi-submarine cruise & Neil Island corals.
+                  </p>
+                  <div className={styles.tripFooterRow}>
+                    <div className={styles.tripPriceBox}>
+                      <span className={styles.tripPriceLabel}>Early Bird Price</span>
+                      <span className={styles.tripPriceValue}>INR 31,699/-</span>
+                    </div>
+                    <span className={styles.tripCtaPill}>
+                      View Trip &rarr;
+                    </span>
+                  </div>
+                </div>
+              </Link>
+
+              {/* Trip 2: Sri Lanka Group Trip */}
+              <Link href="/trips/sri-lanka-february-2027" className={styles.tripFeaturedCard}>
+                <div className={styles.tripMediaWrap}>
+                  <div className={`${styles.tripBadgeTag} ${styles.badgeSriLanka}`}>
+                    🌴 GROUP TRIP · AGES 21–35
+                  </div>
+                  <Image
+                    src="/images/trips/sri-lanka/hero.jpg"
+                    alt="Sri Lanka Group Trip 2027"
+                    fill
+                    className={styles.tripCoverImage}
+                  />
+                  <div className={styles.tripMediaOverlay} />
+                </div>
+                <div className={styles.tripCardBody}>
+                  <div className={styles.tripDateRow}>
+                    13 – 19 FEBRUARY 2027 · 6N / 7D
+                  </div>
+                  <h3 className={styles.tripCardHeading}>SRI LANKA</h3>
+                  <p className={styles.tripQuoteText}>
+                    "Sun, spice & stories for the group chat." Sigiriya Rock Fortress, Kandy temples, Doctor's House Madiha & Mirissa palms.
+                  </p>
+                  <div className={styles.tripFooterRow}>
+                    <div className={styles.tripPriceBox}>
+                      <span className={styles.tripPriceLabel}>Group Size</span>
+                      <span className={styles.tripPriceValue}>15 Travellers</span>
+                    </div>
+                    <span className={styles.tripCtaPill}>
+                      View Trip &rarr;
+                    </span>
+                  </div>
+                </div>
+              </Link>
+
+              {/* Trip 3: On-Demand Bespoke */}
+              <Link href="/on-demand" className={styles.tripFeaturedCard}>
+                <div className={styles.tripMediaWrap}>
+                  <div className={`${styles.tripBadgeTag} ${styles.badgeOnDemand}`}>
+                    ✨ 100% BESPOKE & ON-DEMAND
+                  </div>
+                  <Image
+                    src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?q=80&w=800&auto=format&fit=crop"
+                    alt="On-Demand Bespoke Travel"
+                    fill
+                    className={styles.tripCoverImage}
+                  />
+                  <div className={styles.tripMediaOverlay} />
+                </div>
+                <div className={styles.tripCardBody}>
+                  <div className={styles.tripDateRow}>
+                    ANY DATE · ANY DESTINATION
+                  </div>
+                  <h3 className={styles.tripCardHeading}>ON-DEMAND TRAVEL</h3>
+                  <p className={styles.tripQuoteText}>
+                    "Your vision. Our unrivaled execution." Private villas, custom itineraries, 5-star properties & 24/7 personal concierge support.
+                  </p>
+                  <div className={styles.tripFooterRow}>
+                    <div className={styles.tripPriceBox}>
+                      <span className={styles.tripPriceLabel}>Format</span>
+                      <span className={styles.tripPriceValue}>Private Blueprint</span>
+                    </div>
+                    <span className={styles.tripCtaPill}>
+                      Design Trip &rarr;
+                    </span>
+                  </div>
+                </div>
+              </Link>
+            </div>
+          </div>
+        </section>
+
+        {/* =================================================================
             3. DESTINATIONS (Dual Tabs: Domestic & International)
             ================================================================= */}
         <section id="destinations" className={styles.destinationsSection}>

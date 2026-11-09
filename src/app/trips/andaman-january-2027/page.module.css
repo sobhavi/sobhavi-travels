@@ -1,0 +1,995 @@
+/* Andaman Trip Landing Page Styles */
+.pageContainer {
+  min-height: 100vh;
+  background-color: #FAF6F0;
+  color: #2D2727;
+  font-family: var(--font-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Scrapbook Dots & Star Accent Patterns */
+.pageContainer::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    radial-gradient(#F5B5C5 0.75px, transparent 0.75px),
+    radial-gradient(#A2D2C2 0.75px, #FAF6F0 0.75px);
+  background-size: 40px 40px;
+  background-position: 0 0, 20px 20px;
+  opacity: 0.22;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.contentWrapper {
+  position: relative;
+  z-index: 1;
+}
+
+/* Sticky Minimal Brand Bar */
+.topNav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 28px;
+  background: rgba(250, 246, 240, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(224, 180, 192, 0.35);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.navBrand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+}
+
+.navLogo {
+  height: 38px;
+  width: auto;
+  object-fit: contain;
+}
+
+.navTagline {
+  font-size: 0.82rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #8C6A72;
+  font-weight: 600;
+}
+
+.navActions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.navBackBtn {
+  font-size: 0.88rem;
+  color: #5A4E51;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(210, 190, 195, 0.4);
+  transition: all 0.2s ease;
+}
+
+.navBackBtn:hover {
+  background: #FFFFFF;
+  color: #2D2727;
+}
+
+.navCtaBtn {
+  background: #E47A95;
+  color: #FFFFFF !important;
+  font-size: 0.88rem;
+  font-weight: 600;
+  padding: 8px 18px;
+  border-radius: 999px;
+  text-decoration: none;
+  box-shadow: 0 4px 14px rgba(228, 122, 149, 0.3);
+  transition: all 0.25s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.navCtaBtn:hover {
+  background: #D25F7C;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(228, 122, 149, 0.4);
+}
+
+/* HERO SECTION */
+.heroSection {
+  padding: 50px 24px 70px;
+  max-width: 1240px;
+  margin: 0 auto;
+}
+
+.heroCard {
+  background: linear-gradient(135deg, #FBF8F5 0%, #FFF3F6 50%, #EFF8F4 100%);
+  border-radius: 36px;
+  padding: 56px 48px;
+  position: relative;
+  box-shadow: 0 20px 60px rgba(162, 140, 145, 0.12), 0 1px 3px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 48px;
+  align-items: center;
+  overflow: hidden;
+}
+
+/* Playful pastel sticker badge */
+.badgeWrapper {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #E3F2EB;
+  border: 1px solid #B8E0CF;
+  color: #236B53;
+  padding: 8px 18px;
+  border-radius: 999px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+}
+
+.badgeStar {
+  color: #E6A23C;
+  font-size: 1rem;
+}
+
+.heroTitle {
+  font-size: clamp(2.4rem, 4.8vw, 4rem);
+  line-height: 1.12;
+  font-weight: 800;
+  color: #252021;
+  letter-spacing: -0.02em;
+  margin: 0 0 20px 0;
+}
+
+.heroTitleAccent {
+  color: #E47A95;
+  display: block;
+}
+
+.heroSubtitle {
+  font-size: clamp(1.2rem, 2vw, 1.5rem);
+  font-weight: 700;
+  color: #236B53;
+  margin: 0 0 12px 0;
+  letter-spacing: -0.01em;
+}
+
+.heroDateBadge {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.datePill {
+  background: #FFF;
+  border: 1px dashed #E0B4C0;
+  color: #634F54;
+  padding: 7px 16px;
+  border-radius: 12px;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.durationPill {
+  background: #FFF5F7;
+  color: #D25F7C;
+  border: 1px solid #F5C6D2;
+  padding: 7px 14px;
+  border-radius: 12px;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.heroRouteRow {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #3C3335;
+  margin-bottom: 32px;
+  padding: 12px 18px;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 14px;
+  width: fit-content;
+}
+
+.routeArrow {
+  color: #E47A95;
+  font-weight: 800;
+}
+
+.heroCtas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  align-items: center;
+}
+
+.primaryBookBtn {
+  background: linear-gradient(135deg, #E87A96 0%, #D85676 100%);
+  color: #FFFFFF !important;
+  font-size: 1.02rem;
+  font-weight: 700;
+  padding: 14px 28px;
+  border-radius: 999px;
+  text-decoration: none;
+  box-shadow: 0 8px 24px rgba(228, 122, 149, 0.35);
+  transition: all 0.25s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.primaryBookBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(228, 122, 149, 0.45);
+}
+
+.secondaryWaBtn {
+  background: #FFFFFF;
+  color: #1A694E !important;
+  border: 1.5px solid #A2D2C2;
+  font-size: 1.02rem;
+  font-weight: 700;
+  padding: 14px 26px;
+  border-radius: 999px;
+  text-decoration: none;
+  transition: all 0.25s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.secondaryWaBtn:hover {
+  background: #EAF6F1;
+  border-color: #72BEA5;
+  transform: translateY(-2px);
+}
+
+/* POLAROID FRAME EFFECT */
+.polaroidWrapper {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.polaroidFrame {
+  background: #FFFFFF;
+  padding: 14px 14px 44px 14px;
+  border-radius: 6px;
+  box-shadow: 
+    0 16px 40px rgba(80, 50, 60, 0.15),
+    0 2px 6px rgba(0, 0, 0, 0.08);
+  transform: rotate(2.5deg);
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+  max-width: 440px;
+  width: 100%;
+}
+
+.polaroidFrame:hover {
+  transform: rotate(0deg) scale(1.02);
+}
+
+.polaroidFrameAlt {
+  transform: rotate(-3deg);
+}
+
+.polaroidFrameAlt:hover {
+  transform: rotate(0deg) scale(1.02);
+}
+
+.washiTape {
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-1.5deg);
+  width: 120px;
+  height: 30px;
+  background: rgba(246, 218, 168, 0.85);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  border-left: 2px dashed rgba(215, 175, 105, 0.5);
+  border-right: 2px dashed rgba(215, 175, 105, 0.5);
+  z-index: 10;
+}
+
+.washiTapePink {
+  background: rgba(245, 195, 205, 0.85);
+  border-left-color: rgba(215, 150, 165, 0.5);
+  border-right-color: rgba(215, 150, 165, 0.5);
+}
+
+.washiTapeMint {
+  background: rgba(195, 230, 215, 0.85);
+  border-left-color: rgba(140, 195, 170, 0.5);
+  border-right-color: rgba(140, 195, 170, 0.5);
+}
+
+.polaroidImg {
+  width: 100%;
+  height: 340px;
+  object-fit: cover;
+  border-radius: 3px;
+  display: block;
+}
+
+.polaroidCaption {
+  position: absolute;
+  bottom: 12px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-family: "Caveat", "Brush Script MT", "Segoe Print", cursive, sans-serif;
+  font-size: 1.25rem;
+  color: #5A4E51;
+  letter-spacing: 0.02em;
+}
+
+/* Playful stickers */
+.stickerStar {
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  color: #F4B840;
+  pointer-events: none;
+  filter: drop-shadow(0 2px 4px rgba(244, 184, 64, 0.3));
+}
+
+.dotCluster {
+  position: absolute;
+  display: grid;
+  grid-template-columns: repeat(3, 10px);
+  gap: 6px;
+  pointer-events: none;
+}
+
+.dotCluster span {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #F5B5C5;
+  display: block;
+}
+
+.dotClusterMint span {
+  background: #A2D2C2;
+}
+
+/* THE FEELING SECTION */
+.feelingSection {
+  padding: 60px 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.feelingGrid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 48px;
+  align-items: center;
+}
+
+.stickyNoteCard {
+  background: #FFFDF9;
+  border-radius: 28px;
+  padding: 48px 44px;
+  box-shadow: 0 16px 50px rgba(162, 140, 145, 0.1);
+  border: 1px solid rgba(242, 224, 229, 0.8);
+  position: relative;
+}
+
+.feelingLabel {
+  font-size: 0.85rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #E47A95;
+  margin-bottom: 14px;
+}
+
+.feelingHeadline {
+  font-size: clamp(1.8rem, 3.2vw, 2.5rem);
+  font-weight: 800;
+  color: #241E20;
+  line-height: 1.25;
+  margin: 0 0 12px 0;
+}
+
+.feelingHeadlineAccent {
+  color: #E47A95;
+  display: block;
+}
+
+.feelingDesc {
+  font-size: 1.12rem;
+  line-height: 1.7;
+  color: #55494C;
+  margin: 0 0 20px 0;
+}
+
+.sisterPill {
+  display: inline-block;
+  background: #FFF0F4;
+  color: #C84F6F;
+  border: 1px solid #F5C6D2;
+  padding: 10px 20px;
+  border-radius: 14px;
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+/* ISLAND MAP & THE WEEK IN NOTES */
+.mapSection {
+  padding: 60px 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.mapCard {
+  background: #F3F9F6;
+  border-radius: 32px;
+  padding: 48px;
+  border: 1px solid #D2E9DF;
+  box-shadow: 0 16px 50px rgba(100, 150, 130, 0.08);
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 40px;
+  align-items: center;
+}
+
+.mapVisualTitle {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: #1A5442;
+  margin: 0 0 24px 0;
+}
+
+.islandMapIllustration {
+  width: 100%;
+  max-height: 420px;
+  object-fit: contain;
+  border-radius: 20px;
+  background: #E8F5EE;
+  padding: 14px;
+}
+
+.weekNotesCard {
+  background: #FFFFFF;
+  border-radius: 24px;
+  padding: 36px 32px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.05);
+  border: 1px solid #E4EFEA;
+}
+
+.weekNotesHeading {
+  font-size: 0.88rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #236B53;
+  margin: 0 0 20px 0;
+  border-bottom: 2px dashed #D2E9DF;
+  padding-bottom: 12px;
+}
+
+.notesList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.noteItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.noteNum {
+  background: #E47A95;
+  color: #FFFFFF;
+  font-size: 0.8rem;
+  font-weight: 800;
+  padding: 3px 8px;
+  border-radius: 8px;
+  min-width: 28px;
+  text-align: center;
+}
+
+.noteText {
+  font-size: 0.98rem;
+  color: #3C3335;
+  font-weight: 600;
+  line-height: 1.45;
+}
+
+/* DETAILED ITINERARY CARDS */
+.itinerarySection {
+  padding: 70px 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.sectionHeadingWrapper {
+  text-align: center;
+  margin-bottom: 56px;
+}
+
+.sectionPill {
+  display: inline-block;
+  background: #FEEAEF;
+  color: #D25F7C;
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding: 7px 18px;
+  border-radius: 999px;
+  margin-bottom: 14px;
+}
+
+.sectionMainTitle {
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  font-weight: 800;
+  color: #241E20;
+  margin: 0 0 12px 0;
+}
+
+.sectionSubDesc {
+  font-size: 1.1rem;
+  color: #6D5F63;
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.daysGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.dayCard {
+  background: #FFFFFF;
+  border-radius: 28px;
+  padding: 40px 44px;
+  border: 1px solid rgba(235, 215, 220, 0.7);
+  box-shadow: 0 12px 40px rgba(120, 90, 100, 0.06);
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 44px;
+  align-items: center;
+  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.dayCard:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 20px 50px rgba(120, 90, 100, 0.1);
+}
+
+.dayCardReverse {
+  grid-template-columns: 0.85fr 1.15fr;
+}
+
+.dayHeaderRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.dayTag {
+  background: #FDE8EE;
+  color: #C84F6F;
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 5px 12px;
+  border-radius: 8px;
+}
+
+.dayTitle {
+  font-size: clamp(1.6rem, 2.5vw, 2.1rem);
+  font-weight: 800;
+  color: #241E20;
+  margin: 0 0 18px 0;
+}
+
+.dayBulletList {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 24px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.dayBulletItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 1.02rem;
+  line-height: 1.55;
+  color: #4C4043;
+}
+
+.bulletDot {
+  color: #E47A95;
+  font-weight: 900;
+  font-size: 1.2rem;
+  line-height: 1;
+}
+
+.dayFooterPill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #F3F9F6;
+  border: 1px solid #D2E9DF;
+  color: #1A5442;
+  font-size: 0.9rem;
+  font-weight: 700;
+  padding: 8px 16px;
+  border-radius: 12px;
+  font-style: italic;
+}
+
+/* PRACTICAL BITS / INCLUSIONS & EXCLUSIONS */
+.practicalSection {
+  padding: 70px 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.practicalGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 36px;
+}
+
+.includedCard {
+  background: #F0F9F5;
+  border: 1.5px solid #C4E6D8;
+  border-radius: 28px;
+  padding: 44px;
+  box-shadow: 0 12px 40px rgba(70, 140, 110, 0.08);
+}
+
+.notIncludedCard {
+  background: #FFF5F7;
+  border: 1.5px solid #F5C6D2;
+  border-radius: 28px;
+  padding: 44px;
+  box-shadow: 0 12px 40px rgba(220, 100, 130, 0.08);
+}
+
+.practicalHeading {
+  font-size: 1.35rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin: 0 0 24px 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.includedHeading {
+  color: #16654C;
+}
+
+.notIncludedHeading {
+  color: #B83C5A;
+}
+
+.practicalList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.practicalItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 1.02rem;
+  line-height: 1.5;
+  color: #382F32;
+  font-weight: 500;
+}
+
+.checkIcon {
+  color: #1E8262;
+  font-weight: 900;
+  font-size: 1.15rem;
+  line-height: 1.2;
+}
+
+.crossIcon {
+  color: #D25F7C;
+  font-weight: 900;
+  font-size: 1.15rem;
+  line-height: 1.2;
+}
+
+/* ISLAND PASS TICKET CTA */
+.ticketSection {
+  padding: 70px 24px 100px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.ticketContainer {
+  background: #FFFDF9;
+  border-radius: 28px;
+  border: 2px dashed #E0B4C0;
+  box-shadow: 0 20px 60px rgba(180, 130, 145, 0.15);
+  overflow: hidden;
+  position: relative;
+  display: grid;
+  grid-template-columns: 1.35fr 0.65fr;
+}
+
+.ticketLeft {
+  padding: 48px;
+  border-right: 2px dashed #E0B4C0;
+  position: relative;
+}
+
+.ticketRight {
+  padding: 48px 36px;
+  background: #FDF4F6;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.ticketPassHeader {
+  font-size: 0.85rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #1E8262;
+  margin-bottom: 12px;
+}
+
+.ticketRouteTitle {
+  font-size: clamp(1.8rem, 3.2vw, 2.5rem);
+  font-weight: 900;
+  color: #241E20;
+  letter-spacing: -0.01em;
+  margin: 0 0 16px 0;
+}
+
+.ticketSpecs {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #55484B;
+  margin-bottom: 24px;
+  line-height: 1.6;
+}
+
+.earlyBirdBanner {
+  background: #FFF0F4;
+  border: 1.5px solid #E88BA0;
+  padding: 16px 22px;
+  border-radius: 16px;
+  margin-top: 24px;
+}
+
+.earlyBirdPrice {
+  font-size: 1.6rem;
+  font-weight: 900;
+  color: #B83C5A;
+}
+
+.earlyBirdDeadline {
+  font-size: 0.9rem;
+  color: #7A5B63;
+  margin-top: 4px;
+}
+
+.contactBoxTitle {
+  font-size: 0.85rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #72585F;
+  margin-bottom: 14px;
+}
+
+.contactPhoneLink {
+  display: block;
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #241E20;
+  text-decoration: none;
+  margin-bottom: 8px;
+  transition: color 0.2s ease;
+}
+
+.contactPhoneLink:hover {
+  color: #E47A95;
+}
+
+.socialRowAndaman {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.socialBtnAndaman {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #5C4A50;
+  text-decoration: none;
+  padding: 6px 14px;
+  background: #FFFFFF;
+  border: 1px solid #E0B4C0;
+  border-radius: 999px;
+  transition: all 0.2s ease;
+}
+
+.socialBtnAndaman:hover {
+  background: #E47A95;
+  color: #FFFFFF;
+}
+
+/* FLOATING STICKY CTA ON MOBILE */
+.stickyBottomBar {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 12px 20px;
+  border-top: 1px solid rgba(224, 180, 192, 0.4);
+  box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.08);
+  z-index: 99;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.mobilePriceTag {
+  font-size: 1.15rem;
+  font-weight: 900;
+  color: #B83C5A;
+}
+
+.mobileBookBtn {
+  background: #E47A95;
+  color: #FFFFFF !important;
+  font-size: 0.95rem;
+  font-weight: 700;
+  padding: 10px 22px;
+  border-radius: 999px;
+  text-decoration: none;
+}
+
+/* FAQ SECTION */
+.faqSection {
+  padding: 60px 24px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.faqItem {
+  background: #FFFFFF;
+  border-radius: 18px;
+  margin-bottom: 16px;
+  border: 1px solid #EAD8DC;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+}
+
+.faqQuestion {
+  width: 100%;
+  padding: 22px 26px;
+  text-align: left;
+  background: none;
+  border: none;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #241E20;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.faqAnswer {
+  padding: 0 26px 22px;
+  font-size: 1rem;
+  line-height: 1.65;
+  color: #55484B;
+}
+
+/* RESPONSIVE MEDIA QUERIES */
+@media (max-width: 1024px) {
+  .heroCard {
+    grid-template-columns: 1fr;
+    padding: 44px 32px;
+    gap: 40px;
+  }
+  .mapCard {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .dayCard, .dayCardReverse {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .ticketContainer {
+    grid-template-columns: 1fr;
+  }
+  .ticketLeft {
+    border-right: none;
+    border-bottom: 2px dashed #E0B4C0;
+  }
+}
+
+@media (max-width: 768px) {
+  .topNav {
+    padding: 12px 18px;
+  }
+  .navTagline {
+    display: none;
+  }
+  .heroSection {
+    padding: 24px 16px 50px;
+  }
+  .heroCard {
+    padding: 32px 20px;
+    border-radius: 24px;
+  }
+  .feelingGrid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .practicalGrid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .ticketLeft, .ticketRight {
+    padding: 32px 20px;
+  }
+  .stickyBottomBar {
+    display: flex;
+  }
+}

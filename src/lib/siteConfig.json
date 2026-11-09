@@ -338,9 +338,12 @@
   "navigation": {
     "menuItems": [
       { "id": "home", "label": "Home", "href": "/", "enabled": true, "showInHeader": true, "showInMobile": true, "showInFooter": true },
+      { "id": "on-demand", "label": "On-Demand", "href": "/on-demand", "enabled": true, "showInHeader": true, "showInMobile": true, "showInFooter": true, "badge": "POPULAR" },
+      { "id": "andaman-trip", "label": "Andaman '27", "href": "/trips/andaman-january-2027", "enabled": true, "showInHeader": true, "showInMobile": true, "showInFooter": true, "badge": "WOMEN ONLY" },
+      { "id": "sri-lanka-trip", "label": "Sri Lanka '27", "href": "/trips/sri-lanka-february-2027", "enabled": true, "showInHeader": true, "showInMobile": true, "showInFooter": true, "badge": "GROUP TRIP" },
       { "id": "domestic", "label": "Domestic", "href": "/domestic", "enabled": true, "showInHeader": true, "showInMobile": true, "showInFooter": true },
       { "id": "international", "label": "International", "href": "/international", "enabled": true, "showInHeader": true, "showInMobile": true, "showInFooter": true },
-      { "id": "travel-buddy", "label": "Travel Buddy", "href": "/travel-buddy", "enabled": true, "showInHeader": true, "showInMobile": true, "showInFooter": true },
+      { "id": "travel-buddy", "label": "Travel Buddy", "href": "/travel-buddy", "enabled": true, "showInHeader": false, "showInMobile": true, "showInFooter": true },
       { "id": "rann-utsav", "label": "Rann Utsav", "href": "/rann-utsav", "enabled": true, "showInHeader": true, "showInMobile": true, "showInFooter": true, "badge": "TRENDING" },
       { "id": "journeys", "label": "Journeys", "href": "/journeys", "enabled": true, "showInHeader": false, "showInMobile": true, "showInFooter": true },
       { "id": "blogs", "label": "Blogs", "href": "/blog", "enabled": true, "showInHeader": true, "showInMobile": true, "showInFooter": true },

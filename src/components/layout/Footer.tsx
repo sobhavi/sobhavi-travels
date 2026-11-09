@@ -211,6 +211,24 @@ export default function Footer() {
               <h4 className={styles.colHeader}>Curated Holidays</h4>
               <ul className={styles.linkList}>
                 <li>
+                  <Link href="/trips/andaman-january-2027" className={`${styles.navLink} ${styles.highlightLink}`}>
+                    <span>🌸 Andaman (Jan 2027)</span>
+                    <span className={styles.specialTag}>WOMEN ONLY</span>
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/trips/sri-lanka-february-2027" className={`${styles.navLink} ${styles.highlightLink}`}>
+                    <span>🌴 Sri Lanka (Feb 2027)</span>
+                    <span className={styles.specialTag}>GROUP TRIP</span>
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/on-demand" className={`${styles.navLink} ${styles.highlightLink}`}>
+                    <span>✨ On-Demand Bespoke</span>
+                    <span className={styles.newTag}>HOT</span>
+                  </Link>
+                </li>
+                <li>
                   <Link href="/domestic" className={styles.navLink}>Domestic Escapes</Link>
                 </li>
                 <li>

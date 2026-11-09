@@ -111,10 +111,13 @@ export default function Navbar() {
     ? config.navigation.menuItems 
     : [
         { id: "home", label: "Home", href: "/", enabled: true, showInHeader: true, showInMobile: true },
+        { id: "on-demand", label: "On-Demand", href: "/on-demand", enabled: true, showInHeader: true, showInMobile: true },
+        { id: "andaman-trip", label: "Andaman '27", href: "/trips/andaman-january-2027", enabled: true, showInHeader: true, showInMobile: true },
+        { id: "sri-lanka-trip", label: "Sri Lanka '27", href: "/trips/sri-lanka-february-2027", enabled: true, showInHeader: true, showInMobile: true },
         { id: "domestic", label: "Domestic", href: "/domestic", enabled: true, showInHeader: true, showInMobile: true },
         { id: "international", label: "International", href: "/international", enabled: true, showInHeader: true, showInMobile: true },
-        { id: "travel-buddy", label: "Travel Buddy", href: "/travel-buddy", enabled: true, showInHeader: true, showInMobile: true },
         { id: "rann-utsav", label: "Rann Utsav", href: "/rann-utsav", enabled: true, showInHeader: true, showInMobile: true, badge: "TRENDING" },
+        { id: "travel-buddy", label: "Travel Buddy", href: "/travel-buddy", enabled: true, showInHeader: false, showInMobile: true },
         { id: "blogs", label: "Blogs", href: "/blog", enabled: true, showInHeader: true, showInMobile: true },
         { id: "about", label: "About Us", href: "/about", enabled: true, showInHeader: false, showInMobile: true },
         { id: "visa", label: "Visa Services", href: "/visa", enabled: true, showInHeader: false, showInMobile: true },
