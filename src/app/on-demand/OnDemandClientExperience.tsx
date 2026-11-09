@@ -4,6 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import Navbar from "@/components/layout/Navbar";
 import { 
   Sparkles, 
   MapPin, 
@@ -114,34 +115,8 @@ export default function OnDemandClientExperience() {
 
   return (
     <div className={styles.pageContainer}>
-      {/* Top Bar Navigation */}
-      <nav className={styles.topNav}>
-        <Link href="/" className={styles.navBrand}>
-          <Image
-            src="/logo.png"
-            alt="Sobhavi Travels"
-            width={145}
-            height={52}
-            className={styles.navLogo}
-            priority
-          />
-          <span className={styles.navTagline}>On-Demand</span>
-        </Link>
-        <div className={styles.navActions}>
-          <Link href="/" className={styles.navBackBtn}>
-            ← Home
-          </Link>
-          <a
-            href={getWaLink("Hello Sobhavi Travels! I would like to design an on-demand bespoke holiday.")}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.navCtaBtn}
-          >
-            <MessageCircle size={16} />
-            <span>Private Concierge</span>
-          </a>
-        </div>
-      </nav>
+      {/* Official Sobhavi Travels Global Navbar */}
+      <Navbar />
 
       <main className={styles.contentWrapper}>
         {/* 1. HERO SECTION */}
@@ -431,3 +406,4 @@ export default function OnDemandClientExperience() {
     </div>
   );
 }
+

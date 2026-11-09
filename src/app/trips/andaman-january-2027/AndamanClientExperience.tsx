@@ -4,6 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
+import Navbar from "@/components/layout/Navbar";
 import { 
   Calendar, 
   MapPin, 
@@ -189,34 +190,8 @@ export default function AndamanClientExperience() {
 
   return (
     <div className={styles.pageContainer}>
-      {/* Top Bar Navigation */}
-      <nav className={styles.topNav}>
-        <Link href="/" className={styles.navBrand}>
-          <Image
-            src="/logo.png"
-            alt="Sobhavi Travels"
-            width={140}
-            height={50}
-            className={styles.navLogo}
-            priority
-          />
-          <span className={styles.navTagline}>Island Sisterhood</span>
-        </Link>
-        <div className={styles.navActions}>
-          <Link href="/" className={styles.navBackBtn}>
-            ← All Journeys
-          </Link>
-          <a
-            href={getWaLink("Hello! I want to enquire about the Andaman Women-Only Trip (23-28 Jan 2027).")}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.navCtaBtn}
-          >
-            <MessageCircle size={16} />
-            <span>Chat on WhatsApp</span>
-          </a>
-        </div>
-      </nav>
+      {/* Official Sobhavi Travels Global Navbar */}
+      <Navbar />
 
       <main className={styles.contentWrapper}>
         {/* 1. HERO SECTION */}
@@ -874,3 +849,4 @@ export default function AndamanClientExperience() {
     </div>
   );
 }
+
