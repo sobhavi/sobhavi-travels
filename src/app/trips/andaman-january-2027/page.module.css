@@ -13,139 +13,187 @@
   z-index: 1;
 }
 
-/* ANDAMAN HERO SECTION (Explicit Dark High-Contrast Typography) */
-.andamanHeroSection {
-  padding: 130px 24px 70px;
-  max-width: 1240px;
-  margin: 0 auto;
-}
-
-.andamanHeroCard {
-  background: #ffffff !important;
-  border-radius: 32px;
-  padding: 56px 48px;
+/* CINEMATIC HERO SECTION (Identical to Sri Lanka Design) */
+.heroSection {
   position: relative;
-  box-shadow: 0 16px 50px rgba(180, 150, 100, 0.12), 0 2px 8px rgba(0, 0, 0, 0.04);
-  border: 1px solid rgba(180, 150, 100, 0.25);
-  display: grid;
-  grid-template-columns: 1.15fr 0.85fr;
-  gap: 48px;
+  min-height: 85vh;
+  display: flex;
   align-items: center;
+  justify-content: center;
+  padding: 130px 24px 100px;
+  background: #1c1917;
+  color: #ffffff;
   overflow: hidden;
 }
 
-/* Sticker badge */
-.badgeWrapper {
+.heroBgImage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.55;
+  filter: saturate(1.1) brightness(0.85);
+  transform: scale(1.04);
+}
+
+.heroOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at center, rgba(28, 25, 23, 0.4) 0%, rgba(28, 25, 23, 0.9) 100%);
+  z-index: 1;
+}
+
+.heroContent {
+  position: relative;
+  z-index: 2;
+  max-width: 1050px;
+  width: 100%;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.heroDeckBadge {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  background: var(--surface-alt, #f4efe6);
-  border: 1px solid rgba(184, 151, 46, 0.45);
-  padding: 8px 18px;
+  gap: 10px;
+  background: rgba(223, 183, 74, 0.15);
+  border: 1px solid rgba(223, 183, 74, 0.5);
+  color: #f7d570;
+  padding: 8px 22px;
   border-radius: 999px;
-  font-size: 0.8rem;
+  font-size: 0.82rem;
   font-weight: 800;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
-  margin-bottom: 22px;
-}
-
-.badgeWrapper span {
-  color: #b8972e !important;
-  text-shadow: none !important;
-}
-
-.badgeStar {
-  color: #b8972e !important;
-  font-size: 1rem;
-}
-
-.andamanHeroTitle {
-  font-family: var(--font-heading), "Oswald", sans-serif !important;
-  font-size: clamp(2.4rem, 4.8vw, 4.2rem) !important;
-  line-height: 1.1 !important;
-  font-weight: 800 !important;
-  color: #1c1917 !important;
-  text-shadow: none !important;
-  letter-spacing: 0.02em !important;
-  text-transform: uppercase !important;
-  margin: 0 0 18px 0 !important;
-}
-
-.andamanHeroTitleAccent {
-  color: #b8972e !important;
-  text-shadow: none !important;
-  display: block;
-}
-
-.andamanHeroSubtitle {
-  font-family: var(--font-heading), "Oswald", sans-serif !important;
-  font-size: clamp(1.2rem, 2vw, 1.5rem) !important;
-  font-weight: 800 !important;
-  color: #b8972e !important;
-  text-shadow: none !important;
-  margin: 0 0 16px 0 !important;
-  letter-spacing: 0.04em !important;
-  text-transform: uppercase !important;
-}
-
-.andamanDateBadge {
-  display: inline-flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  align-items: center;
   margin-bottom: 24px;
 }
 
-.datePill {
-  background: var(--surface-alt, #f4efe6);
-  border: 1px dashed rgba(180, 150, 100, 0.4);
-  color: #44403c !important;
-  text-shadow: none !important;
-  padding: 8px 18px;
+.heroMainTitle {
+  font-family: var(--font-heading), "Oswald", sans-serif;
+  font-size: clamp(3.2rem, 8vw, 6.5rem);
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  line-height: 0.95;
+  margin: 0 0 16px 0;
+  color: #ffffff !important;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.6) !important;
+}
+
+.heroSubquote {
+  font-family: var(--font-heading), "Oswald", sans-serif;
+  font-size: clamp(1.25rem, 2.4vw, 1.7rem);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #dfb74a !important;
+  margin: 0 0 28px 0;
+  line-height: 1.3;
+}
+
+.heroTripSpecsRow {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 14px;
+  margin-bottom: 36px;
+}
+
+.specBadge {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #ffffff !important;
+  padding: 8px 20px;
   border-radius: 12px;
   font-size: 0.95rem;
   font-weight: 700;
-}
-
-.durationPill {
-  background: var(--surface-alt, #f4efe6);
-  color: #b8972e !important;
-  text-shadow: none !important;
-  border: 1px solid rgba(184, 151, 46, 0.45);
-  padding: 8px 16px;
-  border-radius: 12px;
-  font-size: 0.9rem;
-  font-weight: 800;
-}
-
-.andamanRouteRow {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  flex-wrap: wrap;
-  gap: 10px;
-  font-size: 1.05rem;
-  font-weight: 700;
-  color: #1c1917 !important;
-  text-shadow: none !important;
-  margin-bottom: 32px;
-  padding: 12px 20px;
-  background: var(--surface-alt, #f4efe6);
-  border-radius: 14px;
-  border: 1px solid rgba(180, 150, 100, 0.2);
-  width: fit-content;
+  gap: 8px;
 }
 
-.routeArrow {
-  color: #b8972e !important;
+.specHighlight {
+  border-color: #dfb74a;
+  color: #f7d570 !important;
+  background: rgba(223, 183, 74, 0.2);
+}
+
+.heroRouteStrip {
+  font-size: clamp(0.95rem, 1.8vw, 1.2rem);
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  color: #ffffff;
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 12px 26px;
+  border-radius: 16px;
+  display: inline-block;
+  margin-bottom: 38px;
+  backdrop-filter: blur(8px);
+}
+
+.routeSep {
+  color: #dfb74a;
+  margin: 0 8px;
   font-weight: 900;
 }
 
-.andamanCtas {
+.heroActionGroup {
   display: flex;
   flex-wrap: wrap;
-  gap: 14px;
+  justify-content: center;
+  gap: 16px;
+}
+
+.btnPrimaryGold {
+  background: linear-gradient(135deg, #dfb74a 0%, #b8972e 100%);
+  color: #1c1917 !important;
+  font-size: 1.05rem;
+  font-weight: 800;
+  padding: 16px 36px;
+  border-radius: 999px;
+  text-decoration: none;
+  box-shadow: 0 8px 30px rgba(184, 151, 46, 0.4);
+  transition: all 0.25s ease;
+  display: inline-flex;
   align-items: center;
+  gap: 10px;
+  border: none;
+  cursor: pointer;
+}
+
+.btnPrimaryGold:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 36px rgba(184, 151, 46, 0.6);
+}
+
+.btnSecondaryOutline {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1.5px solid rgba(255, 255, 255, 0.4);
+  color: #ffffff !important;
+  font-size: 1.05rem;
+  font-weight: 700;
+  padding: 16px 32px;
+  border-radius: 999px;
+  text-decoration: none;
+  backdrop-filter: blur(8px);
+  transition: all 0.25s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.btnSecondaryOutline:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: #ffffff;
+  transform: translateY(-2px);
 }
 
 .primaryBookBtn {

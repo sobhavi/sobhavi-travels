@@ -19,7 +19,8 @@ import {
   ArrowRight,
   ShieldCheck,
   Heart,
-  Users
+  Users,
+  Award
 } from "lucide-react";
 import styles from "./page.module.css";
 
@@ -194,87 +195,75 @@ export default function AndamanClientExperience() {
       <Navbar />
 
       <main className={styles.contentWrapper}>
-        {/* 1. HERO SECTION */}
-        <section className={styles.andamanHeroSection}>
-          <motion.div 
-            initial={{ opacity: 0, y: 25 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className={styles.andamanHeroCard}
-          >
-            <div className={styles.heroTextCol}>
-              <div className={styles.badgeWrapper}>
-                <Sparkles size={16} className={styles.badgeStar} />
-                <span>A WOMEN-ONLY STRANGERS TRIP</span>
-              </div>
+        {/* 1. CINEMATIC HERO (Identical to Sri Lanka Design) */}
+        <section className={styles.heroSection}>
+          <Image
+            src="/images/trips/andaman/hero-radhanagar.jpg"
+            alt="Radhanagar Beach Andaman"
+            fill
+            className={styles.heroBgImage}
+            priority
+          />
+          <div className={styles.heroOverlay} />
 
-              <h1 className={styles.andamanHeroTitle}>
-                Come solo.
-                <span className={styles.andamanHeroTitleAccent}>Leave with island sisters.</span>
-              </h1>
-
-              <div className={styles.andamanHeroSubtitle}>
-                The Andamans
-              </div>
-
-              <div className={styles.andamanDateBadge}>
-                <span className={styles.datePill}>
-                  <Calendar size={15} style={{ display: "inline", marginRight: "6px", verticalAlign: "middle" }} />
-                  23 – 28 January 2027
-                </span>
-                <span className={styles.durationPill}>
-                  <Clock size={15} style={{ display: "inline", marginRight: "6px", verticalAlign: "middle" }} />
-                  5 Nights · 6 Days
-                </span>
-              </div>
-
-              <div className={styles.andamanRouteRow}>
-                <MapPin size={18} style={{ color: "#b8972e" }} />
-                <span>Port Blair</span>
-                <span className={styles.routeArrow}>→</span>
-                <span>Havelock</span>
-                <span className={styles.routeArrow}>→</span>
-                <span>Neil Island</span>
-              </div>
-
-              <div className={styles.andamanCtas}>
-                <button
-                  type="button"
-                  onClick={() => setModalOpen(true)}
-                  className={styles.primaryBookBtn}
-                >
-                  <Sparkles size={18} />
-                  <span>Reserve Your Seat</span>
-                </button>
-                <a
-                  href={getWaLink("Hello Sobhavi Travels! I want to join the Andaman Women-Only Trip (23-28 January 2027). Please share details.")}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={styles.secondaryWaBtn}
-                >
-                  <MessageCircle size={18} />
-                  <span>WhatsApp Concierge</span>
-                </a>
-              </div>
+          <div className={styles.heroContent}>
+            <div className={styles.heroDeckBadge}>
+              <Sparkles size={15} style={{ color: "#dfb74a" }} />
+              <span>A WOMEN-ONLY STRANGERS TRIP · 23–28 JAN 2027</span>
             </div>
 
-            {/* Destination Highlight Photo Card */}
-            <div className={styles.polaroidWrapper}>
-              <div className={styles.polaroidFrame}>
-                <Image
-                  src="/images/trips/andaman/polaroid-radhanagar.jpg"
-                  alt="Radhanagar Beach, Havelock"
-                  width={600}
-                  height={500}
-                  className={styles.polaroidImg}
-                  priority
-                />
-                <div className={styles.polaroidCaption}>
-                  Radhanagar Beach · Havelock
-                </div>
-              </div>
+            <h1 className={styles.heroMainTitle}>THE ANDAMANS</h1>
+
+            <div className={styles.heroSubquote}>
+              "Come solo. Leave with island sisters."
             </div>
-          </motion.div>
+
+            <div className={styles.heroTripSpecsRow}>
+              <span className={`${styles.specBadge} ${styles.specHighlight}`}>
+                <Calendar size={16} />
+                23 – 28 January 2027
+              </span>
+              <span className={styles.specBadge}>
+                <Clock size={16} />
+                5 Nights / 6 Days
+              </span>
+              <span className={styles.specBadge}>
+                <Users size={16} />
+                Women Only · Island Sisters
+              </span>
+              <span className={`${styles.specBadge} ${styles.specHighlight}`}>
+                <Award size={16} />
+                Early Bird: INR 31,699/-
+              </span>
+            </div>
+
+            <div className={styles.heroRouteStrip}>
+              PORT BLAIR <span className={styles.routeSep}>→</span> 
+              HAVELOCK <span className={styles.routeSep}>→</span> 
+              NEIL ISLAND <span className={styles.routeSep}>→</span> 
+              PORT BLAIR
+            </div>
+
+            <div className={styles.heroActionGroup}>
+              <button
+                type="button"
+                onClick={() => setModalOpen(true)}
+                className={styles.btnPrimaryGold}
+              >
+                <Sparkles size={18} />
+                <span>Reserve Your Seat</span>
+              </button>
+              <a
+                href={getWaLink("Hello Sobhavi Travels! I want to join the Andaman Women-Only Trip (23-28 January 2027). Please share details.")}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.btnSecondaryOutline}
+              >
+                <MessageCircle size={18} />
+                <span>WhatsApp Concierge</span>
+              </a>
+            </div>
+          </div>
         </section>
 
         {/* 2. THE FEELING SECTION */}
@@ -318,7 +307,7 @@ export default function AndamanClientExperience() {
         <section className={styles.mapSection}>
           <div className={styles.mapCard}>
             <div className={styles.mapVisualCol}>
-              <h3 className={styles.mapVisualTitle}>our little island map</h3>
+              <h3 className={styles.mapVisualTitle}>Island Route & Visual Map</h3>
               <div style={{ position: "relative" }}>
                 <Image
                   src="/images/trips/andaman/island-map.jpg"
@@ -636,21 +625,6 @@ export default function AndamanClientExperience() {
         </section>
       </main>
 
-      {/* MOBILE STICKY BOTTOM ACTION BAR */}
-      <div className={styles.stickyBottomBar}>
-        <div>
-          <div style={{ fontSize: "0.75rem", textTransform: "uppercase", color: "#7A686C", fontWeight: "700" }}>Early Bird</div>
-          <div className={styles.mobilePriceTag}>INR 31,699</div>
-        </div>
-        <button
-          type="button"
-          onClick={() => setModalOpen(true)}
-          className={styles.mobileBookBtn}
-        >
-          Reserve Seat
-        </button>
-      </div>
-
       {/* QUICK RESERVATION MODAL */}
       <AnimatePresence>
         {modalOpen && (
@@ -661,8 +635,8 @@ export default function AndamanClientExperience() {
               left: 0,
               right: 0,
               bottom: 0,
-              backgroundColor: "rgba(36, 26, 30, 0.65)",
-              backdropFilter: "blur(6px)",
+              backgroundColor: "rgba(28, 25, 23, 0.65)",
+              backdropFilter: "blur(8px)",
               zIndex: 999,
               display: "flex",
               alignItems: "center",
@@ -677,13 +651,14 @@ export default function AndamanClientExperience() {
               exit={{ scale: 0.9, opacity: 0 }}
               onClick={(e) => e.stopPropagation()}
               style={{
-                background: "#FFFDF9",
+                background: "#ffffff",
+                color: "#1c1917",
                 borderRadius: "24px",
                 maxWidth: "480px",
                 width: "100%",
                 padding: "36px 32px",
-                boxShadow: "0 24px 60px rgba(0,0,0,0.25)",
-                border: "1px solid #EAD4DA",
+                boxShadow: "0 24px 60px rgba(0,0,0,0.2)",
+                border: "1.5px solid rgba(180, 150, 100, 0.35)",
                 position: "relative"
               }}
             >
@@ -694,7 +669,7 @@ export default function AndamanClientExperience() {
                   position: "absolute",
                   top: "18px",
                   right: "18px",
-                  background: "#F5E4E8",
+                  background: "rgba(0, 0, 0, 0.05)",
                   border: "none",
                   borderRadius: "50%",
                   width: "32px",
@@ -703,7 +678,7 @@ export default function AndamanClientExperience() {
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
-                  color: "#6A4D54"
+                  color: "#57534e"
                 }}
               >
                 ✕
@@ -712,16 +687,16 @@ export default function AndamanClientExperience() {
               {submitted ? (
                 <div style={{ textAlign: "center", padding: "20px 0" }}>
                   <div style={{ fontSize: "2.5rem", marginBottom: "12px" }}>🎉</div>
-                  <h3 style={{ fontSize: "1.5rem", color: "#241E20", marginBottom: "8px" }}>
+                  <h3 style={{ fontSize: "1.5rem", color: "#1c1917", marginBottom: "8px" }}>
                     Seat Enquiry Received!
                   </h3>
-                  <p style={{ color: "#6A5D60", lineHeight: 1.5, marginBottom: "20px" }}>
+                  <p style={{ color: "#57534e", lineHeight: 1.5, marginBottom: "20px" }}>
                     Thank you, {formData.name}! Our team has registered your interest for the Andaman Women-Only Group Trip (23-28 Jan 2027). A concierge sister is contacting you right away.
                   </p>
                   <button
                     type="button"
                     onClick={() => setModalOpen(false)}
-                    className={styles.primaryBookBtn}
+                    className={styles.btnPrimaryGold}
                     style={{ width: "100%", justifyContent: "center" }}
                   >
                     Close
@@ -738,7 +713,7 @@ export default function AndamanClientExperience() {
 
                   <div style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
                     <div>
-                      <label style={{ display: "block", fontSize: "0.85rem", fontWeight: "700", marginBottom: "4px", color: "#4A3F42" }}>
+                      <label style={{ display: "block", fontSize: "0.85rem", fontWeight: "700", marginBottom: "4px", color: "#292524" }}>
                         Your Full Name *
                       </label>
                       <input
@@ -750,8 +725,8 @@ export default function AndamanClientExperience() {
                         style={{
                           width: "100%",
                           padding: "11px 14px",
-                          borderRadius: "10px",
-                          border: "1.5px solid #E0CAD0",
+                          borderRadius: "12px",
+                          border: "1.5px solid rgba(180, 150, 100, 0.3)",
                           fontSize: "0.95rem",
                           background: "#FFFFFF",
                           outline: "none"
@@ -760,7 +735,7 @@ export default function AndamanClientExperience() {
                     </div>
 
                     <div>
-                      <label style={{ display: "block", fontSize: "0.85rem", fontWeight: "700", marginBottom: "4px", color: "#4A3F42" }}>
+                      <label style={{ display: "block", fontSize: "0.85rem", fontWeight: "700", marginBottom: "4px", color: "#292524" }}>
                         WhatsApp Number *
                       </label>
                       <input
@@ -772,8 +747,8 @@ export default function AndamanClientExperience() {
                         style={{
                           width: "100%",
                           padding: "11px 14px",
-                          borderRadius: "10px",
-                          border: "1.5px solid #E0CAD0",
+                          borderRadius: "12px",
+                          border: "1.5px solid rgba(180, 150, 100, 0.3)",
                           fontSize: "0.95rem",
                           background: "#FFFFFF",
                           outline: "none"
@@ -782,7 +757,7 @@ export default function AndamanClientExperience() {
                     </div>
 
                     <div>
-                      <label style={{ display: "block", fontSize: "0.85rem", fontWeight: "700", marginBottom: "4px", color: "#4A3F42" }}>
+                      <label style={{ display: "block", fontSize: "0.85rem", fontWeight: "700", marginBottom: "4px", color: "#292524" }}>
                         Departure City
                       </label>
                       <input
@@ -793,8 +768,8 @@ export default function AndamanClientExperience() {
                         style={{
                           width: "100%",
                           padding: "11px 14px",
-                          borderRadius: "10px",
-                          border: "1.5px solid #E0CAD0",
+                          borderRadius: "12px",
+                          border: "1.5px solid rgba(180, 150, 100, 0.3)",
                           fontSize: "0.95rem",
                           background: "#FFFFFF",
                           outline: "none"
@@ -803,7 +778,7 @@ export default function AndamanClientExperience() {
                     </div>
 
                     <div>
-                      <label style={{ display: "block", fontSize: "0.85rem", fontWeight: "700", marginBottom: "4px", color: "#4A3F42" }}>
+                      <label style={{ display: "block", fontSize: "0.85rem", fontWeight: "700", marginBottom: "4px", color: "#292524" }}>
                         Notes / Room Preferences
                       </label>
                       <textarea
@@ -814,8 +789,8 @@ export default function AndamanClientExperience() {
                         style={{
                           width: "100%",
                           padding: "10px 14px",
-                          borderRadius: "10px",
-                          border: "1.5px solid #E0CAD0",
+                          borderRadius: "12px",
+                          border: "1.5px solid rgba(180, 150, 100, 0.3)",
                           fontSize: "0.9rem",
                           background: "#FFFFFF",
                           outline: "none",
@@ -827,13 +802,13 @@ export default function AndamanClientExperience() {
                     <button
                       type="submit"
                       disabled={isSubmitting}
-                      className={styles.primaryBookBtn}
+                      className={styles.btnPrimaryGold}
                       style={{ width: "100%", justifyContent: "center", marginTop: "10px", cursor: isSubmitting ? "not-allowed" : "pointer" }}
                     >
                       {isSubmitting ? "Submitting..." : "Submit & Connect on WhatsApp"}
                     </button>
 
-                    <div style={{ textAlign: "center", fontSize: "0.8rem", color: "#8A797D" }}>
+                    <div style={{ textAlign: "center", fontSize: "0.8rem", color: "#78716c" }}>
                       🔒 Zero spam. We protect your privacy. Women-only space.
                     </div>
                   </div>
