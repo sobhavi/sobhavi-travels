@@ -195,12 +195,12 @@ export default function AndamanClientExperience() {
 
       <main className={styles.contentWrapper}>
         {/* 1. HERO SECTION */}
-        <section className={styles.heroSection}>
+        <section className={styles.andamanHeroSection}>
           <motion.div 
             initial={{ opacity: 0, y: 25 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className={styles.heroCard}
+            className={styles.andamanHeroCard}
           >
             <div className={styles.heroTextCol}>
               <div className={styles.badgeWrapper}>
@@ -208,16 +208,16 @@ export default function AndamanClientExperience() {
                 <span>A WOMEN-ONLY STRANGERS TRIP</span>
               </div>
 
-              <h1 className={styles.heroTitle}>
+              <h1 className={styles.andamanHeroTitle}>
                 Come solo.
-                <span className={styles.heroTitleAccent}>Leave with island sisters.</span>
+                <span className={styles.andamanHeroTitleAccent}>Leave with island sisters.</span>
               </h1>
 
-              <div className={styles.heroSubtitle}>
+              <div className={styles.andamanHeroSubtitle}>
                 The Andamans
               </div>
 
-              <div className={styles.heroDateBadge}>
+              <div className={styles.andamanDateBadge}>
                 <span className={styles.datePill}>
                   <Calendar size={15} style={{ display: "inline", marginRight: "6px", verticalAlign: "middle" }} />
                   23 – 28 January 2027
@@ -228,7 +228,7 @@ export default function AndamanClientExperience() {
                 </span>
               </div>
 
-              <div className={styles.heroRouteRow}>
+              <div className={styles.andamanRouteRow}>
                 <MapPin size={18} style={{ color: "#b8972e" }} />
                 <span>Port Blair</span>
                 <span className={styles.routeArrow}>→</span>
@@ -237,7 +237,7 @@ export default function AndamanClientExperience() {
                 <span>Neil Island</span>
               </div>
 
-              <div className={styles.heroCtas}>
+              <div className={styles.andamanCtas}>
                 <button
                   type="button"
                   onClick={() => setModalOpen(true)}
