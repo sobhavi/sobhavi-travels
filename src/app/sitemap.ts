@@ -19,6 +19,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 1.0,
     },
     {
+      url: `${BASE_URL}/upcoming-group-trips`,
+      lastModified: now,
+      changeFrequency: 'daily',
+      priority: 0.98,
+    },
+    {
       url: `${BASE_URL}/trips/andaman-january-2027`,
       lastModified: now,
       changeFrequency: 'daily',

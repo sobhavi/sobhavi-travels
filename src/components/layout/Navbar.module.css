@@ -68,7 +68,7 @@
 .centerLinks {
   display: none;
   align-items: center;
-  gap: 2rem;
+  gap: clamp(1rem, 1.6vw, 2rem);
   flex: 1;
   justify-content: center;
 }
@@ -78,13 +78,14 @@
   font-size: 0.78rem;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.1em;
   color: inherit;
   transition: opacity 0.3s ease, color 0.3s ease;
   position: relative;
   padding: 4px 0;
   text-decoration: none;
   opacity: 0.9;
+  white-space: nowrap;
 }
 
 .navLink::after {

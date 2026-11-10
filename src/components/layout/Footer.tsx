@@ -211,6 +211,12 @@ export default function Footer() {
               <h4 className={styles.colHeader}>Curated Holidays</h4>
               <ul className={styles.linkList}>
                 <li>
+                  <Link href="/upcoming-group-trips" className={`${styles.navLink} ${styles.highlightLink}`}>
+                    <span>✨ Upcoming Group Trips</span>
+                    <span className={styles.specialTag}>2027</span>
+                  </Link>
+                </li>
+                <li>
                   <Link href="/trips/andaman-january-2027" className={`${styles.navLink} ${styles.highlightLink}`}>
                     <span>🌸 Andaman (Jan 2027)</span>
                     <span className={styles.specialTag}>WOMEN ONLY</span>

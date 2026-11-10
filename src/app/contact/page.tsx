@@ -26,7 +26,7 @@ export default function ContactPage() {
         </section>
 
         {/* UNIFIED ENQUIRY & CONTACT SECTION */}
-        <section style={{ padding: '3.5rem 0 8rem', backgroundColor: '#f8fafc' }}>
+        <section style={{ padding: '3.5rem 0 8rem', backgroundColor: 'var(--background, #faf7f2)' }}>
           <div className="container">
             <SinglePageForm />
           </div>

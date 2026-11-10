@@ -8,12 +8,33 @@ import Navbar from '@/components/layout/Navbar';
 import { getSiteConfig, SiteConfig } from '@/lib/siteConfig';
 import { getAllBlogs, BlogPost } from '@/lib/blogs';
 import { travelCategories } from '@/lib/categories';
+import { ChevronDown } from 'lucide-react';
 import styles from './page.module.css';
+
+const HOMEPAGE_FAQS = [
+  {
+    q: "What makes Sobhavi Travels different from traditional tour operators?",
+    a: "We believe travel should be an experience, not a chore. Instead of crowded bus tours with rigid timetables, we design bespoke private holidays and intimate group trips (Namma Escapes) with handpicked boutique stays, private chauffeurs, verified permits, and 24/7 concierge support."
+  },
+  {
+    q: "How do your upcoming 2027 group trips (Andaman & Sri Lanka) work?",
+    a: "Our fixed-date group trips are capped at small groups (12–15 travellers) to ensure high-touch quality. Over 60% of our travelers join solo, making them fantastic for making new friends. Accommodations, transfers, ferries, entry permits, and an experienced tour lead are included."
+  },
+  {
+    q: "Can I customize a private domestic or international holiday package?",
+    a: "Yes! Our bespoke travel desk creates custom plans tailored to your exact dates, budget, and style — whether it's royal palace stays in Rajasthan, tea retreats in Kerala, luxury overwater villas in Maldives, or city explorations in Dubai and Singapore."
+  },
+  {
+    q: "How do I book or get in touch with the Sobhavi team?",
+    a: "You can reach us directly on WhatsApp at +91 74069 94752 / +91 91804 62154, email us at hello@sobhavitravel.com, or submit a request on our website. Our team will get back to you with custom options within a few hours."
+  }
+];
 
 export default function Home() {
   const [siteConfig, setSiteConfig] = useState<SiteConfig>(() => getSiteConfig());
   const [blogs, setBlogs] = useState<BlogPost[]>(() => getAllBlogs());
   const [activeTab, setActiveTab] = useState<'domestic' | 'international'>('international');
+  const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
 
   // Hero Video Carousel state
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -796,6 +817,50 @@ export default function Home() {
         </section>
 
 
+
+        {/* =================================================================
+            7. FREQUENTLY ASKED QUESTIONS
+            ================================================================= */}
+        <section className={styles.homeFaqSection}>
+          <div className="container">
+            <div className={styles.sectionHeader}>
+              <span className={styles.eyebrow}>HELP &amp; CLARITY</span>
+              <h2 className={styles.sectionTitle}>FREQUENTLY ASKED QUESTIONS</h2>
+              <p className={styles.sectionSubtitle}>
+                Clear, straightforward answers about how we design trips, pricing, and booking policies.
+              </p>
+            </div>
+
+            <div className={styles.faqWrapper}>
+              {HOMEPAGE_FAQS.map((faq, idx) => (
+                <div key={idx} className={styles.homeFaqItem}>
+                  <button
+                    type="button"
+                    onClick={() => setOpenFaqIndex(openFaqIndex === idx ? null : idx)}
+                    className={styles.homeFaqQuestion}
+                    aria-expanded={openFaqIndex === idx}
+                  >
+                    <span>{faq.q}</span>
+                    <ChevronDown
+                      size={20}
+                      style={{
+                        transform: openFaqIndex === idx ? "rotate(180deg)" : "rotate(0deg)",
+                        transition: "transform 0.25s ease",
+                        color: "#b8972e",
+                        flexShrink: 0
+                      }}
+                    />
+                  </button>
+                  {openFaqIndex === idx && (
+                    <div className={styles.homeFaqAnswer}>
+                      {faq.a}
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
 
         {/* =================================================================
             8. FINAL CTA

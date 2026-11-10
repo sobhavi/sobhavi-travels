@@ -1409,3 +1409,59 @@
     margin: 40px auto 0;
   }
 }
+
+/* ============================================================
+   HOMEPAGE FAQS SECTION
+   ============================================================ */
+.homeFaqSection {
+  padding: 100px 0;
+  background: var(--surface-alt, #f4efe6);
+  border-top: 1px solid rgba(180, 150, 100, 0.25);
+  border-bottom: 1px solid rgba(180, 150, 100, 0.25);
+}
+
+.faqWrapper {
+  max-width: 920px;
+  margin: 40px auto 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.homeFaqItem {
+  background: #ffffff;
+  border-radius: 18px;
+  border: 1px solid rgba(180, 150, 100, 0.28);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.03);
+  overflow: hidden;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.homeFaqItem:hover {
+  border-color: rgba(184, 151, 46, 0.55);
+}
+
+.homeFaqQuestion {
+  width: 100%;
+  padding: 22px 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-align: left;
+  background: none;
+  border: none;
+  font-family: var(--font-sans);
+  font-size: 1.08rem;
+  font-weight: 700;
+  color: #1c1917;
+  cursor: pointer;
+  gap: 16px;
+}
+
+.homeFaqAnswer {
+  padding: 0 28px 24px;
+  font-size: 0.98rem;
+  line-height: 1.68;
+  color: #44403c;
+}
+

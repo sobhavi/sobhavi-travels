@@ -9,6 +9,7 @@ import SmoothScrollProvider from "@/components/layout/SmoothScrollProvider";
 import Footer from "@/components/layout/Footer";
 import ConditionalFooter from "@/components/layout/ConditionalFooter";
 import SecretLiveEditor from "@/components/ui/SecretLiveEditor";
+import UpcomingTripPopup from "@/components/ui/UpcomingTripPopup";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -81,6 +82,7 @@ export default function RootLayout({
         </Suspense>
         <FilmGrain />
         <FloatingContact />
+        <UpcomingTripPopup />
         <SmoothScrollProvider>
           {children}
           <ConditionalFooter>

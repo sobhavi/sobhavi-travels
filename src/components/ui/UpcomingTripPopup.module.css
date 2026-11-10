@@ -1,0 +1,289 @@
+/* Upcoming Trip First-Visit Popup Styles */
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(18, 16, 15, 0.75);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.popupModal {
+  position: relative;
+  width: 100%;
+  max-width: 540px;
+  max-height: min(92vh, 720px);
+  background: #ffffff;
+  color: #1c1917;
+  border-radius: 28px;
+  border: 1.5px solid rgba(184, 151, 46, 0.5);
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.35), 0 0 40px rgba(184, 151, 46, 0.15);
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Close Button (X) */
+.closeBtn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 10;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(28, 25, 23, 0.65);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(6px);
+}
+
+.closeBtn:hover {
+  background: #1c1917;
+  color: #dfb74a;
+  transform: scale(1.08);
+}
+
+/* Header Image Wrap */
+.imageWrap {
+  position: relative;
+  width: 100%;
+  height: 220px;
+  background: #1c1917;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.coverImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.imageOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.25) 0%, rgba(28, 25, 23, 0.7) 100%);
+}
+
+.tripTag {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  background: linear-gradient(135deg, #dfb74a 0%, #b8972e 100%);
+  color: #1c1917;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding: 5px 14px;
+  border-radius: 999px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+}
+
+.imageBottomPill {
+  position: absolute;
+  bottom: 14px;
+  left: 16px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(0, 0, 0, 0.6);
+  color: #ffffff;
+  padding: 5px 12px;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  backdrop-filter: blur(4px);
+}
+
+/* Modal Body */
+.bodyContent {
+  padding: 26px 28px 28px;
+  display: flex;
+  flex-direction: column;
+}
+
+.headerRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+}
+
+.eyebrow {
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #b8972e;
+}
+
+.datePill {
+  background: var(--surface-alt, #f4efe6);
+  border: 1px solid rgba(184, 151, 46, 0.4);
+  color: #1c1917;
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.title {
+  font-family: var(--font-heading), "Oswald", sans-serif;
+  font-size: clamp(1.8rem, 4vw, 2.3rem);
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  line-height: 1.05;
+  color: #1c1917;
+  margin: 0 0 8px 0;
+}
+
+.subquote {
+  font-size: 0.98rem;
+  font-weight: 600;
+  color: #b8972e;
+  margin-bottom: 12px;
+  line-height: 1.4;
+}
+
+.description {
+  font-size: 0.92rem;
+  line-height: 1.55;
+  color: #57534e;
+  margin-bottom: 18px;
+}
+
+.routeBox {
+  background: var(--surface-alt, #f4efe6);
+  border: 1px solid rgba(180, 150, 100, 0.28);
+  border-radius: 12px;
+  padding: 9px 14px;
+  font-size: 0.84rem;
+  font-weight: 700;
+  color: #1c1917;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.routeArrow {
+  color: #b8972e;
+  font-weight: 900;
+}
+
+.pricingRow {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  padding-bottom: 14px;
+  border-bottom: 1px dashed rgba(180, 150, 100, 0.35);
+}
+
+.priceLabel {
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #78716c;
+}
+
+.priceAmount {
+  font-family: var(--font-heading), "Oswald", sans-serif;
+  font-size: 1.55rem;
+  font-weight: 900;
+  color: #b8972e;
+}
+
+/* Actions */
+.actionRow {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.exploreBtn {
+  background: linear-gradient(135deg, #dfb74a 0%, #b8972e 100%);
+  color: #1c1917;
+  font-size: 0.96rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 14px 24px;
+  border-radius: 999px;
+  text-align: center;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 6px 22px rgba(184, 151, 46, 0.38);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.exploreBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(184, 151, 46, 0.55);
+}
+
+.allTripsLink {
+  background: transparent;
+  color: #78716c;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-align: center;
+  text-decoration: none;
+  padding: 6px;
+  transition: color 0.2s ease;
+  display: block;
+}
+
+.allTripsLink:hover {
+  color: #b8972e;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .bodyContent {
+    padding: 20px 18px 22px;
+  }
+  .imageWrap {
+    height: 180px;
+  }
+  .title {
+    font-size: 1.65rem;
+  }
+}
+

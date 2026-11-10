@@ -8,6 +8,70 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { getSiteConfig, SiteConfig } from '@/lib/siteConfig';
 import styles from './Navbar.module.css';
 
+interface MenuItem {
+  id: string;
+  label: string;
+  href: string;
+  enabled?: boolean;
+  showInHeader?: boolean;
+  showInMobile?: boolean;
+  showInFooter?: boolean;
+  badge?: string;
+}
+
+function normalizeNavigation(items?: MenuItem[]): MenuItem[] {
+  const defaultList: MenuItem[] = [
+    { id: "home", label: "Home", href: "/", enabled: true, showInHeader: true, showInMobile: true },
+    { id: "domestic", label: "Domestic", href: "/domestic", enabled: true, showInHeader: true, showInMobile: true },
+    { id: "international", label: "International", href: "/international", enabled: true, showInHeader: true, showInMobile: true },
+    { id: "upcoming-group-trips", label: "Upcoming Group Trips", href: "/upcoming-group-trips", enabled: true, showInHeader: true, showInMobile: true },
+    { id: "blogs", label: "Blogs", href: "/blog", enabled: true, showInHeader: true, showInMobile: true },
+    { id: "andaman-trip", label: "Andaman '27", href: "/trips/andaman-january-2027", enabled: true, showInHeader: false, showInMobile: true },
+    { id: "sri-lanka-trip", label: "Sri Lanka '27", href: "/trips/sri-lanka-february-2027", enabled: true, showInHeader: false, showInMobile: true },
+    { id: "rann-utsav", label: "Rann Utsav", href: "/rann-utsav", enabled: true, showInHeader: false, showInMobile: true },
+    { id: "about", label: "About Us", href: "/about", enabled: true, showInHeader: false, showInMobile: true },
+    { id: "contact", label: "Contact Us", href: "/contact", enabled: true, showInHeader: false, showInMobile: true }
+  ];
+
+  if (!items || !Array.isArray(items) || items.length === 0) return defaultList;
+
+  let list = items.map((item) => {
+    // Hide individual trip pills and rann-utsav from header bar
+    if (item.id === 'andaman-trip' || item.id === 'sri-lanka-trip' || item.id === 'rann-utsav') {
+      return { ...item, showInHeader: false };
+    }
+    return { ...item };
+  });
+
+  const hasUpcoming = list.some(item => item.id === 'upcoming-group-trips' || item.href === '/upcoming-group-trips');
+  if (!hasUpcoming) {
+    const intlIndex = list.findIndex(item => item.id === 'international' || item.href === '/international');
+    const upcomingItem: MenuItem = {
+      id: "upcoming-group-trips",
+      label: "Upcoming Group Trips",
+      href: "/upcoming-group-trips",
+      enabled: true,
+      showInHeader: true,
+      showInMobile: true,
+      showInFooter: true
+    };
+    if (intlIndex !== -1) {
+      list.splice(intlIndex + 1, 0, upcomingItem);
+    } else {
+      list.push(upcomingItem);
+    }
+  } else {
+    list = list.map(item => {
+      if (item.id === 'upcoming-group-trips' || item.href === '/upcoming-group-trips') {
+        return { ...item, label: "Upcoming Group Trips", href: "/upcoming-group-trips", showInHeader: true, enabled: true };
+      }
+      return item;
+    });
+  }
+
+  return list;
+}
+
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -107,25 +171,7 @@ export default function Navbar() {
   const cleanWa = (header.whatsapp || config.company?.whatsapp || '7406994752').replace(/[^0-9]/g, '');
   const waUrl = `https://wa.me/${cleanWa.startsWith('91') ? cleanWa : '91' + cleanWa}?text=${encodeURIComponent('Hello ' + brandName + '! I want to plan a luxury trip.')}`;
 
-  const allMenuItems = config.navigation?.menuItems && config.navigation.menuItems.length > 0 
-    ? config.navigation.menuItems 
-    : [
-        { id: "home", label: "Home", href: "/", enabled: true, showInHeader: true, showInMobile: true },
-        { id: "andaman-trip", label: "Andaman '27", href: "/trips/andaman-january-2027", enabled: true, showInHeader: true, showInMobile: true },
-        { id: "sri-lanka-trip", label: "Sri Lanka '27", href: "/trips/sri-lanka-february-2027", enabled: true, showInHeader: true, showInMobile: true },
-        { id: "domestic", label: "Domestic", href: "/domestic", enabled: true, showInHeader: true, showInMobile: true },
-        { id: "international", label: "International", href: "/international", enabled: true, showInHeader: true, showInMobile: true },
-        { id: "rann-utsav", label: "Rann Utsav", href: "/rann-utsav", enabled: true, showInHeader: true, showInMobile: true, badge: "TRENDING" },
-        { id: "travel-buddy", label: "Travel Buddy", href: "/travel-buddy", enabled: true, showInHeader: false, showInMobile: true },
-        { id: "blogs", label: "Blogs", href: "/blog", enabled: true, showInHeader: true, showInMobile: true },
-        { id: "about", label: "About Us", href: "/about", enabled: true, showInHeader: false, showInMobile: true },
-        { id: "visa", label: "Visa Services", href: "/visa", enabled: true, showInHeader: false, showInMobile: true },
-        { id: "flights", label: "Flight Booking", href: "/flights", enabled: true, showInHeader: false, showInMobile: true },
-        { id: "hotels", label: "Hotel Booking", href: "/hotels", enabled: true, showInHeader: false, showInMobile: true },
-        { id: "honeymoon", label: "Honeymoon", href: "/honeymoon", enabled: true, showInHeader: false, showInMobile: true },
-        { id: "group-tours", label: "Group Tours", href: "/group-tours", enabled: true, showInHeader: false, showInMobile: true },
-        { id: "contact", label: "Contact Us", href: "/contact", enabled: true, showInHeader: false, showInMobile: true }
-      ];
+  const allMenuItems = normalizeNavigation(config.navigation?.menuItems);
 
   // Desktop Links: only enabled and configured for header
   const desktopLinks = allMenuItems.filter(item => item.enabled !== false && item.showInHeader !== false);
