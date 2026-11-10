@@ -4,7 +4,7 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { usePathname, useSearchParams } from 'next/navigation';
 import styles from './SecretLiveEditor.module.css';
 
-const DEFAULT_PIN = 'sobhavi2026';
+const DEFAULT_PIN = 'Sobhavi@2027';
 
 // Helper to generate a stable, deterministic key for an element on the page
 function getElementKey(el: HTMLElement): string {

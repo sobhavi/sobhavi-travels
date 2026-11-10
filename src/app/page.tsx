@@ -235,60 +235,74 @@ export default function Home() {
     }
   }, []);
 
-  // Dual Tab Destinations Data
-  const domesticDestinations = [
-    {
-      name: "Rajasthan",
-      tagline: "Palaces, Forts & Thar Desert Glamping",
-      image: "https://images.unsplash.com/photo-1599661046289-e31897846e41?q=80&w=900&auto=format&fit=crop",
-      href: "/domestic#rajasthan"
-    },
-    {
-      name: "Shimla & Manali",
-      tagline: "Snow Peaks & Himalayan Pine Valleys",
-      image: "https://images.unsplash.com/photo-1483921020237-2ff51e8e4b22?q=80&w=900&auto=format&fit=crop",
-      href: "/domestic#shimla-manali"
-    },
-    {
-      name: "Kerala",
-      tagline: "Tranquil Backwaters & Lush Tea Plantations",
-      image: "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?q=80&w=900&auto=format&fit=crop",
-      href: "/domestic#kerala"
-    },
-    {
-      name: "Andaman & Nicobar Islands",
-      tagline: "Emerald Lagoons, Coral Reefs & Radhanagar Beach",
-      image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=900&auto=format&fit=crop",
-      href: "/domestic#andaman"
-    }
-  ];
+  // Dual Tab Destinations Data — dynamically derived from live siteConfig (with robust fallbacks)
+  const domesticDestinations = (siteConfig.domesticDestinations && siteConfig.domesticDestinations.length > 0)
+    ? siteConfig.domesticDestinations.map(d => ({
+        name: d.name,
+        tagline: d.tagline,
+        image: d.image || "https://images.unsplash.com/photo-1599661046289-e31897846e41?q=80&w=900&auto=format&fit=crop",
+        href: `/domestic#${d.id || d.name.toLowerCase().replace(/\s+/g, '-')}`
+      }))
+    : [
+        {
+          name: "Rajasthan",
+          tagline: "Palaces, Forts & Thar Desert Glamping",
+          image: "https://images.unsplash.com/photo-1599661046289-e31897846e41?q=80&w=900&auto=format&fit=crop",
+          href: "/domestic#rajasthan"
+        },
+        {
+          name: "Shimla & Manali",
+          tagline: "Snow Peaks & Himalayan Pine Valleys",
+          image: "https://images.unsplash.com/photo-1483921020237-2ff51e8e4b22?q=80&w=900&auto=format&fit=crop",
+          href: "/domestic#shimla-manali"
+        },
+        {
+          name: "Kerala",
+          tagline: "Tranquil Backwaters & Lush Tea Plantations",
+          image: "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?q=80&w=900&auto=format&fit=crop",
+          href: "/domestic#kerala"
+        },
+        {
+          name: "Andaman & Nicobar Islands",
+          tagline: "Emerald Lagoons, Coral Reefs & Radhanagar Beach",
+          image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=900&auto=format&fit=crop",
+          href: "/domestic#andaman"
+        }
+      ];
 
-  const internationalDestinations = [
-    {
-      name: "Dubai",
-      tagline: "Futuristic Skylines, Burj Khalifa & Luxury Marina",
-      image: "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?q=80&w=900&auto=format&fit=crop",
-      href: "/international#dubai"
-    },
-    {
-      name: "Singapore",
-      tagline: "Gardens by the Bay & Marina Bay Sands",
-      image: "https://images.unsplash.com/photo-1525625293386-3f8f99389edd?q=80&w=900&auto=format&fit=crop",
-      href: "/international#singapore"
-    },
-    {
-      name: "Bali",
-      tagline: "Sacred Temples, Rice Terraces & Private Pool Villas",
-      image: "https://images.unsplash.com/photo-1537996194471-e657df975ab4?q=80&w=900&auto=format&fit=crop",
-      href: "/international#bali"
-    },
-    {
-      name: "Maldives",
-      tagline: "Overwater Pool Villas & Turquoise Coral Lagoons",
-      image: "https://images.unsplash.com/photo-1514282401047-d79a71a590e8?q=80&w=900&auto=format&fit=crop",
-      href: "/international#maldives"
-    }
-  ];
+  const internationalDestinations = (siteConfig.internationalDestinations && siteConfig.internationalDestinations.length > 0)
+    ? siteConfig.internationalDestinations.map(d => ({
+        name: d.name,
+        tagline: d.tagline,
+        image: d.image || "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?q=80&w=900&auto=format&fit=crop",
+        href: `/international#${d.id || d.name.toLowerCase().replace(/\s+/g, '-')}`
+      }))
+    : [
+        {
+          name: "Dubai",
+          tagline: "Futuristic Skylines, Burj Khalifa & Luxury Marina",
+          image: "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?q=80&w=900&auto=format&fit=crop",
+          href: "/international#dubai"
+        },
+        {
+          name: "Singapore",
+          tagline: "Gardens by the Bay & Marina Bay Sands",
+          image: "https://images.unsplash.com/photo-1525625293386-3f8f99389edd?q=80&w=900&auto=format&fit=crop",
+          href: "/international#singapore"
+        },
+        {
+          name: "Bali",
+          tagline: "Sacred Temples, Rice Terraces & Private Pool Villas",
+          image: "https://images.unsplash.com/photo-1537996194471-e657df975ab4?q=80&w=900&auto=format&fit=crop",
+          href: "/international#bali"
+        },
+        {
+          name: "Maldives",
+          tagline: "Overwater Pool Villas & Turquoise Coral Lagoons",
+          image: "https://images.unsplash.com/photo-1514282401047-d79a71a590e8?q=80&w=900&auto=format&fit=crop",
+          href: "/international#maldives"
+        }
+      ];
 
 
 
@@ -483,15 +497,15 @@ export default function Home() {
         </section>
 
         {/* =================================================================
-            SPECIAL FEATURE: 2027 CURATED GROUP EXPEDITIONS & ON-DEMAND TRAVEL
+            SPECIAL FEATURE: NAMMA ESCAPES (Curated 2027 Group Expeditions)
             ================================================================= */}
         <section className={styles.featuredTripsSection}>
           <div className="container">
             <div className={styles.sectionHeader}>
-              <span className={styles.eyebrow}>CURATED & ON-DEMAND</span>
-              <h2 className={styles.sectionTitle}>SIGNATURE EXPEDITIONS 2027</h2>
+              <span className={styles.eyebrow}>CURATED GROUP DEPARTURES</span>
+              <h2 className={styles.sectionTitle}>NAMMA ESCAPES</h2>
               <p className={styles.sectionSubtitle}>
-                Handpicked fixed-date group departures & unlimited on-demand bespoke journeys.
+                Handpicked fixed-date group departures designed to escape the routine.
               </p>
             </div>
 
@@ -524,7 +538,7 @@ export default function Home() {
                       <span className={styles.tripPriceValue}>INR 31,699/-</span>
                     </div>
                     <span className={styles.tripCtaPill}>
-                      View Trip &rarr;
+                      View Itinerary &rarr;
                     </span>
                   </div>
                 </div>
@@ -554,45 +568,11 @@ export default function Home() {
                   </p>
                   <div className={styles.tripFooterRow}>
                     <div className={styles.tripPriceBox}>
-                      <span className={styles.tripPriceLabel}>Group Size</span>
-                      <span className={styles.tripPriceValue}>15 Travellers</span>
+                      <span className={styles.tripPriceLabel}>Early Bird Price</span>
+                      <span className={styles.tripPriceValue}>INR 59,999/-</span>
                     </div>
                     <span className={styles.tripCtaPill}>
-                      View Trip &rarr;
-                    </span>
-                  </div>
-                </div>
-              </Link>
-
-              {/* Trip 3: On-Demand Bespoke */}
-              <Link href="/on-demand" className={styles.tripFeaturedCard}>
-                <div className={styles.tripMediaWrap}>
-                  <div className={`${styles.tripBadgeTag} ${styles.badgeOnDemand}`}>
-                    ✨ 100% BESPOKE & ON-DEMAND
-                  </div>
-                  <Image
-                    src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?q=80&w=800&auto=format&fit=crop"
-                    alt="On-Demand Bespoke Travel"
-                    fill
-                    className={styles.tripCoverImage}
-                  />
-                  <div className={styles.tripMediaOverlay} />
-                </div>
-                <div className={styles.tripCardBody}>
-                  <div className={styles.tripDateRow}>
-                    ANY DATE · ANY DESTINATION
-                  </div>
-                  <h3 className={styles.tripCardHeading}>ON-DEMAND TRAVEL</h3>
-                  <p className={styles.tripQuoteText}>
-                    "Your vision. Our unrivaled execution." Private villas, custom itineraries, 5-star properties & 24/7 personal concierge support.
-                  </p>
-                  <div className={styles.tripFooterRow}>
-                    <div className={styles.tripPriceBox}>
-                      <span className={styles.tripPriceLabel}>Format</span>
-                      <span className={styles.tripPriceValue}>Private Blueprint</span>
-                    </div>
-                    <span className={styles.tripCtaPill}>
-                      Design Trip &rarr;
+                      View Itinerary &rarr;
                     </span>
                   </div>
                 </div>

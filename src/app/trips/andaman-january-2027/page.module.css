@@ -39,9 +39,9 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: #fdf2f4;
-  border: 1px solid #f5b5c5;
-  color: #b83c5a;
+  background: var(--surface-alt, #f4efe6);
+  border: 1px solid rgba(184, 151, 46, 0.45);
+  color: #b8972e;
   padding: 8px 18px;
   border-radius: 999px;
   font-size: 0.8rem;
@@ -68,7 +68,7 @@
 }
 
 .heroTitleAccent {
-  color: #b83c5a;
+  color: #b8972e;
   display: block;
 }
 
@@ -100,9 +100,9 @@
 }
 
 .durationPill {
-  background: #fdf2f4;
-  color: #b83c5a;
-  border: 1px solid #f5b5c5;
+  background: var(--surface-alt, #f4efe6);
+  color: #b8972e;
+  border: 1px solid rgba(184, 151, 46, 0.45);
   padding: 8px 16px;
   border-radius: 12px;
   font-size: 0.9rem;
@@ -189,75 +189,55 @@
 
 .polaroidFrame {
   background: #ffffff;
-  padding: 14px 14px 44px 14px;
-  border-radius: 8px;
-  box-shadow: 
-    0 20px 45px rgba(28, 25, 23, 0.12),
-    0 2px 6px rgba(0, 0, 0, 0.05);
-  border: 1px solid rgba(180, 150, 100, 0.25);
-  transform: rotate(2deg);
-  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  padding: 14px;
+  border-radius: 20px;
+  box-shadow: 0 16px 45px rgba(180, 150, 100, 0.14);
+  border: 1.5px solid rgba(180, 150, 100, 0.3);
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
   position: relative;
   max-width: 440px;
   width: 100%;
 }
 
 .polaroidFrame:hover {
-  transform: rotate(0deg) scale(1.02);
+  transform: translateY(-4px);
+  box-shadow: 0 20px 50px rgba(184, 151, 46, 0.2);
 }
 
 .polaroidFrameAlt {
-  transform: rotate(-2.5deg);
+  background: #ffffff;
+  padding: 14px;
+  border-radius: 20px;
+  box-shadow: 0 16px 45px rgba(180, 150, 100, 0.14);
+  border: 1.5px solid rgba(180, 150, 100, 0.3);
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+  position: relative;
+  max-width: 440px;
+  width: 100%;
 }
 
 .polaroidFrameAlt:hover {
-  transform: rotate(0deg) scale(1.02);
-}
-
-.washiTape {
-  position: absolute;
-  top: -14px;
-  left: 50%;
-  transform: translateX(-50%) rotate(-1.5deg);
-  width: 120px;
-  height: 28px;
-  background: rgba(223, 183, 74, 0.85);
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
-  border-left: 2px dashed rgba(184, 151, 46, 0.6);
-  border-right: 2px dashed rgba(184, 151, 46, 0.6);
-  z-index: 10;
-}
-
-.washiTapePink {
-  background: rgba(245, 181, 197, 0.85);
-  border-left-color: rgba(184, 60, 90, 0.5);
-  border-right-color: rgba(184, 60, 90, 0.5);
-}
-
-.washiTapeMint {
-  background: rgba(162, 210, 194, 0.85);
-  border-left-color: rgba(22, 163, 74, 0.5);
-  border-right-color: rgba(22, 163, 74, 0.5);
+  transform: translateY(-4px);
+  box-shadow: 0 20px 50px rgba(184, 151, 46, 0.2);
 }
 
 .polaroidImg {
   width: 100%;
   height: 340px;
   object-fit: cover;
-  border-radius: 4px;
+  border-radius: 12px;
   display: block;
 }
 
 .polaroidCaption {
-  position: absolute;
-  bottom: 12px;
-  left: 0;
-  right: 0;
   text-align: center;
-  font-family: "Caveat", "Brush Script MT", cursive, sans-serif;
-  font-size: 1.25rem;
-  color: #44403c;
-  letter-spacing: 0.02em;
+  font-family: var(--font-heading), "Oswald", sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #1c1917;
+  padding-top: 12px;
 }
 
 /* THE FEELING SECTION */
@@ -303,7 +283,7 @@
 }
 
 .feelingHeadlineAccent {
-  color: #b83c5a;
+  color: #b8972e;
   display: block;
 }
 
@@ -317,8 +297,8 @@
 .sisterPill {
   display: inline-block;
   background: var(--surface-alt, #f4efe6);
-  color: #b83c5a;
-  border: 1px solid rgba(180, 150, 100, 0.3);
+  color: #1c1917;
+  border: 1px solid rgba(184, 151, 46, 0.45);
   padding: 12px 22px;
   border-radius: 14px;
   font-weight: 700;
@@ -496,8 +476,8 @@
 
 .dayTag {
   background: var(--surface-alt, #f4efe6);
-  color: #b83c5a;
-  border: 1px solid rgba(180, 150, 100, 0.3);
+  color: #b8972e;
+  border: 1px solid rgba(184, 151, 46, 0.45);
   font-size: 0.8rem;
   font-weight: 800;
   letter-spacing: 0.14em;
@@ -577,10 +557,10 @@
 
 .notIncludedCard {
   background: #ffffff;
-  border: 1.5px solid #b83c5a;
+  border: 1.5px solid rgba(180, 150, 100, 0.35);
   border-radius: 28px;
   padding: 44px;
-  box-shadow: 0 12px 40px rgba(184, 60, 90, 0.08);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.04);
 }
 
 .practicalHeading {
@@ -600,7 +580,7 @@
 }
 
 .notIncludedHeading {
-  color: #b83c5a;
+  color: #78716c;
 }
 
 .practicalList {
@@ -630,7 +610,7 @@
 }
 
 .crossIcon {
-  color: #b83c5a;
+  color: #78716c;
   font-weight: 900;
   font-size: 1.15rem;
   line-height: 1.2;
@@ -696,17 +676,18 @@
 }
 
 .earlyBirdBanner {
-  background: #fdf2f4;
-  border: 1.5px solid #f5b5c5;
+  background: var(--surface-alt, #f4efe6);
+  border: 1.5px solid rgba(184, 151, 46, 0.45);
   padding: 18px 24px;
   border-radius: 16px;
   margin-top: 24px;
 }
 
 .earlyBirdPrice {
-  font-size: 1.7rem;
+  font-family: var(--font-heading), "Oswald", sans-serif;
+  font-size: 1.8rem;
   font-weight: 900;
-  color: #b83c5a;
+  color: #b8972e;
 }
 
 .earlyBirdDeadline {

@@ -115,7 +115,7 @@ export default function AdminClientDashboard({ initialEnquiries, initialBlogs, i
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
     const cleanPass = passcode.trim();
-    if (cleanPass === 'sobhavi2026' || cleanPass === 'admin123' || cleanPass === 'admin') {
+    if (cleanPass === 'Sobhavi@2027' || cleanPass === 'SobhaviAdmin2027') {
       setIsAuthenticated(true);
       setLoginError(false);
       sessionStorage.setItem('sobhavi_admin_auth', 'true');
@@ -659,10 +659,6 @@ export default function AdminClientDashboard({ initialEnquiries, initialBlogs, i
               Sign In to Admin Portal &rarr;
             </button>
           </form>
-
-          <div className={styles.loginHint}>
-            Default Passcode: <strong>sobhavi2026</strong> (or <strong>admin123</strong>)
-          </div>
         </div>
       </div>
     );

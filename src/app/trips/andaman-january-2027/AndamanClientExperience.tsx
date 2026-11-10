@@ -229,7 +229,7 @@ export default function AndamanClientExperience() {
               </div>
 
               <div className={styles.heroRouteRow}>
-                <MapPin size={18} style={{ color: "#E47A95" }} />
+                <MapPin size={18} style={{ color: "#b8972e" }} />
                 <span>Port Blair</span>
                 <span className={styles.routeArrow}>→</span>
                 <span>Havelock</span>
@@ -243,7 +243,7 @@ export default function AndamanClientExperience() {
                   onClick={() => setModalOpen(true)}
                   className={styles.primaryBookBtn}
                 >
-                  <Heart size={18} />
+                  <Sparkles size={18} />
                   <span>Reserve Your Seat</span>
                 </button>
                 <a
@@ -258,10 +258,9 @@ export default function AndamanClientExperience() {
               </div>
             </div>
 
-            {/* Polaroid Scrapbook Visual */}
+            {/* Destination Highlight Photo Card */}
             <div className={styles.polaroidWrapper}>
               <div className={styles.polaroidFrame}>
-                <div className={`${styles.washiTape} ${styles.washiTapePink}`} />
                 <Image
                   src="/images/trips/andaman/polaroid-radhanagar.jpg"
                   alt="Radhanagar Beach, Havelock"
@@ -271,7 +270,7 @@ export default function AndamanClientExperience() {
                   priority
                 />
                 <div className={styles.polaroidCaption}>
-                  Radhanagar Beach, Havelock
+                  Radhanagar Beach · Havelock
                 </div>
               </div>
             </div>
@@ -294,13 +293,12 @@ export default function AndamanClientExperience() {
                 Whether you’re taking your first solo trip, celebrating personal time, or craving the turquoise Andaman blues — leave the logistics, ferry bookings, and itineraries to us.
               </p>
               <div className={styles.sisterPill}>
-                ✨ Come solo — most of us are. Strangers on Day 1, sisters by Day 6.
+                ✦ Come solo — most of us are. Strangers on Day 1, island sisters by Day 6.
               </div>
             </div>
 
             <div className={styles.polaroidWrapper}>
               <div className={`${styles.polaroidFrame} ${styles.polaroidFrameAlt}`}>
-                <div className={`${styles.washiTape} ${styles.washiTapeMint}`} />
                 <Image
                   src="/images/trips/andaman/polaroid-bharatpur.jpg"
                   alt="Bharatpur Beach, Neil Island"
@@ -309,7 +307,7 @@ export default function AndamanClientExperience() {
                   className={styles.polaroidImg}
                 />
                 <div className={styles.polaroidCaption}>
-                  pack light, bring sunscreen, leave the itinerary to us
+                  Bharatpur Beach · Neil Island
                 </div>
               </div>
             </div>
@@ -403,14 +401,13 @@ export default function AndamanClientExperience() {
                     </ul>
 
                     <div className={styles.dayFooterPill}>
-                      <Sparkles size={14} style={{ color: "#E47A95" }} />
+                      <Sparkles size={14} style={{ color: "#b8972e" }} />
                       <span>{item.stayTag}</span>
                     </div>
                   </div>
 
                   <div className={styles.polaroidWrapper}>
                     <div className={`${styles.polaroidFrame} ${isEven ? styles.polaroidFrameAlt : ""}`}>
-                      <div className={`${styles.washiTape} ${isEven ? styles.washiTapeMint : styles.washiTapePink}`} />
                       <Image
                         src={item.image}
                         alt={item.alt}
@@ -624,7 +621,7 @@ export default function AndamanClientExperience() {
                     style={{
                       transform: activeFaq === index ? "rotate(180deg)" : "rotate(0deg)",
                       transition: "transform 0.25s ease",
-                      color: "#E47A95"
+                      color: "#b8972e"
                     }}
                   />
                 </button>
@@ -732,11 +729,11 @@ export default function AndamanClientExperience() {
                 </div>
               ) : (
                 <form onSubmit={handleFormSubmit}>
-                  <div style={{ fontSize: "0.82rem", fontWeight: "800", color: "#E47A95", letterSpacing: "0.15em", textTransform: "uppercase" }}>
-                    ANDAMAN · WOMEN ONLY
+                  <div style={{ fontSize: "0.82rem", fontWeight: "800", color: "#b8972e", letterSpacing: "0.15em", textTransform: "uppercase" }}>
+                    ANDAMAN · WOMEN ONLY (23–28 JAN 2027)
                   </div>
-                  <h3 style={{ fontSize: "1.5rem", color: "#241E20", marginTop: "4px", marginBottom: "18px" }}>
-                    Reserve Your Spot
+                  <h3 style={{ fontSize: "1.5rem", color: "#1c1917", marginTop: "4px", marginBottom: "18px" }}>
+                    Reserve Your Spot · Early Bird ₹31,699/-
                   </h3>
 
                   <div style={{ display: "flex", flexDirection: "column", gap: "14px" }}>

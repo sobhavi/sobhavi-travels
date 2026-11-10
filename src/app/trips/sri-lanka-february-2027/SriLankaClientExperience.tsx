@@ -239,6 +239,10 @@ export default function SriLankaClientExperience() {
                 <Users size={16} />
                 Mixed Group · 15 Travellers Max
               </span>
+              <span className={`${styles.specBadge} ${styles.specHighlight}`}>
+                <Award size={16} />
+                Early Bird: INR 59,999/-
+              </span>
             </div>
 
             <div className={styles.heroRouteStrip}>
@@ -484,6 +488,9 @@ export default function SriLankaClientExperience() {
           {/* SAVE YOUR SPOT CALLOUT */}
           <div className={styles.saveSpotCard}>
             <h3 className={styles.saveSpotHeading}>Save your spot</h3>
+            <div style={{ display: "inline-block", background: "rgba(184, 151, 46, 0.15)", border: "1px solid rgba(184, 151, 46, 0.45)", borderRadius: "999px", padding: "8px 24px", color: "#b8972e", fontWeight: "800", fontSize: "1.05rem", marginBottom: "16px", letterSpacing: "0.04em" }}>
+              EARLY BIRD OFFER: INR 59,999/- PER PERSON
+            </div>
             <p className={styles.saveSpotSub}>
               Spots are strictly limited to 15 travellers — message us to join the group and secure your room.
             </p>
@@ -568,7 +575,7 @@ export default function SriLankaClientExperience() {
               left: 0,
               right: 0,
               bottom: 0,
-              backgroundColor: "rgba(11, 27, 43, 0.75)",
+              backgroundColor: "rgba(28, 25, 23, 0.65)",
               backdropFilter: "blur(8px)",
               zIndex: 999,
               display: "flex",
@@ -584,14 +591,14 @@ export default function SriLankaClientExperience() {
               exit={{ scale: 0.9, opacity: 0 }}
               onClick={(e) => e.stopPropagation()}
               style={{
-                background: "#0E2338",
-                color: "#FFFFFF",
+                background: "#ffffff",
+                color: "#1c1917",
                 borderRadius: "24px",
                 maxWidth: "480px",
                 width: "100%",
                 padding: "36px 32px",
-                boxShadow: "0 24px 60px rgba(0,0,0,0.5)",
-                border: "1px solid rgba(240, 101, 67, 0.3)",
+                boxShadow: "0 24px 60px rgba(0,0,0,0.2)",
+                border: "1.5px solid rgba(180, 150, 100, 0.35)",
                 position: "relative"
               }}
             >
@@ -602,7 +609,7 @@ export default function SriLankaClientExperience() {
                   position: "absolute",
                   top: "18px",
                   right: "18px",
-                  background: "rgba(255, 255, 255, 0.1)",
+                  background: "rgba(0, 0, 0, 0.05)",
                   border: "none",
                   borderRadius: "50%",
                   width: "32px",
@@ -611,7 +618,7 @@ export default function SriLankaClientExperience() {
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
-                  color: "#D3E0EA"
+                  color: "#57534e"
                 }}
               >
                 ✕
@@ -620,10 +627,10 @@ export default function SriLankaClientExperience() {
               {submitted ? (
                 <div style={{ textAlign: "center", padding: "20px 0" }}>
                   <div style={{ fontSize: "2.5rem", marginBottom: "12px" }}>🌴</div>
-                  <h3 style={{ fontSize: "1.6rem", color: "#FFFFFF", marginBottom: "8px" }}>
+                  <h3 style={{ fontSize: "1.6rem", color: "#1c1917", marginBottom: "8px" }}>
                     Enquiry Dispatched!
                   </h3>
-                  <p style={{ color: "#BFD3E4", lineHeight: 1.5, marginBottom: "20px" }}>
+                  <p style={{ color: "#57534e", lineHeight: 1.5, marginBottom: "20px" }}>
                     Thank you, {formData.name}! Our expedition manager is reviewing your spot request for the Sri Lanka Group Trip (13-19 Feb 2027) and will reach out via WhatsApp immediately.
                   </p>
                   <button
@@ -637,16 +644,16 @@ export default function SriLankaClientExperience() {
                 </div>
               ) : (
                 <form onSubmit={handleFormSubmit}>
-                  <div style={{ fontSize: "0.82rem", fontWeight: "800", color: "#F06543", letterSpacing: "0.18em", textTransform: "uppercase" }}>
-                    SRI LANKA · GROUP TRIP
+                  <div style={{ fontSize: "0.82rem", fontWeight: "800", color: "#b8972e", letterSpacing: "0.18em", textTransform: "uppercase" }}>
+                    SRI LANKA · GROUP TRIP (13–19 FEB 2027)
                   </div>
-                  <h3 style={{ fontSize: "1.6rem", color: "#FFFFFF", marginTop: "4px", marginBottom: "18px" }}>
-                    Save Your Spot
+                  <h3 style={{ fontSize: "1.6rem", color: "#1c1917", marginTop: "4px", marginBottom: "18px" }}>
+                    Save Your Spot · Early Bird ₹59,999/-
                   </h3>
 
                   <div style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
                     <div>
-                      <label style={{ display: "block", fontSize: "0.85rem", fontWeight: "700", marginBottom: "4px", color: "#D2E2F0" }}>
+                      <label style={{ display: "block", fontSize: "0.85rem", fontWeight: "700", marginBottom: "4px", color: "#292524" }}>
                         Full Name *
                       </label>
                       <input
@@ -659,17 +666,17 @@ export default function SriLankaClientExperience() {
                           width: "100%",
                           padding: "11px 14px",
                           borderRadius: "10px",
-                          border: "1px solid rgba(255, 255, 255, 0.2)",
+                          border: "1px solid rgba(180, 150, 100, 0.35)",
                           fontSize: "0.95rem",
-                          background: "rgba(255, 255, 255, 0.08)",
-                          color: "#FFFFFF",
+                          background: "#faf7f2",
+                          color: "#1c1917",
                           outline: "none"
                         }}
                       />
                     </div>
 
                     <div>
-                      <label style={{ display: "block", fontSize: "0.85rem", fontWeight: "700", marginBottom: "4px", color: "#D2E2F0" }}>
+                      <label style={{ display: "block", fontSize: "0.85rem", fontWeight: "700", marginBottom: "4px", color: "#292524" }}>
                         WhatsApp Number *
                       </label>
                       <input
@@ -682,17 +689,17 @@ export default function SriLankaClientExperience() {
                           width: "100%",
                           padding: "11px 14px",
                           borderRadius: "10px",
-                          border: "1px solid rgba(255, 255, 255, 0.2)",
+                          border: "1px solid rgba(180, 150, 100, 0.35)",
                           fontSize: "0.95rem",
-                          background: "rgba(255, 255, 255, 0.08)",
-                          color: "#FFFFFF",
+                          background: "#faf7f2",
+                          color: "#1c1917",
                           outline: "none"
                         }}
                       />
                     </div>
 
                     <div>
-                      <label style={{ display: "block", fontSize: "0.85rem", fontWeight: "700", marginBottom: "4px", color: "#D2E2F0" }}>
+                      <label style={{ display: "block", fontSize: "0.85rem", fontWeight: "700", marginBottom: "4px", color: "#292524" }}>
                         City of Departure
                       </label>
                       <input
@@ -704,17 +711,17 @@ export default function SriLankaClientExperience() {
                           width: "100%",
                           padding: "11px 14px",
                           borderRadius: "10px",
-                          border: "1px solid rgba(255, 255, 255, 0.2)",
+                          border: "1px solid rgba(180, 150, 100, 0.35)",
                           fontSize: "0.95rem",
-                          background: "rgba(255, 255, 255, 0.08)",
-                          color: "#FFFFFF",
+                          background: "#faf7f2",
+                          color: "#1c1917",
                           outline: "none"
                         }}
                       />
                     </div>
 
                     <div>
-                      <label style={{ display: "block", fontSize: "0.85rem", fontWeight: "700", marginBottom: "4px", color: "#D2E2F0" }}>
+                      <label style={{ display: "block", fontSize: "0.85rem", fontWeight: "700", marginBottom: "4px", color: "#292524" }}>
                         Travelling Solo or With Friends?
                       </label>
                       <select
@@ -724,10 +731,10 @@ export default function SriLankaClientExperience() {
                           width: "100%",
                           padding: "11px 14px",
                           borderRadius: "10px",
-                          border: "1px solid rgba(255, 255, 255, 0.2)",
+                          border: "1px solid rgba(180, 150, 100, 0.35)",
                           fontSize: "0.95rem",
-                          background: "#162C42",
-                          color: "#FFFFFF",
+                          background: "#faf7f2",
+                          color: "#1c1917",
                           outline: "none"
                         }}
                       >
@@ -747,7 +754,7 @@ export default function SriLankaClientExperience() {
                       {isSubmitting ? "Submitting..." : "Join Group & Connect on WhatsApp"}
                     </button>
 
-                    <div style={{ textAlign: "center", fontSize: "0.8rem", color: "#95A9BA" }}>
+                    <div style={{ textAlign: "center", fontSize: "0.8rem", color: "#78716c" }}>
                       🔒 Zero spam. Instant quote and room confirmation.
                     </div>
                   </div>

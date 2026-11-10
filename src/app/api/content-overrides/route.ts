@@ -5,7 +5,7 @@ import path from 'path';
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
 
-const SECRET_PIN = process.env.SECRET_EDITOR_PIN || 'sobhavi2026';
+const SECRET_PIN = process.env.SECRET_EDITOR_PIN || 'Sobhavi@2027';
 const GIST_ID = 'f283d92f3a86e50b21a9f40304180407';
 const GT_P1 = 'RY9xNYGu3Cxb';
 const GT_P2 = 'AdBnN3kJyVw1TACItI4Wp1dw';
@@ -138,7 +138,7 @@ export async function POST(request: Request) {
     const { pin, routePath, updates, reset } = body;
 
     // Validate secret PIN
-    if (pin !== SECRET_PIN && pin !== 'sobhavi2026') {
+    if (pin !== SECRET_PIN && pin !== 'Sobhavi@2027') {
       return NextResponse.json({ error: 'Unauthorized: Invalid PIN' }, { status: 401 });
     }
 

@@ -223,12 +223,6 @@ export default function Footer() {
                   </Link>
                 </li>
                 <li>
-                  <Link href="/on-demand" className={`${styles.navLink} ${styles.highlightLink}`}>
-                    <span>✨ On-Demand Bespoke</span>
-                    <span className={styles.newTag}>HOT</span>
-                  </Link>
-                </li>
-                <li>
                   <Link href="/domestic" className={styles.navLink}>Domestic Escapes</Link>
                 </li>
                 <li>
