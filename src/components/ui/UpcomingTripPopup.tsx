@@ -1,12 +1,10 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ArrowRight, X } from "lucide-react";
 import styles from "./UpcomingTripPopup.module.css";
-
-const STORAGE_KEY = "sobhavi_upcoming_trips_popup_v2";
 
 const UPCOMING_TRIPS = [
   {
@@ -23,31 +21,24 @@ const UPCOMING_TRIPS = [
 
 export default function UpcomingTripPopup() {
   const [isOpen, setIsOpen] = useState(false);
+  const hasShownThisLoadRef = useRef(false);
   const pathname = usePathname();
 
   const handleDismiss = useCallback(() => {
-    try {
-      localStorage.setItem(STORAGE_KEY, "true");
-    } catch {
-      // Ignore storage write errors
-    }
+    hasShownThisLoadRef.current = true;
     setIsOpen(false);
   }, []);
 
   useEffect(() => {
     if (pathname?.startsWith("/admin")) return;
+    if (hasShownThisLoadRef.current) return;
 
-    try {
-      const hasSeen = localStorage.getItem(STORAGE_KEY);
-      if (!hasSeen) {
-        const timer = setTimeout(() => {
-          setIsOpen(true);
-        }, 600);
-        return () => clearTimeout(timer);
-      }
-    } catch {
-      // If localStorage is unavailable, fail silently
-    }
+    const timer = setTimeout(() => {
+      hasShownThisLoadRef.current = true;
+      setIsOpen(true);
+    }, 600);
+
+    return () => clearTimeout(timer);
   }, [pathname]);
 
   useEffect(() => {
