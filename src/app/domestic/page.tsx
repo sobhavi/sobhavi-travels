@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import Navbar from '@/components/layout/Navbar';
-import { getSiteConfig } from '@/lib/siteConfig';
+import { getSiteConfig, syncCloudSiteConfig } from '@/lib/siteConfig';
 import styles from './page.module.css';
 
 export const revalidate = 0; // Fresh content
@@ -50,7 +50,11 @@ const FALLBACK_DOMESTIC: DomesticDest[] = [
       { day: "Day 5", title: "Udaipur Sightseeing — Bharatiya Lok Kala Mandal, City Palace & Jag Mandir" },
       { day: "Day 6", title: "Departure from Udaipur — Private Airport/Railway Station Drop" }
     ],
-    inclusions: ["5 Nights Accommodation at Selected Hotels (Standard, Deluxe or Luxury)", "Daily Buffet Breakfast at All Hotels", "Private Airport & Railway Station Transfers", "Intercity Transfers by AC All India Tourist Permit Vehicle", "13 Sightseeing Points with Tolls, Parking & Fuel Included"]
+    inclusions: [
+      "3 Star and 4 Star Properties",
+      "Daily Breakfast",
+      "Sightseeing"
+    ]
   },
   {
     slug: "exotic-shimla-manali",
@@ -155,7 +159,8 @@ const DOMESTIC_FAQS = [
   }
 ];
 
-export default function DomesticPage() {
+export default async function DomesticPage() {
+  await syncCloudSiteConfig();
   const config = getSiteConfig();
   const destinations = (config.domesticDestinations && config.domesticDestinations.length > 0)
     ? config.domesticDestinations

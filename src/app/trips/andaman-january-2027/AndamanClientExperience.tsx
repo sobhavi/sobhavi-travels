@@ -43,15 +43,31 @@ export default function AndamanClientExperience() {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [paymentSuccess, setPaymentSuccess] = useState<{ id: string } | null>(null);
 
   const getWaLink = (msg: string) => {
     return `https://wa.me/${WHATSAPP_PRIMARY}?text=${encodeURIComponent(msg)}`;
   };
 
-  const handleFormSubmit = async (e: React.FormEvent) => {
+  const loadRazorpayScript = () => {
+    return new Promise((resolve) => {
+      if (typeof window !== "undefined" && (window as any).Razorpay) {
+        resolve(true);
+        return;
+      }
+      const script = document.createElement("script");
+      script.src = "https://checkout.razorpay.com/v1/checkout.js";
+      script.onload = () => resolve(true);
+      script.onerror = () => resolve(false);
+      document.body.appendChild(script);
+    });
+  };
+
+  const handlePaymentSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
     try {
+      // 1. Submit lead to enquiries API
       await fetch("/api/enquiries", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -62,19 +78,81 @@ export default function AndamanClientExperience() {
           destination: "Andaman Women-Only Group Trip (23-28 Jan 2027)",
           travellers: formData.travellers,
           duration: "5 Nights / 6 Days",
-          specialRequirements: `City: ${formData.city}. Notes: ${formData.notes}`,
+          specialRequirements: `Departure City: ${formData.city}. Selected: Book Your Seat (Advance Payment ₹5,000)`,
           experience: "Women-Only Strangers Trip"
         })
       });
-      setSubmitted(true);
-      // Auto open whatsapp
-      const waMsg = `Hi Sobhavi Travels! I submitted my enquiry for the Andaman Women-Only Trip (23-28 Jan 2027).\nName: ${formData.name}\nPhone: ${formData.phone}\nFrom: ${formData.city}`;
-      window.open(getWaLink(waMsg), "_blank");
+
+      // 2. Load Razorpay Standard Checkout SDK
+      const scriptLoaded = await loadRazorpayScript();
+      if (!scriptLoaded || typeof window === "undefined" || !(window as any).Razorpay) {
+        // Fallback directly to the Razorpay Payment Link
+        window.location.href = "https://rzp.io/rzp/dumm6Bj";
+        return;
+      }
+
+      // 3. Open Razorpay Checkout modal
+      const options = {
+        key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID || "rzp_live_U1KSN83GzfDtba",
+        amount: 500000, // 5000 in paise
+        currency: "INR",
+        name: "Sobhavi Travels",
+        description: "Book Your Seat - Advance Payment of ₹5,000 | Andaman Trip",
+        image: "https://www.sobhavitravel.com/logo.png",
+        prefill: {
+          name: formData.name,
+          email: formData.email,
+          contact: formData.phone
+        },
+        notes: {
+          trip: "Andaman Women-Only Group Trip (23-28 Jan 2027)",
+          departureCity: formData.city,
+          bookingType: "Advance Seat Booking ₹5,000"
+        },
+        theme: {
+          color: "#b8972e"
+        },
+        handler: function (response: any) {
+          const payId = response.razorpay_payment_id;
+          setPaymentSuccess({ id: payId });
+          setSubmitted(true);
+          setIsSubmitting(false);
+
+          // Update enquiry record with payment ID
+          fetch("/api/enquiries", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              name: formData.name,
+              whatsapp: formData.phone,
+              email: formData.email,
+              destination: "Andaman Women-Only Group Trip (23-28 Jan 2027)",
+              specialRequirements: `✅ ADVANCE PAYMENT RECEIVED: ₹5,000. Razorpay ID: ${payId}. City: ${formData.city}`,
+              experience: "Confirmed Seat Booking"
+            })
+          });
+
+          // Open WhatsApp with confirmation
+          const waMsg = `Hi Sobhavi Travels! I have completed the ₹5,000 advance payment to reserve my seat for the Andaman Women-Only Trip (23-28 Jan 2027)!\n\nName: ${formData.name}\nWhatsApp: ${formData.phone}\nEmail: ${formData.email}\nCity: ${formData.city}\nRazorpay Payment ID: ${payId}`;
+          window.open(getWaLink(waMsg), "_blank");
+        },
+        modal: {
+          ondismiss: function () {
+            setIsSubmitting(false);
+          }
+        }
+      };
+
+      const rzpInstance = new (window as any).Razorpay(options);
+      rzpInstance.on("payment.failed", function (resp: any) {
+        alert("Payment was not completed. You can retry or use the direct payment link.");
+        setIsSubmitting(false);
+      });
+      rzpInstance.open();
     } catch (err) {
       console.error(err);
-      setSubmitted(true);
-    } finally {
-      setIsSubmitting(false);
+      // Fallback to direct payment link
+      window.location.href = "https://rzp.io/rzp/dumm6Bj";
     }
   };
 
@@ -688,10 +766,20 @@ export default function AndamanClientExperience() {
                 <div style={{ textAlign: "center", padding: "20px 0" }}>
                   <div style={{ fontSize: "2.5rem", marginBottom: "12px" }}>🎉</div>
                   <h3 style={{ fontSize: "1.5rem", color: "#1c1917", marginBottom: "8px" }}>
-                    Seat Enquiry Received!
+                    {paymentSuccess ? "Seat Reserved Successfully!" : "Enquiry Received!"}
                   </h3>
+                  {paymentSuccess && (
+                    <div style={{ background: "#f8f5ee", border: "1px solid #d4af37", borderRadius: "12px", padding: "12px 16px", marginBottom: "16px", textAlign: "left" }}>
+                      <p style={{ margin: "0 0 4px", fontSize: "0.85rem", color: "#856404", fontWeight: "700" }}>
+                        Payment ID: {paymentSuccess.id}
+                      </p>
+                      <p style={{ margin: 0, fontSize: "0.85rem", color: "#292524" }}>
+                        Advance of ₹5,000 received for <strong>{formData.name}</strong>.
+                      </p>
+                    </div>
+                  )}
                   <p style={{ color: "#57534e", lineHeight: 1.5, marginBottom: "20px" }}>
-                    Thank you, {formData.name}! Our team has registered your interest for the Andaman Women-Only Group Trip (23-28 Jan 2027). A concierge sister is contacting you right away.
+                    Thank you, {formData.name}! Your booking for the Andaman Women-Only Group Trip (23-28 Jan 2027) is confirmed. Our concierge sister is connecting with you on WhatsApp right away.
                   </p>
                   <button
                     type="button"
@@ -703,7 +791,7 @@ export default function AndamanClientExperience() {
                   </button>
                 </div>
               ) : (
-                <form onSubmit={handleFormSubmit}>
+                <form onSubmit={handlePaymentSubmit}>
                   <div style={{ fontSize: "0.82rem", fontWeight: "800", color: "#b8972e", letterSpacing: "0.15em", textTransform: "uppercase" }}>
                     ANDAMAN · WOMEN ONLY (23–28 JAN 2027)
                   </div>
@@ -758,6 +846,28 @@ export default function AndamanClientExperience() {
 
                     <div>
                       <label style={{ display: "block", fontSize: "0.85rem", fontWeight: "700", marginBottom: "4px", color: "#292524" }}>
+                        Email ID *
+                      </label>
+                      <input
+                        type="email"
+                        required
+                        value={formData.email}
+                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                        placeholder="e.g. ananya@gmail.com"
+                        style={{
+                          width: "100%",
+                          padding: "11px 14px",
+                          borderRadius: "12px",
+                          border: "1.5px solid rgba(180, 150, 100, 0.3)",
+                          fontSize: "0.95rem",
+                          background: "#FFFFFF",
+                          outline: "none"
+                        }}
+                      />
+                    </div>
+
+                    <div>
+                      <label style={{ display: "block", fontSize: "0.85rem", fontWeight: "700", marginBottom: "4px", color: "#292524" }}>
                         Departure City
                       </label>
                       <input
@@ -777,36 +887,45 @@ export default function AndamanClientExperience() {
                       />
                     </div>
 
-                    <div>
-                      <label style={{ display: "block", fontSize: "0.85rem", fontWeight: "700", marginBottom: "4px", color: "#292524" }}>
-                        Notes / Room Preferences
-                      </label>
-                      <textarea
-                        rows={2}
-                        value={formData.notes}
-                        onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
-                        placeholder="Traveling solo / with friend, diet preferences, etc."
-                        style={{
-                          width: "100%",
-                          padding: "10px 14px",
-                          borderRadius: "12px",
-                          border: "1.5px solid rgba(180, 150, 100, 0.3)",
-                          fontSize: "0.9rem",
-                          background: "#FFFFFF",
-                          outline: "none",
-                          resize: "none"
-                        }}
-                      />
+                    <div style={{
+                      background: "rgba(184, 151, 46, 0.08)",
+                      border: "1px dashed #b8972e",
+                      borderRadius: "12px",
+                      padding: "10px 14px",
+                      fontSize: "0.85rem",
+                      color: "#44403c",
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "center"
+                    }}>
+                      <div>
+                        <strong>Advance to Book Seat:</strong>
+                        <div style={{ fontSize: "0.75rem", color: "#78716c" }}>Remaining ₹26,699 before departure</div>
+                      </div>
+                      <div style={{ fontSize: "1.15rem", fontWeight: "800", color: "#b8972e" }}>
+                        ₹5,000
+                      </div>
                     </div>
 
                     <button
                       type="submit"
                       disabled={isSubmitting}
                       className={styles.btnPrimaryGold}
-                      style={{ width: "100%", justifyContent: "center", marginTop: "10px", cursor: isSubmitting ? "not-allowed" : "pointer" }}
+                      style={{ width: "100%", justifyContent: "center", marginTop: "4px", cursor: isSubmitting ? "not-allowed" : "pointer" }}
                     >
-                      {isSubmitting ? "Submitting..." : "Submit & Connect on WhatsApp"}
+                      {isSubmitting ? "Opening Razorpay..." : "Book Your Seat — Pay ₹5,000 Advance"}
                     </button>
+
+                    <div style={{ textAlign: "center", fontSize: "0.78rem", color: "#78716c" }}>
+                      Direct link: <a href="https://rzp.io/rzp/dumm6Bj" target="_blank" rel="noopener noreferrer" style={{ color: "#b8972e", textDecoration: "underline", fontWeight: "600" }}>Pay ₹5,000 via Razorpay ↗</a>
+                    </div>
+
+                    <div style={{ textAlign: "center", fontSize: "0.78rem", color: "#78716c" }}>
+                      🔒 Secured by Razorpay · UPI, Cards, NetBanking, GPay
+                    </div>
+                  </div>
+                </form>
+              )}
 
                     <div style={{ textAlign: "center", fontSize: "0.8rem", color: "#78716c" }}>
                       🔒 Zero spam. We protect your privacy. Women-only space.
