@@ -719,7 +719,8 @@ export default function AndamanClientExperience() {
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              padding: "20px"
+              padding: "16px",
+              overflowY: "auto"
             }}
             onClick={() => setModalOpen(false)}
           >
@@ -734,10 +735,14 @@ export default function AndamanClientExperience() {
                 borderRadius: "24px",
                 maxWidth: "480px",
                 width: "100%",
-                padding: "36px 32px",
+                maxHeight: "92vh",
+                overflowY: "auto",
+                WebkitOverflowScrolling: "touch",
+                padding: "clamp(24px, 5vw, 36px) clamp(18px, 5vw, 30px)",
                 boxShadow: "0 24px 60px rgba(0,0,0,0.2)",
                 border: "1.5px solid rgba(180, 150, 100, 0.35)",
-                position: "relative"
+                position: "relative",
+                boxSizing: "border-box"
               }}
             >
               <button
@@ -745,8 +750,8 @@ export default function AndamanClientExperience() {
                 onClick={() => setModalOpen(false)}
                 style={{
                   position: "absolute",
-                  top: "18px",
-                  right: "18px",
+                  top: "16px",
+                  right: "16px",
                   background: "rgba(0, 0, 0, 0.05)",
                   border: "none",
                   borderRadius: "50%",
@@ -756,7 +761,8 @@ export default function AndamanClientExperience() {
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
-                  color: "#57534e"
+                  color: "#57534e",
+                  zIndex: 2
                 }}
               >
                 ✕
@@ -792,14 +798,14 @@ export default function AndamanClientExperience() {
                 </div>
               ) : (
                 <form onSubmit={handlePaymentSubmit}>
-                  <div style={{ fontSize: "0.82rem", fontWeight: "800", color: "#b8972e", letterSpacing: "0.15em", textTransform: "uppercase" }}>
+                  <div style={{ fontSize: "0.78rem", fontWeight: "800", color: "#b8972e", letterSpacing: "0.15em", textTransform: "uppercase", paddingRight: "32px" }}>
                     ANDAMAN · WOMEN ONLY (23–28 JAN 2027)
                   </div>
-                  <h3 style={{ fontSize: "1.5rem", color: "#1c1917", marginTop: "4px", marginBottom: "18px" }}>
+                  <h3 style={{ fontSize: "clamp(1.25rem, 4vw, 1.5rem)", color: "#1c1917", marginTop: "4px", marginBottom: "16px", lineHeight: "1.25" }}>
                     Reserve Your Spot · Early Bird ₹31,699/-
                   </h3>
 
-                  <div style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
+                  <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
                     <div>
                       <label style={{ display: "block", fontSize: "0.85rem", fontWeight: "700", marginBottom: "4px", color: "#292524" }}>
                         Your Full Name *
@@ -812,10 +818,11 @@ export default function AndamanClientExperience() {
                         placeholder="e.g. Ananya Sharma"
                         style={{
                           width: "100%",
+                          boxSizing: "border-box",
                           padding: "11px 14px",
                           borderRadius: "12px",
                           border: "1.5px solid rgba(180, 150, 100, 0.3)",
-                          fontSize: "0.95rem",
+                          fontSize: "16px",
                           background: "#FFFFFF",
                           outline: "none"
                         }}
@@ -834,10 +841,11 @@ export default function AndamanClientExperience() {
                         placeholder="+91 98765 43210"
                         style={{
                           width: "100%",
+                          boxSizing: "border-box",
                           padding: "11px 14px",
                           borderRadius: "12px",
                           border: "1.5px solid rgba(180, 150, 100, 0.3)",
-                          fontSize: "0.95rem",
+                          fontSize: "16px",
                           background: "#FFFFFF",
                           outline: "none"
                         }}
@@ -856,10 +864,11 @@ export default function AndamanClientExperience() {
                         placeholder="e.g. ananya@gmail.com"
                         style={{
                           width: "100%",
+                          boxSizing: "border-box",
                           padding: "11px 14px",
                           borderRadius: "12px",
                           border: "1.5px solid rgba(180, 150, 100, 0.3)",
-                          fontSize: "0.95rem",
+                          fontSize: "16px",
                           background: "#FFFFFF",
                           outline: "none"
                         }}
@@ -877,10 +886,11 @@ export default function AndamanClientExperience() {
                         placeholder="e.g. Bengaluru / Delhi / Mumbai"
                         style={{
                           width: "100%",
+                          boxSizing: "border-box",
                           padding: "11px 14px",
                           borderRadius: "12px",
                           border: "1.5px solid rgba(180, 150, 100, 0.3)",
-                          fontSize: "0.95rem",
+                          fontSize: "16px",
                           background: "#FFFFFF",
                           outline: "none"
                         }}
@@ -896,13 +906,15 @@ export default function AndamanClientExperience() {
                       color: "#44403c",
                       display: "flex",
                       justifyContent: "space-between",
-                      alignItems: "center"
+                      alignItems: "center",
+                      gap: "10px",
+                      boxSizing: "border-box"
                     }}>
                       <div>
                         <strong>Advance to Book Seat:</strong>
                         <div style={{ fontSize: "0.75rem", color: "#78716c" }}>Remaining ₹26,699 before departure</div>
                       </div>
-                      <div style={{ fontSize: "1.15rem", fontWeight: "800", color: "#b8972e" }}>
+                      <div style={{ fontSize: "1.15rem", fontWeight: "800", color: "#b8972e", whiteSpace: "nowrap" }}>
                         ₹5,000
                       </div>
                     </div>
@@ -911,12 +923,20 @@ export default function AndamanClientExperience() {
                       type="submit"
                       disabled={isSubmitting}
                       className={styles.btnPrimaryGold}
-                      style={{ width: "100%", justifyContent: "center", marginTop: "4px", cursor: isSubmitting ? "not-allowed" : "pointer" }}
+                      style={{
+                        width: "100%",
+                        justifyContent: "center",
+                        marginTop: "4px",
+                        padding: "14px 18px",
+                        fontSize: "0.95rem",
+                        boxSizing: "border-box",
+                        cursor: isSubmitting ? "not-allowed" : "pointer"
+                      }}
                     >
                       {isSubmitting ? "Opening Razorpay..." : "Book Your Seat — Pay ₹5,000 Advance"}
                     </button>
 
-                    <div style={{ textAlign: "center", fontSize: "0.78rem", color: "#78716c" }}>
+                    <div style={{ textAlign: "center", fontSize: "0.78rem", color: "#78716c", wordBreak: "break-word" }}>
                       Direct link: <a href="https://rzp.io/rzp/dumm6Bj" target="_blank" rel="noopener noreferrer" style={{ color: "#b8972e", textDecoration: "underline", fontWeight: "600" }}>Pay ₹5,000 via Razorpay ↗</a>
                     </div>
 
@@ -924,7 +944,7 @@ export default function AndamanClientExperience() {
                       🔒 Secured by Razorpay · UPI, Cards, NetBanking, GPay
                     </div>
 
-                    <div style={{ textAlign: "center", fontSize: "0.78rem", color: "#78716c", marginTop: "4px" }}>
+                    <div style={{ textAlign: "center", fontSize: "0.78rem", color: "#78716c", marginTop: "2px" }}>
                       🔒 Zero spam. We protect your privacy. Women-only space.
                     </div>
                   </div>
