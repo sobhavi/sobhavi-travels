@@ -923,11 +923,8 @@ export default function AndamanClientExperience() {
                     <div style={{ textAlign: "center", fontSize: "0.78rem", color: "#78716c" }}>
                       🔒 Secured by Razorpay · UPI, Cards, NetBanking, GPay
                     </div>
-                  </div>
-                </form>
-              )}
 
-                    <div style={{ textAlign: "center", fontSize: "0.8rem", color: "#78716c" }}>
+                    <div style={{ textAlign: "center", fontSize: "0.78rem", color: "#78716c", marginTop: "4px" }}>
                       🔒 Zero spam. We protect your privacy. Women-only space.
                     </div>
                   </div>
