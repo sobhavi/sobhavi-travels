@@ -525,12 +525,15 @@ export default function SinglePageForm({ initialDestination = "", initialService
               </svg>
             </div>
             <div className={styles.cardDetails}>
-              <div className={styles.cardTitle}>Bengaluru Office</div>
+              <div className={styles.cardTitle}>Registered Office</div>
               <div className={styles.addressBlock}>
                 <div><strong>SOBHAVI TRAVELS</strong></div>
                 <div>Ground Floor, No. 19, 2nd Cross, NR Layout,</div>
                 <div>Kalyanagar, Babusapalya,</div>
                 <div>Bengaluru 560043, Karnataka, India</div>
+                <div style={{ marginTop: '5px', fontSize: '0.82rem', color: '#64748b' }}>
+                  <em>(Digital Concierge &middot; Consultations via Video Call &amp; WhatsApp)</em>
+                </div>
               </div>
             </div>
           </div>

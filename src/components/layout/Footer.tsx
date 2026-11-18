@@ -118,7 +118,7 @@ export default function Footer() {
                   </svg>
                 </div>
                 <div className={styles.infoCardText}>
-                  <span className={styles.infoCardLabel}>Corporate Office</span>
+                  <span className={styles.infoCardLabel}>Registered Office</span>
                   <span className={styles.infoCardValue}>{footer.address || company.address}</span>
                 </div>
               </div>

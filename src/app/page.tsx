@@ -25,6 +25,10 @@ const HOMEPAGE_FAQS = [
     a: "Yes! Our bespoke travel desk creates custom plans tailored to your exact dates, budget, and style — whether it's royal palace stays in Rajasthan, tea retreats in Kerala, luxury overwater villas in Maldives, or city explorations in Dubai and Singapore."
   },
   {
+    q: "Do you offer in-person office consultations in Bangalore?",
+    a: "Sobhavi Travels operates as a digital-first, private concierge travel consultancy. To save our clients time and provide maximum flexibility, all consultations, itinerary curation, and trip briefings are conducted seamlessly via 1-on-1 Google Meet / Zoom video sessions and dedicated WhatsApp team (+91 74069 94752). We serve travelers across Bengaluru, pan-India, and globally."
+  },
+  {
     q: "How do I book or get in touch with the Sobhavi team?",
     a: "You can reach us directly on WhatsApp at +91 74069 94752 / +91 91804 62154, email us at hello@sobhavitravel.com, or submit a request on our website. Our team will get back to you with custom options within a few hours."
   }
