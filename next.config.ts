@@ -14,6 +14,20 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  async redirects() {
+    return [
+      {
+        source: '/cancellation-policy',
+        destination: '/cancellation-and-refund-policy',
+        permanent: true,
+      },
+      {
+        source: '/cancellation-refund-policy',
+        destination: '/cancellation-and-refund-policy',
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;

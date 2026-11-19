@@ -349,6 +349,8 @@ export default function Footer() {
               <Link href="/terms" className={styles.legalLink}>Terms of Service</Link>
               <span className={styles.divider}>•</span>
               <Link href="/terms-and-conditions" className={styles.legalLink}>Terms &amp; Conditions</Link>
+              <span className={styles.divider}>•</span>
+              <Link href="/cancellation-and-refund-policy" className={styles.legalLink}>Cancellation &amp; Refund Policy</Link>
             </div>
           </div>
         </div>
