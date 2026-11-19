@@ -346,8 +346,6 @@ export default function Footer() {
               <span className={styles.divider}>•</span>
               <Link href="/privacy" className={styles.legalLink}>Privacy Policy</Link>
               <span className={styles.divider}>•</span>
-              <Link href="/terms" className={styles.legalLink}>Terms of Service</Link>
-              <span className={styles.divider}>•</span>
               <Link href="/terms-and-conditions" className={styles.legalLink}>Terms &amp; Conditions</Link>
               <span className={styles.divider}>•</span>
               <Link href="/cancellation-and-refund-policy" className={styles.legalLink}>Cancellation &amp; Refund Policy</Link>
