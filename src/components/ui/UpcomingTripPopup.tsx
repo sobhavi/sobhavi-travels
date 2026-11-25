@@ -66,16 +66,17 @@ export default function UpcomingTripPopup() {
         className={styles.popupModal}
         onClick={(e) => e.stopPropagation()}
       >
-        <button
-          type="button"
-          onClick={handleDismiss}
-          className={styles.closeBtn}
-          aria-label="Close"
-        >
-          <X size={18} />
-        </button>
-
-        <h2 className={styles.title}>Upcoming Group Trips</h2>
+        <div className={styles.headerRow}>
+          <h2 className={styles.title}>Upcoming Group Trips</h2>
+          <button
+            type="button"
+            onClick={handleDismiss}
+            className={styles.closeBtn}
+            aria-label="Close"
+          >
+            <X size={18} />
+          </button>
+        </div>
 
         <ul className={styles.tripList}>
           {UPCOMING_TRIPS.map((trip) => (
