@@ -31,12 +31,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.95,
     },
     {
-      url: `${BASE_URL}/trips/sri-lanka-february-2027`,
-      lastModified: now,
-      changeFrequency: 'daily',
-      priority: 0.95,
-    },
-    {
       url: `${BASE_URL}/on-demand`,
       lastModified: now,
       changeFrequency: 'weekly',

@@ -223,12 +223,6 @@ export default function Footer() {
                   </Link>
                 </li>
                 <li>
-                  <Link href="/trips/sri-lanka-february-2027" className={`${styles.navLink} ${styles.highlightLink}`}>
-                    <span>🌴 Sri Lanka (Feb 2027)</span>
-                    <span className={styles.specialTag}>GROUP TRIP</span>
-                  </Link>
-                </li>
-                <li>
                   <Link href="/domestic" className={styles.navLink}>Domestic Escapes</Link>
                 </li>
                 <li>

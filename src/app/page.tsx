@@ -17,7 +17,7 @@ const HOMEPAGE_FAQS = [
     a: "We believe travel should be an experience, not a chore. Instead of crowded bus tours with rigid timetables, we design bespoke private holidays and intimate group trips (Namma Escapes) with handpicked boutique stays, private chauffeurs, verified permits, and 24/7 concierge support."
   },
   {
-    q: "How do your upcoming 2027 group trips (Andaman & Sri Lanka) work?",
+    q: "How do your upcoming 2027 group trips work?",
     a: "Our fixed-date group trips are capped at small groups (12–15 travellers) to ensure high-touch quality. Over 60% of our travelers join solo, making them fantastic for making new friends. Accommodations, transfers, ferries, entry permits, and an experienced tour lead are included."
   },
   {
@@ -561,40 +561,6 @@ export default function Home() {
                     <div className={styles.tripPriceBox}>
                       <span className={styles.tripPriceLabel}>Early Bird Price</span>
                       <span className={styles.tripPriceValue}>INR 31,699/-</span>
-                    </div>
-                    <span className={styles.tripCtaPill}>
-                      View Itinerary &rarr;
-                    </span>
-                  </div>
-                </div>
-              </Link>
-
-              {/* Trip 2: Sri Lanka Group Trip */}
-              <Link href="/trips/sri-lanka-february-2027" className={styles.tripFeaturedCard}>
-                <div className={styles.tripMediaWrap}>
-                  <div className={`${styles.tripBadgeTag} ${styles.badgeSriLanka}`}>
-                    🌴 GROUP TRIP · AGES 21–35
-                  </div>
-                  <Image
-                    src="/images/trips/sri-lanka/hero.jpg"
-                    alt="Sri Lanka Group Trip 2027"
-                    fill
-                    className={styles.tripCoverImage}
-                  />
-                  <div className={styles.tripMediaOverlay} />
-                </div>
-                <div className={styles.tripCardBody}>
-                  <div className={styles.tripDateRow}>
-                    13 – 19 FEBRUARY 2027 · 6N / 7D
-                  </div>
-                  <h3 className={styles.tripCardHeading}>SRI LANKA</h3>
-                  <p className={styles.tripQuoteText}>
-                    "Sun, spice & stories for the group chat." Sigiriya Rock Fortress, Kandy temples, Doctor's House Madiha & Mirissa palms.
-                  </p>
-                  <div className={styles.tripFooterRow}>
-                    <div className={styles.tripPriceBox}>
-                      <span className={styles.tripPriceLabel}>Early Bird Price</span>
-                      <span className={styles.tripPriceValue}>INR 59,999/-</span>
                     </div>
                     <span className={styles.tripCtaPill}>
                       View Itinerary &rarr;

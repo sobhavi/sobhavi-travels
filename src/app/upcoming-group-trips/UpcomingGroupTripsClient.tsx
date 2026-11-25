@@ -41,28 +41,6 @@ const UPCOMING_TRIPS = [
     ],
     detailsUrl: "/trips/andaman-january-2027",
     waMessage: "Hello Sobhavi Travels! I want to join the Andaman Women-Only Group Trip (23-28 January 2027). Please share details."
-  },
-  {
-    id: "sri-lanka-feb-2027",
-    title: "SRI LANKA",
-    tagline: "Sun, spice & stories for the group chat.",
-    badge: "🌴 GROUP TRIP · AGES 21–35",
-    badgeClass: styles.badgeSriLanka,
-    dates: "13 – 19 February 2027",
-    duration: "6 Nights / 7 Days",
-    groupType: "Mixed Group · Ages 21–35",
-    route: "Colombo → Habarana → Kandy → South Coast → Galle → Colombo",
-    image: "/images/trips/sri-lanka/hero.jpg",
-    earlyBirdPrice: "INR 59,999/-",
-    highlights: [
-      "Sigiriya Lion Rock Fortress & Habarana Village experience",
-      "Golden Temple of Dambulla & Matale Spice Gardens",
-      "Kandyan Cultural Dance & Temple of the Sacred Tooth Relic",
-      "Doctor's House Madiha sunset & South Coast ocean vibes",
-      "Coconut Tree Hill Mirissa, Parrot Rock & UNESCO Galle Fort"
-    ],
-    detailsUrl: "/trips/sri-lanka-february-2027",
-    waMessage: "Hello Sobhavi Travels! I want to join the Sri Lanka Group Trip (13-19 February 2027). Please share details."
   }
 ];
 
@@ -96,7 +74,7 @@ const FAQS = [
   },
   {
     q: "What is the age criteria and vibe of the trips?",
-    a: "Our Andaman departure (23–28 Jan 2027) is an exclusive Women-Only Strangers Trip with an open age policy for spirited female travelers. Our Sri Lanka departure (13–19 Feb 2027) is a mixed group curated specifically for young professionals and travelers aged 21 to 35."
+    a: "Our Andaman departure (23–28 Jan 2027) is an exclusive Women-Only Strangers Trip with an open age policy for spirited female travelers looking to explore island life and make lifelong friendships."
   },
   {
     q: "What is included in the package price?",
@@ -150,7 +128,7 @@ export default function UpcomingGroupTripsClient() {
             <div className={styles.heroSpecsRow}>
               <span className={`${styles.specPill} ${styles.specPillHighlight}`}>
                 <Calendar size={15} style={{ display: "inline", marginRight: "6px" }} />
-                January & February 2027
+                23 – 28 January 2027
               </span>
               <span className={styles.specPill}>
                 <Users size={15} style={{ display: "inline", marginRight: "6px" }} />
@@ -186,7 +164,7 @@ export default function UpcomingGroupTripsClient() {
             <span className={styles.sectionEyebrow}>CURATED DEPARTURES</span>
             <h2 className={styles.sectionTitle}>NAMMA ESCAPES 2027</h2>
             <p className={styles.sectionSubtitle}>
-              Two unforgettable itineraries with complete logistics, boutique accommodations, and transparent pricing.
+              Curated fixed-departure itinerary with complete logistics, boutique accommodations, and transparent pricing.
             </p>
           </div>
 

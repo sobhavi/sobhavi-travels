@@ -6,16 +6,16 @@ import { usePathname } from "next/navigation";
 import { ArrowRight, X } from "lucide-react";
 import styles from "./UpcomingTripPopup.module.css";
 
-const UPCOMING_TRIPS = [
+interface TripItem {
+  num?: string;
+  label: string;
+  href: string;
+}
+
+const UPCOMING_TRIPS: TripItem[] = [
   {
-    num: "1.",
     label: "Andaman and Nicobar Islands - Jan 2027",
     href: "/trips/andaman-january-2027",
-  },
-  {
-    num: "2.",
-    label: "Sri Lanka - Feb 2027",
-    href: "/trips/sri-lanka-february-2027",
   },
 ];
 
@@ -86,7 +86,7 @@ export default function UpcomingTripPopup() {
                 className={styles.tripLink}
               >
                 <span className={styles.tripText}>
-                  <span className={styles.tripNum}>{trip.num}</span>
+                  {trip.num && <span className={styles.tripNum}>{trip.num}</span>}
                   <span>{trip.label}</span>
                 </span>
                 <ArrowRight size={17} className={styles.tripArrow} />

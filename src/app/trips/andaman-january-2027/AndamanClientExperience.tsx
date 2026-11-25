@@ -273,7 +273,7 @@ export default function AndamanClientExperience() {
       <Navbar />
 
       <main className={styles.contentWrapper}>
-        {/* 1. CINEMATIC HERO (Identical to Sri Lanka Design) */}
+        {/* 1. CINEMATIC HERO */}
         <section className={styles.heroSection}>
           <Image
             src="/images/trips/andaman/hero-radhanagar.jpg"

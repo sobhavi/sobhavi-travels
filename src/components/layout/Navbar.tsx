@@ -27,7 +27,6 @@ function normalizeNavigation(items?: MenuItem[]): MenuItem[] {
     { id: "upcoming-group-trips", label: "Upcoming Group Trips", href: "/upcoming-group-trips", enabled: true, showInHeader: true, showInMobile: true },
     { id: "blogs", label: "Blogs", href: "/blog", enabled: true, showInHeader: true, showInMobile: true },
     { id: "andaman-trip", label: "Andaman '27", href: "/trips/andaman-january-2027", enabled: true, showInHeader: false, showInMobile: true },
-    { id: "sri-lanka-trip", label: "Sri Lanka '27", href: "/trips/sri-lanka-february-2027", enabled: true, showInHeader: false, showInMobile: true },
     { id: "rann-utsav", label: "Rann Utsav", href: "/rann-utsav", enabled: true, showInHeader: false, showInMobile: true },
     { id: "about", label: "About Us", href: "/about", enabled: true, showInHeader: false, showInMobile: true },
     { id: "contact", label: "Contact Us", href: "/contact", enabled: true, showInHeader: false, showInMobile: true }
@@ -37,7 +36,7 @@ function normalizeNavigation(items?: MenuItem[]): MenuItem[] {
 
   let list = items.map((item) => {
     // Hide individual trip pills and rann-utsav from header bar
-    if (item.id === 'andaman-trip' || item.id === 'sri-lanka-trip' || item.id === 'rann-utsav') {
+    if (item.id === 'andaman-trip' || item.id === 'rann-utsav') {
       return { ...item, showInHeader: false };
     }
     return { ...item };

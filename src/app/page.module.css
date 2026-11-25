@@ -1241,7 +1241,8 @@
 
 .tripsGrid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(320px, 540px));
+  justify-content: center;
   max-width: 1040px;
   margin: 48px auto 0;
   gap: 36px;
