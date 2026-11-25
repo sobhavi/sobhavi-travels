@@ -96,7 +96,7 @@ export const featuredDestinations: Destination[] = [
     "article": {
       "intro": "Japan is a realm where centuries of ritual harmony coexist with the bleeding edge of modern architectural brilliance and culinary obsession.",
       "body": [
-        "From the whisper of cedar trees around Kyoto's moss-carpeted Zen gardens to the pulsing neon towers of Shinjuku, Japan reveals itself in layers of precision and deep aesthetic grace. To journey here with Lumina is to unlock doors closed to ordinary travelers: an after-hours viewing of a 1,200-year-old temple, private audiences with Living National Treasure artisans, and counter seats at sushi sanctums with reservations booked a year in advance.",
+        "From the whisper of cedar trees around Kyoto's moss-carpeted Zen gardens to the pulsing neon towers of Shinjuku, Japan reveals itself in layers of precision and deep aesthetic grace. To journey here with Sobhavi is to unlock doors closed to ordinary travelers: an after-hours viewing of a 1,200-year-old temple, private audiences with Living National Treasure artisans, and counter seats at sushi sanctums with reservations booked a year in advance.",
         "In the winter, northern Hokkaido turns into powder paradise with natural hot spring onsens steaming under snow-laden pines. In spring, cherry blossoms paint the canal banks of Meguro and the imperial gardens of Kyoto in shades of ethereal pink.",
         "Our bespoke itineraries balance restorative serenity with high-voltage city discoveries. Sleep in century-old ryokans on hand-stitched tatami mats, savor multi-course kaiseki banquets prepared by third-generation chefs, and travel effortlessly aboard sleek shinkansen trains with personal luggage dispatch at every step."
       ],
@@ -135,7 +135,7 @@ export const featuredDestinations: Destination[] = [
     "article": {
       "intro": "India is not merely a country; it is an epic woven from five millennia of maharajas, spiritual devotion, and unmatched royal hospitality.",
       "body": [
-        "To travel India in Lumina style is to inhabit the palaces once reserved for royalty. In Udaipur, your private vintage boat glides across Lake Pichola to a marble fortress that seems to float on water. In Jaipur, the doors of the City Palace private residences open for champagne under chandeliers that have illuminated royal banquets for centuries.",
+        "To travel India with Sobhavi is to inhabit the palaces once reserved for royalty. In Udaipur, your private vintage boat glides across Lake Pichola to a marble fortress that seems to float on water. In Jaipur, the doors of the City Palace private residences open for champagne under chandeliers that have illuminated royal banquets for centuries.",
         "Beyond the gilded courts lies India's untamed heart: dawn safaris in Ranthambore tracking royal Bengal tigers through ancient ruins, or watching wild leopards traverse granite boulders at luxury wilderness encampments under starry desert skies.",
         "From the mist-shrouded tea plantations of Munnar to the holy ghats of Varanasi at evening aarti, India captivates your soul with vibrant textiles, aromatic saffron, and warmth that stays with you forever."
       ],
@@ -1809,7 +1809,7 @@ export const popularJourneys: Journey[] = [
         "Evenings unfold with candlelit dinners on your private jetty, accompanied by the gentle rhythm of waves under a sky glittering with constellations."
       ],
       "quote": "The Maldives is pure magic. Time dissolves, and the ocean becomes your entire world.",
-      "quoteAuthor": "Priya & Rohan, Lumina Guests"
+      "quoteAuthor": "Priya & Rohan, Sobhavi Guests"
     },
     "itinerary": [
       {

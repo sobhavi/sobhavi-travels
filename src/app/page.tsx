@@ -336,18 +336,18 @@ export default function Home() {
       {
         "@type": "TravelAgency",
         "name": "Sobhavi Travels",
-        "url": "https://lumina-travel-luxury.vercel.app",
+        "url": "https://www.sobhavitravel.com",
         "telephone": "+917406994752",
         "email": "hello@sobhavitravel.com",
         "address": {
           "@type": "PostalAddress",
-          "streetAddress": "Sobhavi Travels, Indira Nagar",
+          "streetAddress": "Ground Floor, No. 19, 2nd Cross, NR Layout, Kalyanagar, Babusapalya",
           "addressLocality": "Bengaluru",
           "addressRegion": "Karnataka",
-          "postalCode": "560038",
+          "postalCode": "560043",
           "addressCountry": "IN"
         },
-        "description": "Tailor-made luxury travel agency specializing in bespoke domestic holidays and global international expeditions."
+        "description": "Tailor-made boutique travel agency specializing in curated small group escapes, women-only journeys, and bespoke domestic and international holidays."
       }
     ]
   };
