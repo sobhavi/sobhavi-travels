@@ -12,24 +12,24 @@ import styles from './page.module.css';
 
 const HOMEPAGE_FAQS = [
   {
-    q: "What makes Sobhavi Travels different from traditional tour operators?",
-    a: "We believe travel should be an experience, not a chore. Instead of crowded bus tours with rigid timetables, we design bespoke private holidays and intimate group trips (Namma Escapes) with handpicked boutique stays, private chauffeurs, verified permits, and 24/7 concierge support."
+    q: "What is Sobhavi’s approach to planning trips?",
+    a: "We build holidays around how you actually like to travel — your pace, preferences, and style. We take care of the entire coordination: handpicked stays, reliable local drivers, permits, and a dedicated contact on WhatsApp throughout your journey."
   },
   {
-    q: "How do your upcoming 2027 group trips work?",
-    a: "Our fixed-date group trips are capped at small groups (12–15 travellers) to ensure high-touch quality. Over 60% of our travelers join solo, making them fantastic for making new friends. Accommodations, transfers, ferries, entry permits, and an experienced tour lead are included."
+    q: "Can I join an upcoming group trip on my own?",
+    a: "Yes, many of our travellers sign up solo. We keep groups small (typically 10–15 people) and introduce everyone before departure so it feels like travelling with friends from Day 1. Solo travellers are paired with a same-gender roommate."
   },
   {
-    q: "Can I customize a private domestic or international holiday package?",
-    a: "Yes! Our bespoke travel desk creates custom plans tailored to your exact dates, budget, and style — whether it's royal palace stays in Rajasthan, tea retreats in Kerala, luxury overwater villas in Maldives, or city explorations in Dubai and Singapore."
+    q: "Can I customize my dates, destinations, and hotels?",
+    a: "Yes. For private trips, everything is fully flexible. Tell us your ideal travel dates, budget, and destinations on your wishlist, and we’ll design a day-by-day plan tailored specifically to you."
   },
   {
-    q: "Do you offer in-person office consultations in Bangalore?",
-    a: "Sobhavi Travels operates as a digital-first, private concierge travel consultancy. To save our clients time and provide maximum flexibility, all consultations, itinerary curation, and trip briefings are conducted seamlessly via 1-on-1 Google Meet / Zoom video sessions and dedicated WhatsApp team (+91 74069 94752). We serve travelers across Bengaluru, pan-India, and globally."
+    q: "Do you have an office in Bangalore I can visit?",
+    a: "We’re based in Bangalore, but we coordinate everything digitally. We connect over a quick video call or chat on WhatsApp at a time convenient for you. This allows us to plan trips seamlessly for travellers across Bangalore, India, and abroad."
   },
   {
-    q: "How do I book or get in touch with the Sobhavi team?",
-    a: "You can reach us directly on WhatsApp at +91 74069 94752 / +91 91804 62154, email us at hello@sobhavitravel.com, or submit a request on our website. Our team will get back to you with custom options within a few hours."
+    q: "How do we get started?",
+    a: "Send us a message on WhatsApp (+91 74069 94752) or fill out the enquiry form with your ideas and rough travel dates. We’ll share initial suggestions, refine the details together, and confirm bookings once you’re completely happy with the plan."
   }
 ];
 

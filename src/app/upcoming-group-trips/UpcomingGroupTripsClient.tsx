@@ -70,7 +70,7 @@ const PERKS = [
 const FAQS = [
   {
     q: "Can I travel completely solo on these group trips?",
-    a: "Yes! More than half of our guests sign up solo. We pair solo travelers with a same-gender roommate of similar age in twin-sharing accommodations. If you prefer your own private room, a single-supplement room upgrade is also available."
+    a: "Yes! More than half of our guests sign up solo. We pair solo travelers with a same-gender roommate of similar age in twin-sharing accommodations."
   },
   {
     q: "What is the age criteria and vibe of the trips?",
