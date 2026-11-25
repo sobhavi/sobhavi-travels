@@ -1,5 +1,29 @@
 [
   {
+    "id": "blog-solo-female-travel-guide",
+    "slug": "solo-female-travel-guide",
+    "title": "The Solo Female Travel Guide: Because Waiting for Your Friends to Be Free Is Not a Travel Plan",
+    "excerpt": "A practical, no-nonsense guide for women who want to travel alone - but have a few questions (and possibly a very concerned family).",
+    "coverImage": "/blogs/solo-female-travel-guide.jpg",
+    "category": "Solo Travel",
+    "author": "Sobhavi Editorial Desk",
+    "authorRole": "Women's Travel Specialist",
+    "readTime": "10 min read",
+    "publishedAt": "November 2026",
+    "article": {
+      "intro": "Let's get one thing out of the way. You do not need to be fearless to travel alone. You don't need to be the girl who can trek 15 kilometres, sleep in a dorm with 12 strangers, or eat at a restaurant without checking your phone. You just need to be willing to figure things out.",
+      "body": [
+        "And honestly, if you've ever spent six months trying to coordinate one Goa trip with five friends, you already know why solo travel sounds tempting.",
+        "One friend can't get leave. Another has a budget problem. Someone's boyfriend isn't comfortable. Someone else will confirm by Friday and disappear until next Tuesday.",
+        "At some point, you have to ask yourself: am I actually waiting for company, or am I using company as an excuse?",
+        "Travelling alone as a woman isn't all sunsets, cute cafés and Instagram stories. There will be moments when you feel awkward, get lost, question your hotel choice, or wish you had someone to hold your bag while you use the washroom.",
+        "So this isn't going to be a lecture about being brave. It's a practical guide to travelling on your own terms, without being unnecessarily reckless or scaring yourself out of going."
+      ],
+      "quote": "The point isn't to prove that you can do everything alone. It's to realise that you don't have to put your plans on hold until someone else is ready.",
+      "quoteAuthor": "Sobhavi Travel Specialist"
+    }
+  },
+  {
     "id": "blog-dubai-travel-guide-indians",
     "slug": "dubai-travel-guide-for-indians",
     "title": "Dubai Travel Guide for Indians: What to Know Before You Go",

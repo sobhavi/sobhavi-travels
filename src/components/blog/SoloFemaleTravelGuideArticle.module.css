@@ -1,0 +1,824 @@
+/* Solo Female Travel Guide - Editorial Luxury Styles (Sobhavi Theme) */
+
+.articleContainer {
+  width: 100%;
+  color: #1c1917;
+  font-family: var(--font-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  line-height: 1.85;
+}
+
+/* Quick Jump Table of Contents */
+.tocNav {
+  background: #fdfbf7;
+  border: 1px solid rgba(184, 151, 46, 0.28);
+  border-radius: 16px;
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 2.75rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+}
+
+.tocLabel {
+  display: block;
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #b8972e;
+  margin-bottom: 0.85rem;
+}
+
+.tocList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tocPill {
+  display: inline-block;
+  padding: 5px 13px;
+  background: #ffffff;
+  border: 1px solid rgba(180, 150, 100, 0.28);
+  border-radius: 999px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #44403c;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.tocPill:hover {
+  background: #1c1917;
+  color: #dfb74a;
+  border-color: #1c1917;
+}
+
+/* Lead Section & Dropcap */
+.leadSection {
+  margin-bottom: 3rem;
+}
+
+.dropcapParagraph {
+  font-size: 1.15rem;
+  line-height: 1.9;
+  color: #292524;
+  margin-bottom: 1.5rem;
+}
+
+.dropcapParagraph::first-letter {
+  font-family: var(--font-heading), "Oswald", sans-serif;
+  font-size: 3.8rem;
+  float: left;
+  line-height: 0.85;
+  margin-right: 0.75rem;
+  margin-top: 0.15rem;
+  color: #b8972e;
+  font-weight: 700;
+}
+
+.bodyParagraph {
+  font-size: 1.05rem;
+  line-height: 1.88;
+  color: #44403c;
+  margin-bottom: 1.5rem;
+}
+
+/* Quote Cards */
+.highlightQuoteCard {
+  background: linear-gradient(135deg, rgba(253, 251, 247, 0.95) 0%, rgba(244, 239, 230, 0.7) 100%);
+  border-left: 4px solid #b8972e;
+  border-radius: 0 16px 16px 0;
+  padding: 1.5rem 1.75rem;
+  margin: 2.25rem 0;
+  box-shadow: 0 6px 22px rgba(184, 151, 46, 0.06);
+}
+
+.highlightQuoteText {
+  font-family: var(--font-heading), "Oswald", sans-serif;
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.5;
+  color: #1c1917;
+  letter-spacing: 0.01em;
+  margin: 0;
+}
+
+/* Chapter Headers */
+.chapterBlock {
+  margin: 4rem 0 2.5rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(180, 150, 100, 0.2);
+}
+
+.chapterHeader {
+  margin-bottom: 1.5rem;
+}
+
+.chapterNum {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #b8972e;
+  background: rgba(184, 151, 46, 0.1);
+  padding: 4px 12px;
+  border-radius: 999px;
+  margin-bottom: 0.75rem;
+}
+
+.chapterTitle {
+  font-family: var(--font-heading), "Oswald", sans-serif;
+  font-size: clamp(1.5rem, 3.2vw, 2.1rem);
+  font-weight: 700;
+  line-height: 1.28;
+  color: #1c1917;
+  letter-spacing: 0.02em;
+  margin: 0;
+}
+
+/* Destination Matrix (Chapter 1) */
+.destinationMatrixGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.destinationCard {
+  background: #ffffff;
+  border: 1px solid rgba(180, 150, 100, 0.28);
+  border-radius: 18px;
+  padding: 1.75rem 1.5rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+}
+
+.destinationCardHeader {
+  margin-bottom: 1.25rem;
+}
+
+.destBadge {
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  color: #b8972e;
+  display: block;
+  margin-bottom: 0.35rem;
+}
+
+.destHeading {
+  font-family: var(--font-heading), "Oswald", sans-serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1c1917;
+  margin: 0;
+}
+
+.destinationPills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 1.25rem;
+}
+
+.pill {
+  padding: 4px 12px;
+  background: #fbf8f2;
+  border: 1px solid rgba(184, 151, 46, 0.3);
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #1c1917;
+}
+
+.destNote {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: #57534e;
+  margin: 0;
+  border-top: 1px dashed rgba(180, 150, 100, 0.25);
+  padding-top: 1rem;
+}
+
+/* Callout Box */
+.calloutBox {
+  display: flex;
+  gap: 1rem;
+  background: #fdfbf7;
+  border: 1.5px solid rgba(184, 151, 46, 0.3);
+  border-radius: 16px;
+  padding: 1.5rem;
+  margin: 2.25rem 0;
+}
+
+.calloutIcon {
+  font-size: 1.8rem;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.calloutTitle {
+  font-family: var(--font-heading), "Oswald", sans-serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #1c1917;
+  margin: 0 0 0.5rem;
+}
+
+.calloutText {
+  font-size: 0.98rem;
+  line-height: 1.7;
+  color: #44403c;
+  margin: 0;
+}
+
+/* Reality Check Grid (Chapter 2) */
+.realityCheckGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin: 1.75rem 0 2.25rem;
+}
+
+.realityCheckItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  background: #ffffff;
+  border: 1px solid rgba(180, 150, 100, 0.25);
+  border-radius: 12px;
+  padding: 1rem 1.15rem;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: #292524;
+}
+
+.checkIcon {
+  color: #b8972e;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+/* Stay Options Grid (Chapter 3) */
+.stayOptionsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+  margin: 2rem 0;
+}
+
+.stayOptionCard {
+  background: #ffffff;
+  border: 1px solid rgba(180, 150, 100, 0.28);
+  border-radius: 16px;
+  padding: 1.5rem 1.25rem;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.03);
+}
+
+.stayIcon {
+  font-size: 1.8rem;
+  margin-bottom: 0.75rem;
+}
+
+.stayTitle {
+  font-family: var(--font-heading), "Oswald", sans-serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #1c1917;
+  margin: 0 0 0.6rem;
+}
+
+.stayDesc {
+  font-size: 0.92rem;
+  line-height: 1.65;
+  color: #57534e;
+  margin: 0;
+}
+
+.checklistSectionBox {
+  background: #fdfbf7;
+  border: 1px solid rgba(184, 151, 46, 0.25);
+  border-radius: 16px;
+  padding: 1.5rem 1.75rem;
+  margin: 2rem 0;
+}
+
+.checklistTitle {
+  font-family: var(--font-heading), "Oswald", sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #1c1917;
+  margin: 0 0 1rem;
+}
+
+.cleanList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.cleanList li {
+  position: relative;
+  padding-left: 1.5rem;
+  font-size: 0.96rem;
+  line-height: 1.6;
+  color: #44403c;
+}
+
+.cleanList li::before {
+  content: "✦";
+  position: absolute;
+  left: 0;
+  color: #b8972e;
+  font-size: 0.85rem;
+}
+
+/* Safety Split (Chapter 4) */
+.safetySplitGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.safetyColumnCard {
+  background: #ffffff;
+  border: 1px solid rgba(180, 150, 100, 0.28);
+  border-radius: 18px;
+  padding: 1.75rem 1.5rem;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.03);
+}
+
+.safetyColHeader {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-heading), "Oswald", sans-serif;
+  font-size: 0.95rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  color: #b8972e;
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid rgba(184, 151, 46, 0.2);
+}
+
+.safetyBulletList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.safetyBulletList li {
+  position: relative;
+  padding-left: 1.4rem;
+  font-size: 0.93rem;
+  line-height: 1.55;
+  color: #44403c;
+}
+
+.safetyBulletList li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: #b8972e;
+  font-size: 1.2rem;
+  line-height: 1;
+}
+
+.empowermentBanner {
+  background: #1c1917;
+  color: #faf7f2;
+  border-radius: 18px;
+  padding: 2.25rem 2rem;
+  margin: 2.5rem 0;
+  box-shadow: 0 12px 35px rgba(28, 25, 23, 0.2);
+  border: 1px solid rgba(184, 151, 46, 0.35);
+}
+
+.empowermentHeadline {
+  font-family: var(--font-heading), "Oswald", sans-serif;
+  font-size: clamp(1.4rem, 2.8vw, 1.85rem);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: #dfb74a;
+  margin: 0 0 1rem;
+}
+
+.empowermentBody {
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: #f5f0e6;
+  margin: 0 0 1rem;
+}
+
+.empowermentSub {
+  font-size: 0.94rem;
+  line-height: 1.6;
+  color: #dfb74a;
+  margin: 0;
+  font-style: italic;
+}
+
+/* Transport Cards (Chapter 5) */
+.transportCardsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+  margin: 2rem 0;
+}
+
+.transportCard {
+  background: #ffffff;
+  border: 1px solid rgba(180, 150, 100, 0.25);
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03);
+}
+
+.transportIcon {
+  color: #b8972e;
+  margin-bottom: 0.75rem;
+}
+
+.transportCardTitle {
+  font-family: var(--font-heading), "Oswald", sans-serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #1c1917;
+  margin: 0 0 0.5rem;
+}
+
+.transportCardText {
+  font-size: 0.92rem;
+  line-height: 1.65;
+  color: #57534e;
+  margin: 0;
+}
+
+/* Quote Pill Box (Chapter 6) */
+.quotePillBox {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  background: #fdfbf7;
+  border-left: 4px solid #b8972e;
+  border-radius: 0 14px 14px 0;
+  padding: 1.25rem 1.5rem;
+  margin: 1.75rem 0;
+}
+
+.quotePillIcon {
+  color: #b8972e;
+  flex-shrink: 0;
+}
+
+.quotePillText {
+  font-size: 1rem;
+  line-height: 1.65;
+  color: #292524;
+  margin: 0;
+}
+
+/* Budget Grid (Chapter 9) */
+.budgetGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.85rem;
+  margin: 1.75rem 0;
+}
+
+.budgetItem {
+  background: #ffffff;
+  border: 1px solid rgba(180, 150, 100, 0.25);
+  border-radius: 12px;
+  padding: 0.85rem 1rem;
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: #1c1917;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.budgetBullet {
+  font-size: 1.1rem;
+}
+
+/* Packing Checklist (Chapter 10) */
+.packingChecklistGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+  margin: 1.75rem 0;
+}
+
+.packingCheckItem {
+  background: #fdfbf7;
+  border: 1px solid rgba(184, 151, 46, 0.25);
+  border-radius: 10px;
+  padding: 0.75rem 1rem;
+  font-size: 0.92rem;
+  color: #292524;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.packingCheckItem svg {
+  color: #b8972e;
+  flex-shrink: 0;
+}
+
+/* Protocol Steps (Chapter 11) */
+.protocolStepsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin: 1.75rem 0;
+}
+
+.protocolStep {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.25rem;
+  background: #ffffff;
+  border: 1px solid rgba(180, 150, 100, 0.25);
+  border-radius: 14px;
+  padding: 1.25rem 1.5rem;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.02);
+}
+
+.stepBadge {
+  background: #b8972e;
+  color: #ffffff;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  padding: 4px 10px;
+  border-radius: 6px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.stepContent {
+  flex: 1;
+}
+
+.stepTitle {
+  font-family: var(--font-heading), "Oswald", sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #1c1917;
+  margin: 0 0 0.35rem;
+}
+
+.stepDesc {
+  font-size: 0.92rem;
+  line-height: 1.55;
+  color: #57534e;
+  margin: 0;
+}
+
+/* Ticket Checklist Card (Chapter 12) */
+.ticketChecklistCard {
+  background: #ffffff;
+  border: 1.5px solid rgba(184, 151, 46, 0.4);
+  border-radius: 20px;
+  padding: 2rem 2.25rem;
+  margin: 2rem 0;
+  box-shadow: 0 10px 30px rgba(184, 151, 46, 0.08);
+}
+
+.ticketHeader {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-bottom: 1rem;
+  margin-bottom: 1.25rem;
+  border-bottom: 1.5px dashed rgba(184, 151, 46, 0.35);
+}
+
+.ticketIcon {
+  color: #b8972e;
+}
+
+.ticketTitle {
+  font-family: var(--font-heading), "Oswald", sans-serif;
+  font-size: 1.05rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  color: #1c1917;
+}
+
+.ticketList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.ticketRow {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  font-size: 0.98rem;
+  line-height: 1.6;
+  color: #292524;
+}
+
+.checkGold {
+  color: #b8972e;
+  font-weight: 800;
+  font-size: 1.1rem;
+}
+
+/* Contextual Andaman Promo Card */
+.andamanPromoCard {
+  background: linear-gradient(135deg, #fff7f9 0%, #faf3f5 100%);
+  border: 1.5px solid #f5b5c5;
+  border-radius: 20px;
+  padding: 2.5rem 2.25rem;
+  margin: 3.5rem 0;
+  box-shadow: 0 12px 35px rgba(184, 60, 90, 0.08);
+}
+
+.promoBadge {
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  color: #b83c5a;
+  text-transform: uppercase;
+  margin-bottom: 0.6rem;
+}
+
+.promoTitle {
+  font-family: var(--font-heading), "Oswald", sans-serif;
+  font-size: clamp(1.4rem, 2.8vw, 1.85rem);
+  font-weight: 700;
+  color: #1c1917;
+  margin: 0 0 0.85rem;
+}
+
+.promoDesc {
+  font-size: 1.02rem;
+  line-height: 1.7;
+  color: #44403c;
+  margin: 0 0 1.5rem;
+  max-width: 680px;
+}
+
+.promoActionRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.promoBtnPrimary {
+  display: inline-block;
+  background: #b83c5a;
+  color: #ffffff;
+  padding: 12px 24px;
+  border-radius: 999px;
+  font-size: 0.92rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.promoBtnPrimary:hover {
+  background: #962842;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(184, 60, 90, 0.25);
+}
+
+.promoBtnWa {
+  display: inline-block;
+  background: #ffffff;
+  color: #b83c5a;
+  border: 1px solid #f5b5c5;
+  padding: 12px 22px;
+  border-radius: 999px;
+  font-size: 0.92rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.promoBtnWa:hover {
+  background: #b83c5a;
+  color: #ffffff;
+}
+
+/* Conclusion & Closing Callout */
+.conclusionSection {
+  margin: 3.5rem 0 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(180, 150, 100, 0.2);
+}
+
+.conclusionTitle {
+  font-family: var(--font-heading), "Oswald", sans-serif;
+  font-size: clamp(1.5rem, 3.2vw, 2.1rem);
+  font-weight: 700;
+  color: #1c1917;
+  margin: 0 0 1.5rem;
+}
+
+.closingCallout {
+  background: #faf7f2;
+  border: 1.5px solid rgba(184, 151, 46, 0.35);
+  border-radius: 18px;
+  padding: 2rem 2.25rem;
+  margin: 2.75rem 0 1rem;
+}
+
+.closingHeadline {
+  font-family: var(--font-heading), "Oswald", sans-serif;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #1c1917;
+  margin: 0 0 0.85rem;
+}
+
+.closingBody {
+  font-size: 1.02rem;
+  line-height: 1.75;
+  color: #44403c;
+  margin: 0 0 0.85rem;
+}
+
+.closingTagline {
+  font-family: var(--font-heading), "Oswald", sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: #b8972e;
+  margin: 0;
+}
+
+.contactLeadBtn {
+  display: inline-block;
+  background: #1c1917;
+  color: #dfb74a;
+  padding: 12px 24px;
+  border-radius: 999px;
+  font-size: 0.92rem;
+  font-weight: 700;
+  text-decoration: none;
+  border: 1px solid #1c1917;
+  transition: all 0.2s ease;
+}
+
+.contactLeadBtn:hover {
+  background: #b8972e;
+  color: #1c1917;
+  border-color: #b8972e;
+  transform: translateY(-2px);
+}
+
+/* RESPONSIVE DESIGN */
+@media (max-width: 768px) {
+  .destinationMatrixGrid,
+  .realityCheckGrid,
+  .stayOptionsGrid,
+  .safetySplitGrid,
+  .transportCardsGrid,
+  .packingChecklistGrid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .budgetGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .ticketChecklistCard,
+  .andamanPromoCard,
+  .closingCallout {
+    padding: 1.5rem 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .budgetGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .tocNav {
+    padding: 1rem;
+  }
+
+  .dropcapParagraph::first-letter {
+    font-size: 3rem;
+  }
+
+  .empowermentBanner {
+    padding: 1.5rem 1.25rem;
+  }
+}

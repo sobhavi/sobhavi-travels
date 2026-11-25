@@ -4,6 +4,7 @@ import Link from 'next/link';
 import Navbar from '@/components/layout/Navbar';
 import EnquireCtaBanner from '@/components/ui/EnquireCtaBanner';
 import DubaiGuideArticle from '@/components/blog/DubaiGuideArticle';
+import SoloFemaleTravelGuideArticle from '@/components/blog/SoloFemaleTravelGuideArticle';
 import { getBlogBySlug, getAllBlogs, syncCloudBlogs } from '@/lib/blogs';
 import styles from './page.module.css';
 
@@ -105,6 +106,8 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
               <div className={styles.storyContent}>
                 {post.slug === 'dubai-travel-guide-for-indians' ? (
                   <DubaiGuideArticle />
+                ) : post.slug === 'solo-female-travel-guide' ? (
+                  <SoloFemaleTravelGuideArticle />
                 ) : (
                   <>
                     {/* Intro with Dropcap */}
