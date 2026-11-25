@@ -1,7 +1,6 @@
 import type { MetadataRoute } from 'next';
 import { LEISURE_DESTINATIONS } from '@/lib/destinationsData';
 import { featuredDestinations, popularJourneys } from '@/lib/data';
-import { travelCategories } from '@/lib/categories';
 import { getAllBlogs } from '@/lib/blogs';
 import { CITY_ROUTES } from '@/lib/rannUtsavRoutes';
 
@@ -170,15 +169,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }));
 
-  // 4. Travel Categories
-  const categoryRoutes: MetadataRoute.Sitemap = travelCategories.map(c => ({
-    url: `${BASE_URL}/categories/${c.slug}`,
-    lastModified: now,
-    changeFrequency: 'weekly',
-    priority: 0.75,
-  }));
-
-  // 5. Popular Journeys
+  // 4. Popular Journeys
   const journeyRoutes: MetadataRoute.Sitemap = popularJourneys.map(j => ({
     url: `${BASE_URL}/journeys/${j.slug}`,
     lastModified: now,
@@ -186,7 +177,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.75,
   }));
 
-  // 6. Rann Utsav City Departure Packages
+  // 5. Rann Utsav City Departure Packages
   const rannCityRoutes: MetadataRoute.Sitemap = CITY_ROUTES.map(r => ({
     url: `${BASE_URL}/rann-utsav/${r.slug}`,
     lastModified: now,
@@ -198,7 +189,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...staticRoutes,
     ...destinationRoutes,
     ...blogRoutes,
-    ...categoryRoutes,
     ...journeyRoutes,
     ...rannCityRoutes,
   ];

@@ -7,7 +7,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Navbar from '@/components/layout/Navbar';
 import { getSiteConfig, SiteConfig } from '@/lib/siteConfig';
 import { getAllBlogs, BlogPost } from '@/lib/blogs';
-import { travelCategories } from '@/lib/categories';
 import { ChevronDown } from 'lucide-react';
 import styles from './page.module.css';
 
@@ -647,59 +646,6 @@ export default function Home() {
             <div className={styles.exploreAllWrapper}>
               <Link href="/destinations" className={styles.exploreAllBtn}>
                 <span>EXPLORE ALL DESTINATIONS</span>
-                <span className={styles.exploreArrow}>&rarr;</span>
-              </Link>
-            </div>
-          </div>
-        </section>
-
-        {/* =================================================================
-            4. CURATED TRAVEL CATEGORIES (All Starting at ₹25,000)
-            ================================================================= */}
-        <section id="categories" className={styles.categoriesSection}>
-          <div className="container">
-            <div className={styles.sectionHeader}>
-              <span className={styles.eyebrow}>CURATED COLLECTIONS</span>
-              <h2 className={styles.sectionTitle}>TRAVEL CATEGORIES</h2>
-              <p className={styles.sectionSubtitle}>
-                Every experience tailored to how you dream of exploring. All packages starting at ₹25,000.
-              </p>
-            </div>
-
-            <div className={styles.categoriesGrid}>
-              {travelCategories.slice(0, 6).map((cat) => (
-                <Link
-                  key={cat.slug}
-                  href={`/categories/${cat.slug}`}
-                  className={styles.categoryCard}
-                >
-                  <div
-                    className={styles.categoryCardImage}
-                    style={{ backgroundImage: `url(${cat.heroImage})` }}
-                  >
-                    <div className={styles.categoryCardOverlay} />
-                    
-                    {/* Corner price badge design-wise */}
-                    <div className={styles.cornerPriceBadge}>
-                      <span className={styles.cornerPriceLabel}>STARTING AT</span>
-                      <span className={styles.cornerPriceAmount}>₹25,000</span>
-                    </div>
-                  </div>
-                  <div className={styles.categoryCardContent}>
-                    <h3 className={styles.categoryCardTitle}>{cat.name}</h3>
-                    <p className={styles.categoryCardTagline}>{cat.tagline}</p>
-                    <span className={styles.categoryCardLink}>
-                      <span>Explore Collection</span>
-                      <span>&rarr;</span>
-                    </span>
-                  </div>
-                </Link>
-              ))}
-            </div>
-
-            <div className={styles.exploreAllWrapper}>
-              <Link href="/categories" className={styles.exploreAllBtn}>
-                <span>EXPLORE ALL CATEGORIES ({travelCategories.length})</span>
                 <span className={styles.exploreArrow}>&rarr;</span>
               </Link>
             </div>
